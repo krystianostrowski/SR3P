@@ -1,18 +1,41 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, globalShortcut, Menu } = require('electron');
 
-let window;
+let dispatcherWindow;
+let serviceWindow;
 
 const CreateWindow = () => {
-    window = new BrowserWindow({
+    dispatcherWindow = new BrowserWindow({
         width: 800,
         height: 600,
+        backgroundColor: '#212121',
+        autoHideMenuBar: true,
+        title: "Dispatcher Window",
         webPreferences: {
             nodeIntegration: true
         }
     });
 
-    window.loadFile('./html/index.html');
-    window.webContents.openDevTools();
-}
+    serviceWindow = new BrowserWindow({
+        width: 800,
+        height: 600,
+        backgroundColor: '#212121',
+        autoHideMenuBar: true,
+        title: "Service Window",
+        webPreferences: {
+            nodeIntegration: true
+        }
+    });
 
-app.whenReady().then(CreateWindow);
+    dispatcherWindow.loadFile('./html/dispather.html');
+    serviceWindow.loadFile('./html/service.html');
+
+    dispatcherWindow.webContents.openDevTools();
+    serviceWindow.webContents.openDevTools();
+
+    globalShortcut.register('f5', () => {
+        dispatcherWindow.reload();
+        serviceWindow.reload();
+    });
+};
+
+app.on('ready', CreateWindow);
