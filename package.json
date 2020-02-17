@@ -11,9 +11,7 @@
     "electron-winstaller": "^4.0.0"
   },
   "scripts": {
-    "start": "electron src/index.js",
-    "install": "electron-packager ./src --out ./build --overwrite",
-    "postinstall": "node installer.js"
+    "start": "electron src/index.js"
   },
   "repository": {
     "type": "git",
