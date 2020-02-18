@@ -26,7 +26,7 @@ const CreateWindow = () => {
         }
     });
 
-    dispatcherWindow.loadFile('./html/dispather.html');
+    dispatcherWindow.loadFile('./html/dispatcher.html');
     serviceWindow.loadFile('./html/service.html');
 
     dispatcherWindow.webContents.openDevTools();

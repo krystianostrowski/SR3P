@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="C:/Git/SR3P/src/css/dispatcher.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="wrapper">
+        <h2>Panel Dyspozytora</h2>
+        <div class="info">
+            <div class="left">
+                <div class="active-dispatcher">
+                   <span>Aktywny dyspozytor:<br />
+                    XYZ</span>
+                </div>
+            </div>
+            <div class="right">
+                <div class="data">
+                    Godzina i data zgłoszenia:<br />
+                    xx.xx.xxxxr.<br/>
+                    xx:xx
+                </div>
+            </div>
+        </div>
+        <div class="zgloszenie">
+            <h3>Wyślij zgłoszenie</h3>
+            <form action="">
+                <table>
+                <tr>
+                    <td ><p>Miejsce Zdarzenia:</p><input type="text" name="" id=""></td>
+                    <td>Powód wezwania:<br/><input type="text" name="" id=""></td>
+                    <td>Ilość i stan poszkodowanych:<br/><input type="text" name="" id=""></td>
+                </tr>
+                <tr>
+                    <td style="padding-top:10vh;"><p>Dane wzywającego(Imię,nazwisko,wiek):</p><input type="text" name="" id=""></td>
+                </tr>
+                </table>
+                <div class="select-help">
+                   <h3> Wybierz jednostki potrzebne do akcji:</h3>
+                   <table>
+                       <tr>
+                           <td id="Policja"><input type="checkbox" name="" id="policja"><label for="policja">Policja</label></td>
+                           <td id="Pogotowie"><input type="checkbox" name="" id="pogotowie"><label for="pogotowie">Pogotowie</label></td>
+                           <td id="Straz"><input type="checkbox" name="" id="straz"><label for="straz">Straż Pożarna</label></td>
+                       </tr>
+                   </table>
+                </div>
+                <input id="send" type="button" value="Wyślij">
+            </form>
+        </div>
+        
+    </div>
+</body>
+</html>
