@@ -1,0 +1,38 @@
+{
+    "misata": [
+        {
+            "nazwa": "",
+            "ulice": {
+                "nazwa": "",
+                "budynki": [
+                    {
+                        "numer": 0,
+                        "dane": {
+
+                        }
+                    },
+                    {
+                        "numer": 0,
+                        "dane": {
+                            
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "nazwa": "",
+            "ulice": {
+                "nazwa": "",
+                "budynki": [
+                    {
+                        "numer": 0,
+                        "dane": {
+                            
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
