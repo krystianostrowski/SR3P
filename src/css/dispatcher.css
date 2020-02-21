@@ -10,6 +10,18 @@ body{
     
     color: #ffffff;
 }
+.title-bar{
+    background-color: #0099FF;
+    display: flex;
+    width: 100%;
+    height: 50px;
+}
+.menu-section,
+.title-section,
+.controls-section{
+    width: calc(100% / 3);
+    text-align: center;
+}
 .wrapper{
     height: 100%;
     width: 100%;

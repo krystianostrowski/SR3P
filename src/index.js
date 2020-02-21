@@ -38,16 +38,15 @@ const CreateWindow = () => {
     dispatcherWindow.loadFile('./html/dispatcher.html');
     serviceWindow.loadFile('./html/service.html');
 
-    dispatcherWindow.webContents.openDevTools();
-    serviceWindow.webContents.openDevTools();
-
     globalShortcut.register('f5', () => {
         dispatcherWindow.reload();
         serviceWindow.reload();
     });
 
-    dispatcherWindow.on('closed', () => app.quit());
-    serviceWindow.on('closed', () => app.quit());
+    globalShortcut.register('f6', () => {
+        dispatcherWindow.webContents.openDevTools();
+        serviceWindow.webContents.openDevTools();
+    });
 };
 
 app.on('ready', CreateWindow);
