@@ -12,9 +12,6 @@ const CreateWindow = () => {
         x: 0,
         y: 0,
         backgroundColor: '#212121',
-        autoHideMenuBar: true,
-        maximizable: false,
-        title: "Dispatcher Window",
         webPreferences: {
             nodeIntegration: true
         }
@@ -27,9 +24,6 @@ const CreateWindow = () => {
         x: 1000,
         y: 0,
         backgroundColor: '#212121',
-        autoHideMenuBar: true,
-        maximizable: false,
-        title: "Service Window",
         webPreferences: {
             nodeIntegration: true
         }
