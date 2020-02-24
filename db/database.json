@@ -1,0 +1,20 @@
+{
+    "cities": [
+        {
+            "name": "",
+            "streets": [
+                {
+                    "name": "",
+                    "buildings": [
+                        {
+                            "number": 0,
+                            "data": {
+
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

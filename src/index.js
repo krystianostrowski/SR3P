@@ -1,5 +1,6 @@
 const { app, BrowserWindow, globalShortcut, ipcMain } = require('electron');
-const { DebugLog } = require('./js/debug');
+const { DebugLog, LogTypes } = require('./js/debug');
+const api = require('./js/sr3pAPI');
 
 let dispatcherWindow;
 let serviceWindow;
@@ -41,6 +42,9 @@ const CreateWindow = () => {
         dispatcherWindow.webContents.openDevTools();
         serviceWindow.webContents.openDevTools();
     });
+
+    dispatcherWindow.on('closed', () => app.quit());
+    serviceWindow.on('closed', () => app.quit());
 };
 
 app.on('ready', CreateWindow);
@@ -48,4 +52,7 @@ app.on('ready', CreateWindow);
 ipcMain.on('send__button--clicked', (e, args) => {
     dispatcherWindow.loadFile('./html/dispatcher__info.html');
     DebugLog('Send button clicked');
+    const city = api.GetCity('');
+    const street = api.GetStreet(city, '');
+    const building = api.GetBuilding(street, 0);
 });

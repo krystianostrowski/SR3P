@@ -15,8 +15,14 @@ const GetTime = () => {
 const LogTypes = {
     LOG: 'log',
     WARN: 'warn',
-    ERROR: 'error',
-    EXCEPTION: 'exception'
+    ERROR: 'error'
+}
+
+const Colors = {
+    DEFAULT: '\033[0m',
+    GREEN: '\033[0;32m',
+    RED: '\x1b[31m',
+    YELLOW: '\x1b[33m'
 }
 
 const DebugLog = (message, LogType = LogTypes.LOG) => {
@@ -24,11 +30,15 @@ const DebugLog = (message, LogType = LogTypes.LOG) => {
     switch(LogType)
     {
         case LogTypes.LOG:
-            console.log(`[${GetTime()}] ${message}`);
+            console.log(`${Colors.GREEN} [${GetTime()}] ${message} ${Colors.DEFAULT}`);
             break;
 
         case LogTypes.WARN: 
-            console.warn("Not implemented");
+            console.log(`${Colors.YELLOW} [${GetTime()}] ${message} ${Colors.DEFAULT}`);
+            break;
+
+        case LogTypes.ERROR: 
+            console.log(`${Colors.RED} [${GetTime()}] ${message} ${Colors.DEFAULT}`);
             break;
     }
 };
