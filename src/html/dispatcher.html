@@ -9,12 +9,6 @@
 </head>
 <body>
     <div class="title-bar">
-        <div class="menu-section">
-            <button id="menu-btn">MENU</button>
-        </div>
-        <div class="title-section">
-            <p>TEST</p>
-        </div>
         <div class="controls-section">
             <button id="min-btn">_</button>
             <button id="max-btn">[]</button>
@@ -23,49 +17,54 @@
     </div>
 
     <div class="wrapper">
-        <h2>Panel Dyspozytora</h2>
-        <div class="info">
-            <div class="left">
-                <div class="active-dispatcher">
-                   <span>Aktywny dyspozytor:<br />
-                    XYZ</span>
+        <div class="location">
+            
+            <div class="case">
+                
+                <div class="side-left">
+                    <img src="img/lupa.png" alt="">
                 </div>
+                <div class="center">
+                    <form id="location-form">
+                    <input type="search" id="location" placeholder="Wyszukaj lokalizację">
+                        
+                    </form>
+                </div>
+                
             </div>
-            <div class="right">
-                <div class="data">
-                    Godzina i data zgłoszenia:<br />
-                    xx.xx.xxxxr.<br/>
-                    xx:xx
+            <div class="adresses">
+
+                <div class="out">
+
                 </div>
+
+                <div class="option">
+                    <div class="left"><img src="img/lokacja.png" alt=""></div>
+                    <div class="right">Wojska Polskiego, Słupsk</div>
+                </div>
+
+                <div class="option">
+                    <div class="left"><img src="img/lokacja.png" alt=""></div>
+                    <div class="right">Wojska Polskiego 03, Słupsk</div>
+                </div>
+
+                <div class="option">
+                    <div class="left"><img src="img/lokacja.png" alt=""></div>
+                    <div class="right">Wojska Polskiego 02, Słupsk</div>
+                </div>
+                <div class="option">
+                    <div class="left"><img src="img/lokacja.png" alt=""></div>
+                    <div class="right">Orange Słupsk Wojska Polskego 18</div>
+                </div>
+                
             </div>
+            
+            
         </div>
-        <div class="zgloszenie">
-            <h3>Wyślij zgłoszenie</h3>
-            <form action="">
-                <table>
-                <tr>
-                    <td ><p>Miejsce Zdarzenia:</p><input type="text" name="" id=""></td>
-                    <td>Powód wezwania:<br/><input type="text" name="" id=""></td>
-                    <td>Ilość i stan poszkodowanych:<br/><input type="text" name="" id=""></td>
-                </tr>
-                <tr>
-                    <td style="padding-top:10vh;"><p>Dane wzywającego(Imię,nazwisko,wiek):</p><input type="text" name="" id=""></td>
-                </tr>
-                </table>
-                <div class="select-help">
-                   <h3> Wybierz jednostki potrzebne do akcji:</h3>
-                   <table>
-                       <tr>
-                           <td id="Policja"><input type="checkbox" name="" id="policja"><label for="policja">Policja</label></td>
-                           <td id="Pogotowie"><input type="checkbox" name="" id="pogotowie"><label for="pogotowie">Pogotowie</label></td>
-                           <td id="Straz"><input type="checkbox" name="" id="straz"><label for="straz">Straż Pożarna</label></td>
-                       </tr>
-                   </table>
-                </div>
-                <input id="send" type="button" value="Wyślij">
-            </form>
+        <hr>
+        <div class="main">
+            <img src="img/main.png" alt="">
         </div>
-        
     </div>
 </body>
 </html>

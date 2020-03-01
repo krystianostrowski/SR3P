@@ -7,7 +7,7 @@ let serviceWindow;
 
 const CreateWindow = () => {
     dispatcherWindow = new BrowserWindow({
-        frame: false,
+        frame: true,
         width: 800,
         height: 600,
         x: 0,
