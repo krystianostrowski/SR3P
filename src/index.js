@@ -7,7 +7,7 @@ let serviceWindow;
 
 const CreateWindow = () => {
     dispatcherWindow = new BrowserWindow({
-        frame: true,
+        frame: false,
         width: 800,
         height: 600,
         x: 0,
@@ -19,7 +19,7 @@ const CreateWindow = () => {
     });
 
     serviceWindow = new BrowserWindow({
-        frame: true,
+        frame: false,
         width: 800,
         height: 600,
         x: 1000,
@@ -36,6 +36,7 @@ const CreateWindow = () => {
     globalShortcut.register('f5', () => {
         dispatcherWindow.reload();
         serviceWindow.reload();
+        DebugLog('Reloaded windows');
     });
 
     globalShortcut.register('f6', () => {
