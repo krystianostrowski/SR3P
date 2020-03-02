@@ -1,13 +1,13 @@
 {
     "cities": [
         {
-            "name": "",
+            "name": "Słupsk",
             "streets": [
                 {
-                    "name": "",
+                    "name": "Karola Szymanowskiego",
                     "buildings": [
                         {
-                            "number": 0,
+                            "number": 5,
                             "data": {
 
                             }
