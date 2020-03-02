@@ -1,8 +1,9 @@
 function border(){
     let cas = document.getElementById("case");
     let sch = document.getElementById("location");
-
-   
+    const cos = document.querySelector("#location");
+    
+    cos.classList.add('test')
     cas.style.boxShadow = "0px 0px 5px 5px rgb(143, 143, 143)";
     cas.style.borderRadius = "30px";
 
