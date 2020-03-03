@@ -1,4 +1,5 @@
 {
+    "$schema": "./schema.json",
     "cities": [
         {
             "name": "Słupsk",
@@ -15,6 +16,34 @@
                     ]
                 }
             ]
+        }
+    ],
+    
+    "reports": [
+        {
+            "id": 0,
+            "services": {
+                "ambulance": {
+                    "requested": false,
+                    "quantity": 0,
+                    "state": null
+                },
+                "police": {
+                    "requested": false,
+                    "quantity": 0,
+                    "state": null
+                },
+                "fireFighters": {
+                    "requested": false,
+                    "quantity": 0,
+                    "state": null
+                }
+            },
+            "data": {
+                "city": "",
+                "street": "",
+                "building": 0
+            }
         }
     ]
 }
