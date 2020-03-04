@@ -29,6 +29,10 @@ const GetData = () => {
     return data;
 }
 
+const SaveData = data => {
+    //TODO: Save database file
+};
+
 /**
  * @description Function gets city object from database
  * @param {String} name City name
@@ -102,6 +106,105 @@ const GetBuilding = (street, number) => {
 
         DebugLog(`Couldn't find building number: ${number}!`, LogTypes.WARN);
     }
+}
+
+/**
+ * 
+ * @param {int} id 
+ */
+function GetReport(id) {
+    if(!bDbExists || !isNaN(id))
+        return;
+
+    const data = GetData();
+    const reports = data.reports;
+
+    for(report of reports)
+    {
+        if(report.id == id)
+        {
+            DebugLog(`Report id: ${report.id}`);
+            return report;
+        }
+
+        DebugLog(`Couldn't find report id: ${report.id}`, LogTypes.WARN);
+    }
+}
+
+/**
+ * 
+ * @param {String} city 
+ * @param {String} streetName 
+ */
+function GetReport(city, streetName) {
+    if(!bDbExists || city == null || streetName == null)
+        return;
+
+    const data = GetData();
+    const reports = data.reports;
+
+    for(report of reports)
+    {
+        const reportData = report.data;
+        if(reportData == city && reportData.street == streetName)
+        {
+            DebugLog(`Report: ${reportData.city} ${reportData.street}`);
+            return report;
+        }
+
+        DebugLog(`Couldn't find report: ${reportData.city} ${reportData.street}`, LogTypes.WARN);
+    }
+}
+
+/**
+ * 
+ * @param {Object} data 
+ * @param {Object} services 
+ */
+const AddReport = (data, services) => {
+    let db = GetData();
+    
+    data = {
+        "city": "",
+        "street": "",
+        "building": 0
+    }
+
+    services = {
+        "ambulance": {
+            "requested": false,
+        },
+        "police": {
+            "requested": false,
+        },
+        "fireFighters": {
+            "requested": true,
+            "quantity": 1,
+        }
+    }
+
+    if(services.ambulance.requested)
+    {
+
+    }
+    else
+    {
+
+    }
+
+    if(services.police.requested)
+    {
+
+    }
+
+    if(services.fireFighters.requested)
+    {
+
+    }
+
+    db.reports.push({id: 0, services: {}, data: data});
+
+    SaveData(db);
 }
 
 module.exports = {
