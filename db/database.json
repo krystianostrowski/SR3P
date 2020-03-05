@@ -1,49 +1,46 @@
 {
-    "$schema": "./schema.json",
-    "cities": [
+  "$schema": "./schema.json",
+  "cities": [
+    {
+      "name": "Słupsk",
+      "streets": [
         {
-            "name": "Słupsk",
-            "streets": [
-                {
-                    "name": "Karola Szymanowskiego",
-                    "buildings": [
-                        {
-                            "number": 5,
-                            "data": {
-
-                            }
-                        }
-                    ]
-                }
-            ]
-        }
-    ],
- 
-    "reports": [
-        {
-            "id": 0,
-            "services": {
-                "ambulance": {
-                    "requested": false,
-                    "quantity": 0,
-                    "state": null
-                },
-                "police": {
-                    "requested": false,
-                    "quantity": 0,
-                    "state": null
-                },
-                "fireFighters": {
-                    "requested": false,
-                    "quantity": 0,
-                    "state": null
-                }
-            },
-            "data": {
-                "city": "",
-                "street": "",
-                "building": 0
+          "name": "Karola Szymanowskiego",
+          "buildings": [
+            {
+              "number": 5,
+              "data": {}
             }
+          ]
         }
-    ]
+      ]
+    }
+  ],
+  "reports": [
+    {
+      "id": 0,
+      "services": {
+        "ambulance": {
+          "requested": false,
+          "quantity": 0,
+          "state": null
+        },
+        "police": {
+          "requested": false,
+          "quantity": 0,
+          "state": null
+        },
+        "fireFighters": {
+          "requested": false,
+          "quantity": 0,
+          "state": null
+        }
+      },
+      "data": {
+        "city": "",
+        "street": "",
+        "building": 0
+      }
+    }
+  ]
 }
