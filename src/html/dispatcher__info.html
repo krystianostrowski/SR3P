@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/dispatcher-info.css">
+    <link rel="stylesheet" href="../resources/icons/css/fontawesome.css">
+    <script defer src="../js/dispatcher__renderer.js"></script>
+    <script src="../js/location.js"></script>
+</head>
+<body>
+    <div class="title-bar">
+        <div class="titlebar__title">
+            dispatcher window
+        </div>
+        <div class="controls-section">
+            <button id="min-btn"><i class="icon-window-minimize"></i></button>
+            <button id="max-btn"><i class="icon-check-empty"></i></button>
+            <button id="close-btn"><i class="icon-cancel"></i></button>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="location">
+
+            <div class="case" id="case">
+                <div class="center">
+                    <form id="location-form">
+                        <span class="lupa"><img src="../resources/img/lupa.png" alt=""></span>
+                        <input type="search" onblur="closeBorder(),closeSearch()" onfocus="border(),search()"
+                            id="location" placeholder="Wyszukaj lokalizację">
+                    </form>
+                </div>
+
+            </div>
+
+            <div id="adresses" class="adresses">
+
+
+
+                <div class="out">
+
+                </div>
+                <ul>
+                    <li>
+                        <div class="left-li"><img src="../resources/img/lokacja.png" alt=""></div>
+                        <div class="right-li">Wojska Polskiego, Słupsk</div>
+                    </li>
+
+                    <li>
+                        <div class="left-li"><img src="../resources/img/lokacja.png" alt=""></div>
+                        <div class="right-li">Wojska Polskiego 02, Słupsk</div>
+                    </li>
+                    <li>
+                        <div class="left-li"><img src="../resources/img/lokacja.png" alt=""></div>
+                        <div class="right-li">Wojska Polskiego 03, Słupsk</div>
+                    </li>
+                    <li>
+                        <div class="left-li"><img src="../resources/img/lokacja.png" alt=""></div>
+                        <div class="right-li">Orange Słupsk Wojska Polskiego</div>
+                    </li>
+                    <li>
+                        <div class="left-li"><img src="../resources/img/lokacja.png" alt=""></div>
+                        <div class="right-li">Rzeszów</div>
+                    </li>
+                    <li>
+                        <div class="left-li"><img src="../resources/img/lokacja.png" alt=""></div>
+                        <div class="right-li">Niemcy</div>
+                    </li>
+                    <li>
+                        <div class="left-li"><img src="../resources/img/lokacja.png" alt=""></div>
+                        <div class="right-li">Francja</div>
+                    </li>
+                </ul>
+            </div>
+
+
+
+        </div>
+        <hr>
+        <div class="main">
+            <div class="left-side">
+                <img src="../resources/img/info.png" alt="">
+            </div>
+            <div class="info">
+                <span class="info-text" style="font-size:130%">Opis Zdarzenia <span style="color:#1ED760">:</span><br>
+                <span style="font-size:100%">Godzina zgłoszenia <span style="color:#1ED760">:</span><br>
+                <span style="font-size:100%">Orientacyjna liczba osób zagrożonych <span style="color:#1ED760">:</span><br>
+                <span style="font-size:100%">Dodatkowe zagrożenia <span style="color:#1ED760">:</span> <br>
+                <span style="font-size:100%">Dodatkowe informacje <span style="color:#1ED760">:</span><br>
+                
+            </div>
+            <div class="services">
+                <div class="straz">
+                    <div class="service-top">
+                    <img src="../resources/img/strazak.png" alt="">
+                    </div>
+                    <div class="straz-body"><p style="font-size:110%">Straż Pożarna</p><br>
+                        <p style="font-size:110%">Status: w drodze</p>
+                    </div>
+                </div>
+
+                <div class="policja">
+                    <div class="service-top"><img src="../resources/img/policjant.png" alt=""></div>
+                    <div class="policja-body"><p style="font-size:110%">Policja</p><br>
+                    <p style="font-size:110%">Status: na miejscu</p>
+                    </div>
+                </div>
+
+                <div class="pogotowie">
+                    <div class="service-top"><img src="../resources/img/pogotowie.png" alt=""></div>
+                    <div class="pogotowie-body"><p style="font-size:110%">Policja</p><br>
+                        <p style="font-size:110%">Status: na miejscu</p>
+                        </div>
+               
+                </div>
+            </div>
+            <div class="map">
+                  <h1>tu kiedys cos bedzie ;)</h1>
+            </div>
+            <div class="show">
+                <div class="element">
+                    <label  class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+               <span style="font-size:160%;padding-left:1vw;">Pokaż bramy wjazdowe</span> 
+                </div>
+
+                <div class="element">
+                    <label  class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+               <span style="font-size:160%;padding-left:1vw;">Pokaż dojścia wody</span>
+                </div>
+
+                <div class="element">
+                    <label  class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+               <span style="font-size:160%;padding-left:1vw;">Pokaż wyjścia ewakuacyjne</span>
+                </div>
+
+                <div class="element">
+                    <label  class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+               <span style="font-size:160%;padding-left:1vw;">Wyłącznik prądu</span>
+                </div>
+
+                <div class="element">
+                    <label  class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+               <span style="font-size:160%;padding-left:1vw;">Zawór gazu</span>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</body>
+</html>

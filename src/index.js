@@ -7,10 +7,10 @@ let serviceWindow;
 
 const CreateWindow = () => {
     dispatcherWindow = new BrowserWindow({
-        frame: false,
+        frame: true,
         width: 800,
         height: 600,
-        resizable: false,
+        resizable: true,
         x: 0,
         y: 0,
         backgroundColor: '#212121',
@@ -23,7 +23,7 @@ const CreateWindow = () => {
         frame: false,
         width: 800,
         height: 600,
-        resizable: false,
+        resizable: true,
         x: 1000,
         y: 0,
         backgroundColor: '#212121',
@@ -33,7 +33,7 @@ const CreateWindow = () => {
     });
 
     dispatcherWindow.loadFile('./html/dispatcher.html');
-    serviceWindow.loadFile('./html/service.html');
+    serviceWindow.loadFile('./html/dispatcher__info.html');
 
     globalShortcut.register('f5', () => {
         dispatcherWindow.reload();

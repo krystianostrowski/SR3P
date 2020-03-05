@@ -202,14 +202,20 @@ hr{
     .lupa{
         width:6%;
     }
+    .lupa img{
+        width:20px;
+        height: 20px;
+    }
     .center input[type=search]{
         padding-left:13%;
+        font-size:120%;
     }
     .left-li{
         width: 11%;
     }
     .right-li{
         padding-left:3.4%;
+        font-size:80%;
     }
   }
 
