@@ -28,6 +28,24 @@ body{
     text-align: right;
     -webkit-app-region: no-drag;
 }
+
+.controls-section button {
+    border: none;
+    outline: none;
+    background: none;
+    height: 23px;
+    width: 35px;
+    color: #ffffff;
+}
+
+.controls-section button:hover {
+    background: #111111;
+}
+
+.controls-section button:last-of-type:hover {
+    background: #ff0000;
+}
+
 .wrapper{
     height: 100%;
     width: 100%;

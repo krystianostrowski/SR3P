@@ -122,8 +122,9 @@
                         "maxProperties": 3
                     }
                 }
-            }
+            },
+             "required": [ "services", "data" ]
         }
     },
-    "required": [ "cities", "reports", "data" ]
+    "required": [ "cities", "reports" ]
 }
