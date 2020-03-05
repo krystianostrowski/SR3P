@@ -30,7 +30,12 @@ const GetData = () => {
 }
 
 const SaveData = data => {
-    //TODO: Save database file
+    fs.writeFileSync(dbPath, JSON.stringify(data, null, 2), error =>
+    {
+        if(error)
+            return DebugLog(error.message, LogTypes.ERROR);
+    });
+
 };
 
 /**
@@ -163,46 +168,40 @@ function GetReport(city, streetName) {
  */
 const AddReport = (data, services) => {
     let db = GetData();
-    
-    data = {
-        "city": "",
-        "street": "",
-        "building": 0
-    }
 
-    services = {
-        "ambulance": {
-            "requested": false,
-        },
-        "police": {
-            "requested": false,
-        },
-        "fireFighters": {
-            "requested": true,
-            "quantity": 1,
-        }
-    }
+    const id =  (db.reports.length == 0) ? 1 : db.reports[db.reports.length - 1].id + 1;
 
     if(services.ambulance.requested)
     {
-
+        services.ambulance.state = "w drodze";
     }
     else
     {
-
+        services.ambulance.quantity = 0;
+        services.ambulance.state = null;
     }
 
     if(services.police.requested)
     {
-
+        services.police.state = "w drodze";
+    }
+    else
+    {
+        services.police.quantity = 0;
+        services.police.state = null;
     }
 
     if(services.fireFighters.requested)
     {
-
+        services.fireFighters.state = "w drodze";
+    }
+    else
+    {
+        services.fireFighters.quantity = 0;
+        services.fireFighters.state = null;
     }
 
-    db.reports.push({id: 0, services: {}, data: data});
+    db.reports.push({id: id, services: services, data: data});
 
     SaveData(db);
 }
@@ -216,5 +215,14 @@ module.exports = {
     },
     GetBuilding: (street, number) => {
         return GetBuilding(street, number);
+    },
+    GetReport: id => {
+        return GetReport(id);
+    },
+    GetReport: (city, streetName) => {
+        return GetReport(city, streetName);
+    },
+    AddReport: (data, services) => {
+        AddReport(data, services);
     }
 }

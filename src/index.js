@@ -1,6 +1,5 @@
 const { app, BrowserWindow, globalShortcut, ipcMain } = require('electron');
 const { DebugLog } = require('./js/debug');
-const { GetCity, GetStreet, GetBuilding } = require('./js/sr3pAPI');
 
 let dispatcherWindow;
 let serviceWindow;
@@ -51,8 +50,3 @@ const CreateWindow = () => {
 };
 
 app.on('ready', CreateWindow);
-
-ipcMain.on('send__button--clicked', (e, args) => {
-    dispatcherWindow.loadFile('./html/dispatcher__info.html');
-    DebugLog('Send button clicked');
-});
