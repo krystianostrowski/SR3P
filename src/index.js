@@ -6,7 +6,7 @@ let serviceWindow;
 
 const CreateWindow = () => {
     dispatcherWindow = new BrowserWindow({
-        frame: true,
+        frame: false,
         width: 800,
         height: 600,
         resizable: true,
@@ -50,3 +50,5 @@ const CreateWindow = () => {
 };
 
 app.on('ready', CreateWindow);
+
+app.allowRendererProcessReuse = true;

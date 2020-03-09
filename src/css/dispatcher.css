@@ -66,6 +66,7 @@ body{
     display: flex;
     z-index: 100;
     transition: 0.2s;
+    border-radius: 30px;
 }
 
 .side-left:hover{
@@ -222,4 +223,20 @@ hr{
 @font-face {
     font-family: 'Lato';
     src: url('../resources/fonts/lato.woff2');
+}
+
+
+
+.shadow--active {
+    box-shadow: 0px 0px 5px 5px rgb(143, 143, 143);
+}
+
+.location--hidden {
+    display: none;
+    visibility: hidden;
+}
+
+.location--visible {
+    display: inline;
+    visibility: visible;
 }

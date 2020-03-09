@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../css/dispatcher.css">
     <link rel="stylesheet" href="../resources/icons/css/fontawesome.css">
     <script defer src="../js/dispatcher__renderer.js"></script>
-    <script src="../js/location.js"></script>
+    <script defer src="../js/location.js"></script>
 </head>
 
 <body>
@@ -25,15 +25,13 @@
     <div class="wrapper">
         <div class="location">
 
-            <div class="case" id="case">
+            <div class="case">
                 <div class="center">
                     <form id="location-form">
                         <span class="lupa"><img src="../resources/img/lupa.png" alt=""></span>
-                        <input type="search" onblur="closeBorder(),closeSearch()" onfocus="border(),search()"
-                            id="location" placeholder="Wyszukaj lokalizację">
+                        <input type="search" id="location" placeholder="Wyszukaj lokalizację">
                     </form>
                 </div>
-
             </div>
 
             <div id="adresses" class="adresses">

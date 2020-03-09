@@ -1,41 +1,52 @@
-function border(){
-    let cas = document.getElementById("case");
-    let sch = document.getElementById("location");
-    
-    cas.style.boxShadow = "0px 0px 5px 5px rgb(143, 143, 143)";
-    cas.style.borderRadius = "30px";
-}
-function closeBorder(){
-    let cas = document.getElementById("case");
-    let sch = document.getElementById("location");
-    cas.style.boxShadow = "none"
-    
-}
+const searchBar = document.querySelector('#location');
+const locationsList = document.querySelector('ul');
+const locations = locationsList.querySelectorAll('li');
+const shadow = document.querySelector('.case');
+const adressesWrapper = document.querySelector('#adresses');
 
-function search(){
-    
-    const searchInput = document.querySelector("input");
-    const li = [...document.querySelectorAll("ul li")];
-    const ul = document.querySelector("ul");
-    const searchWord = e => {
-        const currentWord = e.target.value.toUpperCase();
-        let result = li;
-        result = result.filter(li => li.textContent.toUpperCase().includes(currentWord));
-        ul.textContent = '';
-        result.forEach( place => ul.appendChild(place));
+const locationHiddenClass = 'location--hidden';
+const locationVisibleClass = 'location--visible';
 
-    }
-    searchInput.addEventListener('input', searchWord);
+const SwitchShadow = () => {
+    shadow.classList.toggle('shadow--active');
+    adressesWrapper.style.display = "block";
+    locationsList.style.display =  "block";
+};
 
-    
-    const adress = document.getElementById("adresses");
-    adress.style.display = "block";
-    ul.style.display =  "block";
+const OnLocationClicked = e => {
+    searchBar.value = e.target.textContent;
+};
 
-}
+const OnSearchBarInput = e => {
+    const input = e.target.value.toLowerCase();
 
-function closeSearch(){
-    const adress = document.getElementById("adresses");
-    adress.style.display = "none";
-   
-}
+    locations.forEach(location => {
+        const locationText = location.textContent.toLocaleLowerCase();
+
+        if(!locationText.includes(input))
+        {
+            if(location.classList.contains(locationVisibleClass))
+            {
+                location.classList.remove(locationVisibleClass);
+            }
+
+            location.classList.add(locationHiddenClass);
+        }
+        else if(locationText.includes(input))
+        {
+            if(location.classList.contains(locationHiddenClass))
+            {
+                location.classList.remove(locationHiddenClass);
+            }
+
+            location.classList.add(locationVisibleClass);
+        }
+    });
+};
+
+searchBar.addEventListener('blur', SwitchShadow);
+searchBar.addEventListener('focus', SwitchShadow);
+searchBar.addEventListener('input', OnSearchBarInput);
+
+locationsList.addEventListener('click', OnLocationClicked);
+
