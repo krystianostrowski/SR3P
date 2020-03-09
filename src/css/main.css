@@ -1,0 +1,258 @@
+:root {
+    --location-background-color: #000000;
+    --input-background-color: #ffffff;
+    --main: #121212;
+  }
+  
+*,
+*::before,
+*::after{
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+    padding:0;
+    font-family: 'Lato', sans-serif;
+    color: #ffffff;
+}
+/* ------------TITLE BAR-----------*/
+.title-bar{ 
+    display: flex;
+    width: 100%;
+    height: 23px;
+    justify-content: space-between;
+    background: var(--location-background-color);
+    -webkit-app-region: drag;
+    left:0;
+    top:0;
+    position:sticky;
+}
+.controls-section{
+    right:0;
+    text-align: right;
+    -webkit-app-region: no-drag;
+}
+
+.controls-section button {
+    border: none;
+    outline: none;
+    background: none;
+    height: 23px;
+    width: 35px;
+    color: #ffffff;
+}
+
+.controls-section button:hover {
+    background: #111111;
+}
+
+.controls-section button:last-of-type:hover {
+    background: #ff0000;
+}
+/*______WRAPPER_____*/
+.wrapper{
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    padding:0;
+}
+/*_____________________ SEARCH BAR________________________*/
+.location{
+    background-color: var(--location-background-color);
+    width: 100%;
+    height:12vh ;
+    display: flex;
+}
+.case{
+    width:60%;
+    margin:auto;
+    height:6vh;
+    display: flex;
+    z-index: 100;
+    transition: 0.2s;
+    border-radius: 30px;
+}
+
+.side-left:hover{
+    cursor: pointer;
+}
+.center{
+    width:100%;
+    height: 100%;
+    position: relative;
+    border-bottom-right-radius: 50%;
+    border-top-right-radius: 50%;
+    
+}
+form{
+    width: 100%;
+    height: 100%;
+}
+.center input[type="search"]{
+    width:100%;
+    height: 100%;
+    border:none;
+    font-size:140%;
+    padding-right:2%;
+    padding-left:9.2%;
+    border-radius: 30px;
+   
+}
+
+.center input[type=search]:focus{
+    outline: none;
+}
+.center input[type=search]::placeholder{
+    color:#C4C4C4;
+}
+.center img{
+    position: absolute;
+    height:100%;
+    width: 8%;
+    padding:1.3vh 1.3vw 1.3vh 1.3vw;
+    border-bottom-left-radius: 30px;
+    border-top-left-radius: 30px;
+    background-color: #C4C4C4;
+
+    
+}
+.adresses{
+    top:8.5%;
+    left:20%;
+    width: 60%;
+    height: inherit;
+    background-color: white;
+    position: absolute;
+    z-index: 50;
+    display:none;
+    
+
+}
+  
+.out{
+    width:100%;
+    height:3vh;
+    background-color:white;
+   
+}
+.adresses ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width:100%;
+    height:inherit;
+    display:none;
+}
+
+.adresses li{
+    width:100%;
+    height: 6vh;
+    min-height: 60px;
+    margin-top:-1px;
+    background-color: white;
+    color:black;
+    display: flex;
+    align-items: center;
+    font-size: 140%;
+
+}
+.adresses li:hover{
+    background-color: rgb(233, 232, 232);
+    cursor: pointer;
+}
+.left-li{
+    height: 6vh;
+    max-width: 12%;
+    min-width: 7.5%;
+    display:flex;
+    align-items: center;
+}
+.left-li img{
+    margin: auto;
+    height: 40px;
+    width: 40px;
+}
+.right-li{
+    height: 6vh;
+    width:inherit;
+    padding-left:1.9%;
+    display: flex;
+    align-items: center;
+}
+
+@media(max-width:1000px){
+    
+    .center input[type=search]{
+        padding-left:13%;
+        font-size:120%;
+    }
+    .left-li{
+        width: 11%;
+    }
+    .right-li{
+        padding-left:3.4%;
+        font-size:80%;
+    }
+  }
+  @media(max-width:1200px){
+    .center input[type=search]{
+        padding-left:12%;
+    }
+    .center img{
+        width:10%;
+    }
+    .left-li{
+        width: 10%;
+
+    }
+    .right-li{
+        width:90%;
+    }
+
+}
+@media(max-width:870px){
+    .center input[type=search]{
+        padding-left:14%;
+    }
+    .center img{
+        width:12%;
+        padding:1.5vh 1.7vw 1.5vh 1.7vw;
+    }
+    .left-li{
+        width:13%;
+    }
+    .right-li{
+        width: 87%;
+    }
+}
+/*_____________________________________________*/
+@font-face {
+    font-family: 'Lato';
+    src: url('../resources/fonts/lato.woff2');
+}
+hr{
+    padding:0;
+    margin:0;
+    border: 2px solid #1ED760;
+}
+
+.shadow--active {
+    box-shadow: 0px 0px 5px 5px rgb(143, 143, 143);
+}
+
+.location--hidden {
+    display: none;
+    visibility: hidden;
+}
+
+.location--visible {
+    display: inline;
+    visibility: visible;
+}
+
+@media(max-height:700px){
+    .case{
+        height:7vh;
+    }
+}
