@@ -160,7 +160,6 @@ hr{
     padding: 0;
     width:100%;
     height:inherit;
-    display:none;
 }
 
 .adresses li{
@@ -238,5 +237,10 @@ hr{
 
 .location--visible {
     display: inline;
+    visibility: visible;
+}
+
+.locations--active {
+    display: block;
     visibility: visible;
 }
