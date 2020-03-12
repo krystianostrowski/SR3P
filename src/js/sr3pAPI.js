@@ -117,7 +117,7 @@ const GetBuilding = (street, number) => {
  * 
  * @param {int} id 
  */
-function GetReport(id) {
+/*function GetReport(id) {
     if(!bDbExists || !isNaN(id))
         return;
 
@@ -134,30 +134,30 @@ function GetReport(id) {
 
         DebugLog(`Couldn't find report id: ${report.id}`, LogTypes.WARN);
     }
-}
+}*/
 
 /**
- * 
- * @param {String} city 
- * @param {String} streetName 
+ * @param {String} 
  */
-function GetReport(city, streetName) {
-    if(!bDbExists || city == null || streetName == null)
-        return;
+function GetReport(string) {
+    if(!bDbExists || string == null)
+        return false;
 
     const data = GetData();
     const reports = data.reports;
+    const substrings = string.split(' ');
 
     for(report of reports)
-    {
+    {   
         const reportData = report.data;
-        if(reportData == city && reportData.street == streetName)
+
+        for(substring of substrings)
         {
-            DebugLog(`Report: ${reportData.city} ${reportData.street}`);
-            return report;
+            //TODO: Searching script
         }
 
-        DebugLog(`Couldn't find report: ${reportData.city} ${reportData.street}`, LogTypes.WARN);
+        DebugLog(`Couldn't find report: ${string}`, LogTypes.WARN);
+        return false;
     }
 }
 
@@ -216,11 +216,11 @@ module.exports = {
     GetBuilding: (street, number) => {
         return GetBuilding(street, number);
     },
-    GetReport: id => {
+    /*GetReport: id => {
         return GetReport(id);
-    },
-    GetReport: (city, streetName) => {
-        return GetReport(city, streetName);
+    },*/
+    GetReport: (string) => {
+        return GetReport(string);
     },
     AddReport: (data, services) => {
         AddReport(data, services);

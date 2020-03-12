@@ -1,5 +1,6 @@
 const { app, BrowserWindow, globalShortcut, ipcMain } = require('electron');
-const { DebugLog } = require('./js/debug');
+const { DebugLog, LogTypes } = require('./js/debug');
+const api = require('./js/sr3pAPI');
 
 let dispatcherWindow;
 let serviceWindow;
@@ -43,6 +44,7 @@ const CreateWindow = () => {
     globalShortcut.register('f6', () => {
         dispatcherWindow.webContents.openDevTools();
         serviceWindow.webContents.openDevTools();
+        DebugLog('Opened DevTools');
     });
 
     dispatcherWindow.on('closed', () => app.quit());
@@ -52,3 +54,19 @@ const CreateWindow = () => {
 app.on('ready', CreateWindow);
 
 app.allowRendererProcessReuse = true;
+
+ipcMain.on('search-report', (event, arg) => {
+    DebugLog(`Search: ${arg}`, LogTypes.WARN);
+
+    /*
+        TODO: If found report load dispatcher__info.html
+        and send data to dispatcherWindow and serviceWindow 
+     */
+
+    const report = api.GetReport(arg);
+
+    console.log(report);
+
+    /*dispatcherWindow.webContents.send();
+    serviceWindow.webContents.send();*/
+});
