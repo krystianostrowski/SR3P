@@ -1,23 +1,7 @@
-const { remote, ipcRenderer } = require('electron');
-
-document.querySelector("#min-btn").addEventListener('click', () => {
-    remote.getCurrentWindow().minimize();
-});
-
-document.querySelector("#max-btn").addEventListener('click', () => {
-    const currentWindow = remote.getCurrentWindow();
-    if (currentWindow.isMaximized()) {
-        currentWindow.unmaximize();
-    } else {
-        currentWindow.maximize();
-    }
-});
-
-document.querySelector("#close-btn").addEventListener('click', () => {
-    remote.app.quit();
-});
+const { ipcRenderer } = require('electron');
 
 const searchBar = document.querySelector('#location');
+const form = document.querySelector('form');
 const locationsList = document.querySelector('ul');
 const locations = locationsList.querySelectorAll('li');
 const shadow = document.querySelector('.case');
@@ -50,13 +34,17 @@ const DeActivateSearchBar = e => {
     }
 }
 
+const SearchReport = report => {
+    ipcRenderer.send('search-report', report);
+};
+
 const OnLocationClicked = e => {
     if(e.target.classList.contains('locations__item'))
     {
         searchBar.value = e.target.textContent;
-        DeActivateSearchBar();
 
-        //TODO: Search for reports in database
+        console.log("object");
+        SearchReport(e.target.textContent.toLocaleLowerCase());
     }
 };
 
@@ -88,9 +76,14 @@ const OnSearchBarInput = e => {
 };
 
 searchBar.addEventListener('click', ActivateSearchBar);
-document.querySelector('html').addEventListener('click', DeActivateSearchBar);
 searchBar.addEventListener('input', OnSearchBarInput);
 
 locationsList.addEventListener('click', OnLocationClicked);
 
-//TODO: Move locations.js to dispatcher__renderer.js
+form.addEventListener('submit', () => { 
+    event.preventDefault();
+
+    SearchReport(searchBar.value.toLocaleLowerCase());
+});
+
+document.addEventListener('click', DeActivateSearchBar);
