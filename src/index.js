@@ -5,6 +5,13 @@ const api = require('./js/sr3pAPI');
 let dispatcherWindow;
 let serviceWindow;
 
+const WindowState = {
+    SEARCH: 'search',
+    INFO: 'info'
+}
+
+let dispatcherWindowState = WindowState.SEARCH;
+
 const CreateWindow = () => {
     dispatcherWindow = new BrowserWindow({
         frame: false,
@@ -33,7 +40,7 @@ const CreateWindow = () => {
     });
 
     dispatcherWindow.loadFile('./html/dispatcher.html');
-    serviceWindow.loadFile('./html/dispatcher__info.html');
+    serviceWindow.loadFile('./html/service.html');
 
     globalShortcut.register('f5', () => {
         dispatcherWindow.reload();
@@ -53,20 +60,32 @@ const CreateWindow = () => {
 
 app.on('ready', CreateWindow);
 
-app.allowRendererProcessReuse = true;
+app.allowRendererProcessReuse = false;
 
 ipcMain.on('search-report', (event, arg) => {
     DebugLog(`Search: ${arg}`, LogTypes.WARN);
 
-    /*
-        TODO: If found report load dispatcher__info.html
-        and send data to dispatcherWindow and serviceWindow 
-     */
-
     const report = api.GetReport(arg);
 
-    console.log(report);
+    if(report == false)
+    {   
+        DebugLog('Report not found');
+        if(dispatcherWindowState != WindowState.SEARCH)
+            dispatcherWindow.loadFile('./html/dispatcher.html');
 
-    /*dispatcherWindow.webContents.send();
-    serviceWindow.webContents.send();*/
+        return;
+    }
+    else 
+    {
+        DebugLog('Found report');
+        if(dispatcherWindowState != WindowState.INFO)
+            dispatcherWindow.loadFile('./html/dispatcher__info.html');
+
+        setTimeout(() => {
+            dispatcherWindow.webContents.send('send-report-data', report);
+        }, 5000)
+        /*serviceWindow.webContents.send();*/
+    }
+
+    DebugLog(report.data.city);
 });

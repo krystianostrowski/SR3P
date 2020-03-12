@@ -151,7 +151,6 @@ form{
     margin-top:-1px;
     background-color: white;
     color:black;
-    display: flex;
     align-items: center;
     font-size: 140%;
 
@@ -242,17 +241,14 @@ hr{
 
 .location--hidden {
     display: none;
-    visibility: hidden;
 }
 
 .location--visible {
-    display: inline;
-    visibility: visible;
+    display: flex;
 }
 
 .locations--active {
     display: block;
-    visibility: visible;
 }
 
 @media(max-height:700px){

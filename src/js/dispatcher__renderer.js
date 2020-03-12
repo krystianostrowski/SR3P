@@ -17,7 +17,6 @@ const ActivateSearchBar = () => {
     {
         shadow.classList.add('shadow--active');
         adressesWrapper.classList.add('locations--active');
-        locations.forEach(location => location.classList.add(locationVisibleClass));
 
         bIsSearchbarActive = true;
     }
@@ -28,7 +27,6 @@ const DeActivateSearchBar = e => {
     {
         shadow.classList.remove('shadow--active');
         adressesWrapper.classList.remove('locations--active');
-        locations.forEach(location => location.classList.remove(locationVisibleClass));
 
         bIsSearchbarActive = false;
     }
@@ -43,8 +41,7 @@ const OnLocationClicked = e => {
     {
         searchBar.value = e.target.textContent;
 
-        console.log("object");
-        SearchReport(e.target.textContent.toLocaleLowerCase());
+        SearchReport(e.target.textContent.toLowerCase());
     }
 };
 
@@ -52,7 +49,7 @@ const OnSearchBarInput = e => {
     const input = e.target.value.toLowerCase();
 
     locations.forEach(location => {
-        const locationText = location.textContent.toLocaleLowerCase();
+        const locationText = location.textContent.toLowerCase();
 
         if(!locationText.includes(input))
         {
@@ -74,6 +71,25 @@ const OnSearchBarInput = e => {
         }
     });
 };
+
+const RenderInfo = report => {
+    const desc = document.querySelector('#description');
+    const time = document.querySelector('#time');
+    const victims = document.querySelector('#victims');
+    const addDang = document.querySelector('#additional-dangers');
+    const addInf = document.querySelector('#additional-informations');
+
+    desc.innerText = "TBA";
+    time.innerText = "TBA";
+    victims.innerText = "TBA";
+    addDang.innerText = "TBA";
+    addInf.innerText = report.data.city;
+}
+
+ipcRenderer.on('send-report-data', (event, arg) => {
+    console.log("object");
+    RenderInfo(arg);
+});
 
 searchBar.addEventListener('click', ActivateSearchBar);
 searchBar.addEventListener('input', OnSearchBarInput);

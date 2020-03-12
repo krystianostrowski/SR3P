@@ -108,16 +108,16 @@ const GetBuilding = (street, number) => {
             DebugLog(`Building: ${building.number}`);
             return building;
         }
-
-        DebugLog(`Couldn't find building number: ${number}!`, LogTypes.WARN);
     }
+
+    DebugLog(`Couldn't find building number: ${number}!`, LogTypes.WARN);
 }
 
 /**
  * 
  * @param {int} id 
  */
-/*function GetReport(id) {
+function GetReportById(id) {
     if(!bDbExists || !isNaN(id))
         return;
 
@@ -134,16 +134,17 @@ const GetBuilding = (street, number) => {
 
         DebugLog(`Couldn't find report id: ${report.id}`, LogTypes.WARN);
     }
-}*/
+}
 
 /**
  * @param {String} 
  */
 function GetReport(string) {
+    const data = GetData();
+    
     if(!bDbExists || string == null)
         return false;
 
-    const data = GetData();
     const reports = data.reports;
     const substrings = string.split(' ');
 
@@ -151,14 +152,38 @@ function GetReport(string) {
     {   
         const reportData = report.data;
 
+        let bCity = false;
+        let bStreet = false;
+        let bBuilding = false;
+
         for(substring of substrings)
         {
-            //TODO: Searching script
+            if(reportData.city.toLowerCase() == substring)
+            {
+                bCity = true;
+                continue;
+            }
+
+            if(reportData.street.toLowerCase() == substring)
+            {
+                bStreet = true;
+                continue;
+            }
+
+            if(reportData.building == substring)
+            {
+                bBuilding = true;
+                continue;
+            }
+
         }
 
-        DebugLog(`Couldn't find report: ${string}`, LogTypes.WARN);
-        return false;
+        if(bCity && bStreet && bBuilding)
+                return report;
     }
+
+    DebugLog(`Couldn't find report: ${string}`, LogTypes.WARN);
+    return false;
 }
 
 /**
@@ -216,9 +241,9 @@ module.exports = {
     GetBuilding: (street, number) => {
         return GetBuilding(street, number);
     },
-    /*GetReport: id => {
-        return GetReport(id);
-    },*/
+    GetReportById: id => {
+        return GetReportById(id);
+    },
     GetReport: (string) => {
         return GetReport(string);
     },
