@@ -277,3 +277,13 @@ hr{
         height:7vh;
     }
 }
+@media(max-height:1000px){
+    .plus{
+        width:60px;
+    }
+}
+@media(max-height:600px){
+    .plus{
+        width:40px;
+    }
+}
