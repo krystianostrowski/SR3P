@@ -7,7 +7,8 @@ let serviceWindow;
 
 const WindowState = {
     SEARCH: 'search',
-    INFO: 'info'
+    INFO: 'info',
+    FORM: 'form'
 }
 
 let dispatcherWindowState = WindowState.SEARCH;
@@ -88,4 +89,9 @@ ipcMain.on('search-report', (event, arg) => {
     }
 
     DebugLog(report.data.city);
+});
+
+ipcMain.on('open-dispatcher-form', () => {
+    dispatcherWindowState = WindowState.FORM;
+    dispatcherWindow.loadFile('./html/dispatcher__form.html');
 });

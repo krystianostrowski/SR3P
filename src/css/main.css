@@ -136,6 +136,8 @@ form{
     border-radius: 50%;
     display: flex;
     align-items: center;
+    outline: none;
+    border: none;
 }
 .plus:hover{
     cursor: pointer;

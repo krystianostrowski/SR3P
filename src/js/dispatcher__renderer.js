@@ -6,6 +6,7 @@ const locationsList = document.querySelector('ul');
 const locations = locationsList.querySelectorAll('li');
 const shadow = document.querySelector('.case');
 const adressesWrapper = document.querySelector('#adresses');
+const plusBtn = document.querySelector('.plus');
 
 const locationHiddenClass = 'location--hidden';
 const locationVisibleClass = 'location--visible';
@@ -103,3 +104,7 @@ form.addEventListener('submit', () => {
 });
 
 document.addEventListener('click', DeActivateSearchBar);
+
+plusBtn.addEventListener('click', () => {
+    ipcRenderer.send('open-dispatcher-form');
+});
