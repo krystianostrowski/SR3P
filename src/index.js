@@ -99,8 +99,6 @@ ipcMain.on('add-report-to-db', (event, arg) => {
     
     const report = api.AddReport(arg.data, arg.services);
 
-    DebugLog(report.data.city);
-
     if(report == false)
     {
         //TODO: Error while adding report to database - show error
@@ -114,14 +112,22 @@ ipcMain.on('add-report-to-db', (event, arg) => {
         });
 
         //TODO: Service window send data request
-        serviceWindow.webContents.send('request-sending-report');
+        serviceWindow.webContents.send('request-sending-report', report);
     }
 });
 
-ipcMain.on('request-accepted', () => {
+ipcMain.on('request-accepted', (event, arg) => {
     serviceWindow.loadFile('./html/service__map.html');
+
+    serviceWindow.webContents.on('dom-ready', () => {
+        serviceWindow.webContents.send('sending-data', arg);
+    });
 });
 
-ipcMain.on('service-reached-destination', () => {
+ipcMain.on('service-reached-destination', (event, arg) => {
     serviceWindow.loadFile('./html/service__info.html');
+
+    serviceWindow.webContents.on('dom-ready', () => {
+        serviceWindow.webContents.send('receive-report', arg)
+    });
 }); 
