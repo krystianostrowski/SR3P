@@ -1,0 +1,9 @@
+.wrapper{
+    display:flex!important;
+    align-items: center;
+    height:97vh;
+    background-color: #121212;;
+}
+.wrapper img{
+    margin: auto;
+}

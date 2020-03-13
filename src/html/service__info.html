@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/dispatcher.css">
+    <link rel="stylesheet" href="../css/service-info.css">
     <link rel="stylesheet" href="../resources/icons/css/fontawesome.css">
     <script defer src="../js/titlebar.js"></script>
     <script defer src="../js/service__renderer.js"></script>
@@ -22,6 +22,111 @@
             <button id="close-btn"><i class="icon-cancel"></i></button>
         </div>
     </div>
-        
+    <div class="wrapper">
+        <div class="left-side">
+            <img src="../resources/img/info.png" alt="">
+        </div>
+        <div class="info">
+            <span class="info-text" style="font-size:130%">Opis Zdarzenia <span style="color:#1ED760">:</span><span id="description"></span><br>
+            <span style="font-size:100%">Godzina zgłoszenia <span style="color:#1ED760">:</span><span id="time"></span><br>
+            <span style="font-size:100%">Orientacyjna liczba osób zagrożonych <span style="color:#1ED760">:</span><span id="victims"></span><br>
+            <span style="font-size:100%">Dodatkowe zagrożenia <span style="color:#1ED760">:</span><span id="additional-dangers"></span><br>
+            <span style="font-size:100%">Dodatkowe informacje <span style="color:#1ED760">:</span><span id="additional-informations"></span><br>
+            
+        </div>
+        <div class="services">
+            <div class="straz">
+                <div class="service-top">
+                <img src="../resources/img/strazak.png" alt="">
+                </div>
+                <div class="straz-body">
+                    <div class="body-top"><span style="margin:auto">Straż Pożarna</span></div>
+                    <div class="body-bottom"><span style="margin:auto">Status: <span id="fire-fighters-status"></span></span></div>
+                </div>
+            </div>
+
+            <div class="policja">
+                <div class="service-top"><img src="../resources/img/policjant.png" alt=""></div>
+                <div class="policja-body">
+                    <div class="body-top"><span style="margin:auto">Straż Pożarna</span></div>
+                    <div class="body-bottom"><span style="margin:auto">Status: <span id="police-status"></span></span></div>
+                </div>
+            </div>
+
+            <div class="pogotowie">
+                <div class="service-top"><img src="../resources/img/pogotowie.png" alt=""></div>
+                <div class="pogotowie-body">
+                    <div class="body-top"><span style="margin:auto">Straż Pożarna</span></div>
+                    <div class="body-bottom"><span style="margin:auto">Status: <span id="ambulance-status"></span></span></div>
+                    </div>
+           
+            </div>
+        </div>
+        <div class="map">
+              <h1>tu kiedys cos bedzie ;)</h1>
+        </div>
+        <div class="show">
+            <div class="element">
+                <div class="element-left">
+                    <label  class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="element-right">
+                    <span class="show-text" style="font-size:160%;padding-left:1vw;">Pokaż bramy wjazdowe</span>
+                 </div>
+            </div>
+
+            <div class="element">
+                <div class="element-left">
+                    <label  class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="element-right">
+                    <span class="show-text" style="font-size:160%;padding-left:1vw;">Pokaż dojścia wody</span>
+                 </div>
+            </div>
+
+            <div class="element">
+                <div class="element-left">
+                    <label  class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="element-right">
+                    <span class="show-text" style="font-size:160%;padding-left:1vw;">Pokaż wyjścia ewakuacyjne</span>
+                 </div>
+            </div>
+
+            <div class="element">
+                <div class="element-left">
+                    <label  class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="element-right">
+                    <span class="show-text" style="font-size:160%;padding-left:1vw;">Wyłącznik prądu</span>
+                 </div>
+            </div>
+
+            <div class="element">
+                <div class="element-left">
+                    <label  class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="element-right">
+                    <span class="show-text" style="font-size:160%;padding-left:1vw;">Głowny zawór gazu</span>
+                 </div>
+            </div>
+        </div>
+    </div>
+
     </body>
 </html>

@@ -176,6 +176,11 @@ margin: auto;
     font-size: 140%;
 
 }
+.adresses li:last-child{
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+
+}
 .adresses li:hover{
     background-color: rgb(233, 232, 232);
     cursor: pointer;
