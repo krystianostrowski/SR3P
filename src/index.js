@@ -8,7 +8,9 @@ let serviceWindow;
 const WindowState = {
     SEARCH: 'search',
     INFO: 'info',
-    FORM: 'form'
+    FORM: 'form',
+    ONTHEWAY: 'onTheWay',
+    ATLOCATION: 'atLocation'
 }
 
 let dispatcherWindowState = WindowState.SEARCH;
@@ -41,7 +43,7 @@ const CreateWindow = () => {
     });
 
     dispatcherWindow.loadFile('./html/dispatcher.html');
-    serviceWindow.loadFile('./html/dispatcher__form.html');
+    serviceWindow.loadFile('./html/service.html');
 
     globalShortcut.register('f5', () => {
         dispatcherWindow.reload();
@@ -82,16 +84,44 @@ ipcMain.on('search-report', (event, arg) => {
         if(dispatcherWindowState != WindowState.INFO)
             dispatcherWindow.loadFile('./html/dispatcher__info.html');
 
-        setTimeout(() => {
+        dispatcherWindow.webContents.on('dom-ready', () => {
             dispatcherWindow.webContents.send('send-report-data', report);
-        }, 5000)
-        /*serviceWindow.webContents.send();*/
+        });
     }
-
-    DebugLog(report.data.city);
 });
 
 ipcMain.on('open-dispatcher-form', () => {
     dispatcherWindowState = WindowState.FORM;
     dispatcherWindow.loadFile('./html/dispatcher__form.html');
 });
+
+ipcMain.on('add-report-to-db', (event, arg) => {
+    
+    const report = api.AddReport(arg.data, arg.services);
+
+    DebugLog(report.data.city);
+
+    if(report == false)
+    {
+        //TODO: Error while adding report to database - show error
+    }
+    else
+    {
+        dispatcherWindow.loadFile('./html/dispatcher__info.html');
+
+        dispatcherWindow.webContents.on('dom-ready', () => {
+            dispatcherWindow.webContents.send('send-report-data', report);
+        });
+
+        //TODO: Service window send data request
+        serviceWindow.webContents.send('request-sending-report');
+    }
+});
+
+ipcMain.on('request-accepted', () => {
+    serviceWindow.loadFile('./html/service__map.html');
+});
+
+ipcMain.on('service-reached-destination', () => {
+    serviceWindow.loadFile('./html/service__info.html');
+}); 

@@ -33,9 +33,13 @@ const SaveData = data => {
     fs.writeFileSync(dbPath, JSON.stringify(data, null, 2), error =>
     {
         if(error)
-            return DebugLog(error.message, LogTypes.ERROR);
+        {
+            DebugLog(error.message, LogTypes.ERROR);
+            return false;
+        }
     });
 
+    return true;
 };
 
 /**
@@ -226,9 +230,13 @@ const AddReport = (data, services) => {
         services.fireFighters.state = null;
     }
 
-    db.reports.push({id: id, services: services, data: data});
+    const report = {id: id, services: services, data: data}
+    db.reports.push(report);
 
-    SaveData(db);
+    if(!SaveData(db))
+        return false;
+
+    return report;
 }
 
 module.exports = {
@@ -248,6 +256,6 @@ module.exports = {
         return GetReport(string);
     },
     AddReport: (data, services) => {
-        AddReport(data, services);
+        return AddReport(data, services);
     }
 }
