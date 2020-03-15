@@ -135,6 +135,11 @@ ipcMain.on('request-accepted', (event, arg) => {
 ipcMain.on('service-reached-destination', (event, arg) => {
     serviceWindow.loadFile('./html/service__info.html');
 
+    api.UpdateStatus(arg.id);
+    arg.services.fireFighters.state = "na miejscu";
+
+    dispatcherWindow.webContents.send('send-report-data', arg);
+
     serviceWindow.webContents.on('dom-ready', () => {
         serviceWindow.webContents.send('receive-report', arg)
     });

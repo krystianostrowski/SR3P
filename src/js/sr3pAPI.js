@@ -243,6 +243,26 @@ const AddReport = (data, services, additionalInfo) => {
     return report;
 }
 
+const UpdateStatus = reportId => {
+    if(!bDbExists)
+        return;
+
+    const data = GetData();
+    const reports = data.reports;
+
+    let reportIndex;
+
+    for(report of reports)
+    {
+        if(report.id == reportId)
+            reportIndex = reports.indexOf(report);
+    }
+
+    data.reports[reportIndex].services.fireFighters.state = "na miejscu";
+
+    SaveData(data);
+}
+
 module.exports = {
     CheckIfDBExists: () => {
        CheckIfDBExists(); 
@@ -264,5 +284,8 @@ module.exports = {
     },
     AddReport: (data, services, additionalInfo) => {
         return AddReport(data, services, additionalInfo);
+    },
+    UpdateStatus: reportId => {
+        UpdateStatus(reportId);
     }
 }
