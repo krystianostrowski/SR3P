@@ -120,10 +120,31 @@
                         "required": [ "city", "street", "building" ],
                         "minProperties": 3,
                         "maxProperties": 3
+                    },
+                    "additionalInfo": {
+                        "type": "object",
+                        "properties": {
+                            "time": {
+                                "type": "string"
+                            },
+                            "desc": {
+                                "type": "string"
+                            },
+                            "victims": {
+                                "type": [ "null", "integer" ]
+                            },
+                            "dangers": {
+                                "type": "string"
+                            },
+                            "info": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [ "time", "desc", "victims", "dangers", "info" ]
                     }
                 }
             },
-             "required": [ "services", "data" ]
+             "required": [ "services", "data", "additionalInfo" ]
         }
     },
     "required": [ "cities", "reports" ]

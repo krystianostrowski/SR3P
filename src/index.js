@@ -59,9 +59,17 @@ const CreateWindow = () => {
 
     dispatcherWindow.on('closed', () => app.quit());
     serviceWindow.on('closed', () => app.quit());
+
+    api.CheckIfDBExists();
+    DebugLog('Created windows');
 };
 
 app.on('ready', CreateWindow);
+
+app.on('window-all-closed', () => {
+    if(process.platform !== 'darwin')
+        app.quit();
+});
 
 app.allowRendererProcessReuse = false;
 
@@ -97,11 +105,12 @@ ipcMain.on('open-dispatcher-form', () => {
 
 ipcMain.on('add-report-to-db', (event, arg) => {
     
-    const report = api.AddReport(arg.data, arg.services);
+    const report = api.AddReport(arg.data, arg.services, arg.additionalInfo);
 
     if(report == false)
     {
-        //TODO: Error while adding report to database - show error
+        //TODO: show error on screen
+        DebugLog('Error while adding report to database', LogTypes.ERROR);
     }
     else
     {
@@ -111,7 +120,6 @@ ipcMain.on('add-report-to-db', (event, arg) => {
             dispatcherWindow.webContents.send('send-report-data', report);
         });
 
-        //TODO: Service window send data request
         serviceWindow.webContents.send('request-sending-report', report);
     }
 });

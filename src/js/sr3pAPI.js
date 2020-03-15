@@ -4,25 +4,28 @@ const { DebugLog, LogTypes } = require('./debug');
 const dbPath = './db/database.json';
 let bDbExists = false;
 
-const GetData = () => {
-    let data;
-
+const CheckIfDBExists = () => {
     if(fs.existsSync(dbPath))
     {
         bDbExists = true;
         DebugLog('Connected to database');
-        data = fs.readFileSync(dbPath, (err, json) => {
-            if(err)
-                return DebugLog(err.message, LogTypes.ERROR);
-
-            return json;
-        });
     }
     else
     {
         bDbExists = false;
         return DebugLog('Databse not found', LogTypes.ERROR);
     }
+};
+
+const GetData = () => {
+    let data;
+
+    data = fs.readFileSync(dbPath, (err, json) => {
+        if(err)
+            return DebugLog(err.message, LogTypes.ERROR);
+
+        return json;
+    });
 
     data = JSON.parse(data);
 
@@ -48,11 +51,10 @@ const SaveData = data => {
  * @returns City object
  */
 const GetCity = name => {
-    const data = GetData();
-
     if(!bDbExists)
         return;
 
+    const data = GetData();
     const cities = data.cities;
 
     for(city of cities)
@@ -144,11 +146,10 @@ function GetReportById(id) {
  * @param {String} 
  */
 function GetReport(string) {
-    const data = GetData();
-    
     if(!bDbExists || string == null)
         return false;
 
+    const data = GetData();
     const reports = data.reports;
     const substrings = string.split(' ');
 
@@ -195,7 +196,10 @@ function GetReport(string) {
  * @param {Object} data 
  * @param {Object} services 
  */
-const AddReport = (data, services) => {
+const AddReport = (data, services, additionalInfo) => {
+    if(!bDbExists)
+        return;
+
     let db = GetData();
 
     const id =  (db.reports.length == 0) ? 1 : db.reports[db.reports.length - 1].id + 1;
@@ -230,7 +234,7 @@ const AddReport = (data, services) => {
         services.fireFighters.state = null;
     }
 
-    const report = {id: id, services: services, data: data}
+    const report = {id: id, services: services, data: data, additionalInfo: additionalInfo}
     db.reports.push(report);
 
     if(!SaveData(db))
@@ -240,6 +244,9 @@ const AddReport = (data, services) => {
 }
 
 module.exports = {
+    CheckIfDBExists: () => {
+       CheckIfDBExists(); 
+    },
     GetCity: name => {
         return GetCity(name);
     },
@@ -255,7 +262,7 @@ module.exports = {
     GetReport: (string) => {
         return GetReport(string);
     },
-    AddReport: (data, services) => {
-        return AddReport(data, services);
+    AddReport: (data, services, additionalInfo) => {
+        return AddReport(data, services, additionalInfo);
     }
 }

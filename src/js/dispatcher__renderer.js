@@ -1,4 +1,5 @@
 const { ipcRenderer } = require('electron');
+const { RenderInfo } = require('../js/render__info');
 
 const searchBar = document.querySelector('#location');
 const form = document.querySelector('form');
@@ -74,41 +75,21 @@ const OnSearchBarInput = e => {
     });
 };
 
-const RenderInfo = report => {
-    const desc = document.querySelector('#description');
-    const time = document.querySelector('#time');
-    const victims = document.querySelector('#victims');
-    const addDang = document.querySelector('#additional-dangers');
-    const addInf = document.querySelector('#additional-informations');
-
-    const ffStatus = document.querySelector('#fire-fighters-status');
-    const policeStatus = document.querySelector('#police-status');
-    const ambulanceStatus = document.querySelector('#ambulance-status');
-
-    desc.innerText = "TBA";
-    time.innerText = "TBA";
-    victims.innerText = "TBA";
-    addDang.innerText = "TBA";
-    addInf.innerText = report;
-
-    const services = report.services;
-
-    console.log(ambulanceStatus);
-
-    ffStatus.innerText = (services.fireFighters.requested) ? services.fireFighters.state : "not requested"; 
-    policeStatus.innerText = (services.police.requested) ? services.police.state : "not requested"; 
-    ambulanceStatus.innerText = (services.ambulance.requested) ? services.ambulance.state : "not requested"; 
-}
-
 const GetDataFromForm = () => {
     const cityInput = document.querySelector('#city__input');
     const streetInput = document.querySelector('#street__input');
     const buildingInput = document.querySelector('#building__input');
+    const desc = document.querySelector('#desc');
+    const victims = document.querySelector('#victims');
+    const dangers = document.querySelector('#dangers');
+    const info = document.querySelector('#additional-info');
 
     const policeCheckbox = document.querySelector('#police__checkbox');
     const ambulanceCheckbox = document.querySelector('#ambulance__checkbox');
     const fireFightersCheckbox = document.querySelector('#fire-fighters__checkbox');
     
+    const date = new Date();
+
     let ambulance;
     let police;
     let fireFighters;
@@ -167,7 +148,15 @@ const GetDataFromForm = () => {
             building: parseInt(buildingInput.value)
     }
 
-    ipcRenderer.send('add-report-to-db', {data, services});
+    const additionalInfo = {
+        time: `${date.getDate()}.${date.getMonth()}.${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`,
+        desc: desc.value,
+        victims: (victims == '' || victims == null) ? null : victims.value,
+        dangers: dangers.value,
+        info: info.value
+    }
+
+    ipcRenderer.send('add-report-to-db', {data, services, additionalInfo});
 };
 
 ipcRenderer.on('send-report-data', (event, arg) => {
