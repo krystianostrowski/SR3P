@@ -13,7 +13,7 @@ h1{
     width:90%;
     margin: auto;
 }
-.wrapper button{
+#arrival-confirmation {
     border: 3px solid #1ED760;
     width:20vw;
     height:5vh;
@@ -21,7 +21,7 @@ h1{
     font-size:150%;
     outline: none;
 }
-.wrapper button:hover{
+#arrival-confirmation:hover{
     cursor: pointer;
     background-color: rgb(194, 191, 191);
     transition: .5s;
@@ -29,4 +29,14 @@ h1{
 .map img{
     width: 100%;
     height: 100%;
+}
+@media(max-width:1163px){
+    #arrival-confirmation{
+        font-size:130%;
+    }
+}
+@media(max-width:1015px){
+    #arrival-confirmation{
+        font-size:100%;
+    }
 }

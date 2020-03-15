@@ -42,8 +42,8 @@ const CreateWindow = () => {
         }
     });
 
-    dispatcherWindow.loadFile('./html/dispatcher.html');
-    serviceWindow.loadFile('./html/service.html');
+    dispatcherWindow.loadFile('./html/service__map.html');
+    serviceWindow.loadFile('./html/dispatcher__form.html');
 
     globalShortcut.register('f5', () => {
         dispatcherWindow.reload();

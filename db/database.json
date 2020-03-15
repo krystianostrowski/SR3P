@@ -48,6 +48,230 @@
         "dangers": "Testowe zagrozenia",
         "info": "Testowe info"
       }
+    },
+    {
+      "id": 1,
+      "services": {
+        "ambulance": {
+          "requested": false,
+          "quantity": 0,
+          "state": null
+        },
+        "police": {
+          "requested": true,
+          "quantity": 1,
+          "state": "w drodze"
+        },
+        "fireFighters": {
+          "requested": false,
+          "quantity": 0,
+          "state": null
+        }
+      },
+      "data": {
+        "city": "12",
+        "street": "12",
+        "building": 12
+      },
+      "additionalInfo": {
+        "time": "15.2.2020 20:24",
+        "desc": "",
+        "victims": "",
+        "dangers": "",
+        "info": ""
+      }
+    },
+    {
+      "id": 2,
+      "services": {
+        "ambulance": {
+          "requested": false,
+          "quantity": 0,
+          "state": null
+        },
+        "police": {
+          "requested": false,
+          "quantity": 0,
+          "state": null
+        },
+        "fireFighters": {
+          "requested": false,
+          "quantity": 0,
+          "state": null
+        }
+      },
+      "data": {
+        "city": "12",
+        "street": "12",
+        "building": 12
+      },
+      "additionalInfo": {
+        "time": "15.2.2020 20:33",
+        "desc": "",
+        "victims": "",
+        "dangers": "",
+        "info": ""
+      }
+    },
+    {
+      "id": 3,
+      "services": {
+        "ambulance": {
+          "requested": false,
+          "quantity": 0,
+          "state": null
+        },
+        "police": {
+          "requested": false,
+          "quantity": 0,
+          "state": null
+        },
+        "fireFighters": {
+          "requested": false,
+          "quantity": 0,
+          "state": null
+        }
+      },
+      "data": {
+        "city": "",
+        "street": "",
+        "building": null
+      },
+      "additionalInfo": {
+        "time": "15.2.2020 21:30",
+        "desc": "",
+        "victims": "",
+        "dangers": "",
+        "info": ""
+      }
+    },
+    {
+      "id": 4,
+      "services": {
+        "ambulance": {
+          "requested": false,
+          "quantity": 0,
+          "state": null
+        },
+        "police": {
+          "requested": false,
+          "quantity": 0,
+          "state": null
+        },
+        "fireFighters": {
+          "requested": false,
+          "quantity": 0,
+          "state": null
+        }
+      },
+      "data": {
+        "city": "",
+        "street": "",
+        "building": null
+      },
+      "additionalInfo": {
+        "time": "15.2.2020 21:57",
+        "desc": "",
+        "victims": "",
+        "dangers": "",
+        "info": ""
+      }
+    },
+    {
+      "id": 5,
+      "services": {
+        "ambulance": {
+          "requested": false,
+          "quantity": 0,
+          "state": null
+        },
+        "police": {
+          "requested": false,
+          "quantity": 0,
+          "state": null
+        },
+        "fireFighters": {
+          "requested": false,
+          "quantity": 0,
+          "state": null
+        }
+      },
+      "data": {
+        "city": "",
+        "street": "",
+        "building": null
+      },
+      "additionalInfo": {
+        "time": "15.2.2020 21:57",
+        "desc": "",
+        "victims": "",
+        "dangers": "",
+        "info": ""
+      }
+    },
+    {
+      "id": 6,
+      "services": {
+        "ambulance": {
+          "requested": false,
+          "quantity": 0,
+          "state": null
+        },
+        "police": {
+          "requested": false,
+          "quantity": 0,
+          "state": null
+        },
+        "fireFighters": {
+          "requested": false,
+          "quantity": 0,
+          "state": null
+        }
+      },
+      "data": {
+        "city": "",
+        "street": "",
+        "building": null
+      },
+      "additionalInfo": {
+        "time": "15.2.2020 21:57",
+        "desc": "",
+        "victims": "",
+        "dangers": "",
+        "info": ""
+      }
+    },
+    {
+      "id": 7,
+      "services": {
+        "ambulance": {
+          "requested": true,
+          "quantity": 1,
+          "state": "w drodze"
+        },
+        "police": {
+          "requested": true,
+          "quantity": 1,
+          "state": "w drodze"
+        },
+        "fireFighters": {
+          "requested": false,
+          "quantity": 0,
+          "state": null
+        }
+      },
+      "data": {
+        "city": "12",
+        "street": "12",
+        "building": 12
+      },
+      "additionalInfo": {
+        "time": "15.2.2020 22:4",
+        "desc": "",
+        "victims": "",
+        "dangers": "",
+        "info": ""
+      }
     }
   ]
 }
