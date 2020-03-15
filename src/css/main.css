@@ -126,6 +126,27 @@ form{
     z-index: 50;
     display:none;
 }
+.home{
+    position: absolute;
+    margin-left:5%;
+    margin-top:3vh;
+    height:6vh;
+    width:75px;
+    background-color: #1ED760;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    outline: none;
+    border: none;
+}
+.home:hover{
+    cursor: pointer;
+}
+.home img{
+height: 70%;
+width: 100%;
+margin: auto;
+}
 .plus{
     position: absolute;
     margin-left:5%;
@@ -204,7 +225,31 @@ margin: auto;
     display: flex;
     align-items: center;
 }
-
+@media(max-height:695px){
+    .home{
+        width: 60px;
+    }
+}
+@media(max-height:513px){
+    .home{
+        width: 50px;
+    }
+}
+@media(max-height:876px){
+    #hi{
+        font-size:90%;
+    }
+}
+@media(max-height:745px){
+    #hi{
+        font-size:80%;
+    }
+}
+@media(max-height:666px){
+    #hi{
+        font-size:70%;
+    }
+}
 @media(max-width:1000px){
     
     .center input[type=search]{

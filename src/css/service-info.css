@@ -6,6 +6,9 @@
     height: 83vh;
     float:left;
 }
+.home{
+    margin-top:1vh!important;
+}
 /*__________________INFORMATIONS ABOUT CALL___________ */
 .info{
     font-size:105%;
@@ -193,6 +196,24 @@ align-items: center;
     height: 0;
 }
 /*______________________________________________*/
+@media(max-width:1285px){
+    .home{
+        height: 40px;
+        width: 50px;
+    }
+}
+@media(max-width:991px){
+    .home{
+        height: 35px;
+        width: 40px;
+    }
+}
+@media(max-width:847px){
+    .home{
+        height: 25px;
+        width: 30px;
+    }
+}
 @media(max-width:1155px){
         .left-side img{
             width:90%
