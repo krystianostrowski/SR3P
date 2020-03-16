@@ -43,7 +43,7 @@ const CreateWindow = () => {
     });
 
     dispatcherWindow.loadFile('./html/dispatcher.html');
-    serviceWindow.loadFile('./html/service.html');
+    serviceWindow.loadFile('./html/dispatcher__place__info.html');
 
     globalShortcut.register('f5', () => {
         dispatcherWindow.reload();

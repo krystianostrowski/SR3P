@@ -225,16 +225,7 @@ margin: auto;
     display: flex;
     align-items: center;
 }
-@media(max-height:695px){
-    .home{
-        width: 60px;
-    }
-}
-@media(max-height:513px){
-    .home{
-        width: 50px;
-    }
-}
+
 @media(max-height:876px){
     #hi{
         font-size:90%;
@@ -331,9 +322,12 @@ hr{
     .plus{
         width:60px;
     }
+    .home{
+        width:60px;
+    }
 }
 @media(max-height:600px){
-    .plus{
+    .home{
         width:40px;
     }
 }
