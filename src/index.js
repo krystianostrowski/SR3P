@@ -42,8 +42,8 @@ const CreateWindow = () => {
         }
     });
 
-    dispatcherWindow.loadFile('./html/service__map.html');
-    serviceWindow.loadFile('./html/dispatcher__form.html');
+    dispatcherWindow.loadFile('./html/dispatcher.html');
+    serviceWindow.loadFile('./html/service.html');
 
     globalShortcut.register('f5', () => {
         dispatcherWindow.reload();
@@ -144,3 +144,8 @@ ipcMain.on('service-reached-destination', (event, arg) => {
         serviceWindow.webContents.send('receive-report', arg)
     });
 }); 
+
+ipcMain.on('home-button-clicked', () => {
+    dispatcherWindowState = WindowState.SEARCH;
+    dispatcherWindow.loadFile('./html/dispatcher.html');
+});

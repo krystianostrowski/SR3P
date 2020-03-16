@@ -9,9 +9,17 @@ const shadow = document.querySelector('.case');
 const adressesWrapper = document.querySelector('#adresses');
 const plusBtn = document.querySelector('.plus');
 const sendFormBtn = document.querySelector('.send');
+const homeBtn = document.querySelector('.home');
 
 const locationHiddenClass = 'location--hidden';
 const locationVisibleClass = 'location--visible';
+
+const policeCheckbox = document.querySelector('#police__checkbox');
+const ambulanceCheckbox = document.querySelector('#ambulance__checkbox');
+const fireFightersCheckbox = document.querySelector('#fire-fighters__checkbox');
+const ffQuantityInput = document.querySelector('#ff-quantity');
+const policeQuantityInput = document.querySelector('#police-quantity');
+const ambulanceQuantityInput = document.querySelector('#ambulance-quantity');
 
 let bIsSearchbarActive = false;
 
@@ -83,10 +91,6 @@ const GetDataFromForm = () => {
     const victims = document.querySelector('#victims');
     const dangers = document.querySelector('#dangers');
     const info = document.querySelector('#additional-info');
-
-    const policeCheckbox = document.querySelector('#police__checkbox');
-    const ambulanceCheckbox = document.querySelector('#ambulance__checkbox');
-    const fireFightersCheckbox = document.querySelector('#fire-fighters__checkbox');
     
     const date = new Date();
 
@@ -98,7 +102,7 @@ const GetDataFromForm = () => {
     {
         ambulance = {
             requested: true,
-            quantity: 1
+            quantity: (ambulanceQuantityInput.value <= 0 || ambulanceQuantityInput.value == null || ambulanceQuantityInput.value == '' ) ? 1 : parseInt(ambulanceQuantityInput.value)
         }
     }
     else
@@ -112,7 +116,7 @@ const GetDataFromForm = () => {
     {
         police = {
             requested: true,
-            quantity: 1
+            quantity: (policeQuantityInput.value <= 0 || policeQuantityInput.value == null || policeQuantityInput.value == '' ) ? 1 : parseInt(policeQuantityInput.value)
         }
     }
     else
@@ -126,7 +130,7 @@ const GetDataFromForm = () => {
     {
         fireFighters = {
             requested: true,
-            quantity: 1
+            quantity: (ffQuantityInput.value <= 0 || ffQuantityInput.value == null || ffQuantityInput.value == '' ) ? 1 : parseInt(ffQuantityInput.value)
         }
     }
     else
@@ -151,7 +155,7 @@ const GetDataFromForm = () => {
     const additionalInfo = {
         time: `${date.getDate()}.${date.getMonth()}.${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`,
         desc: desc.value,
-        victims: (victims == '' || victims == null) ? null : victims.value,
+        victims: (victims == '' || victims == null) ? null : parseInt(victims.value),
         dangers: dangers.value,
         info: info.value
     }
@@ -186,4 +190,53 @@ if(plusBtn != null)
 if(sendFormBtn != null)
 {
     sendFormBtn.addEventListener('click', GetDataFromForm);
+}
+
+if(homeBtn != null)
+{
+    homeBtn.addEventListener('click', () => {
+        ipcRenderer.send('home-button-clicked')
+    });
+}
+
+if(policeCheckbox != null)
+{
+    policeCheckbox.addEventListener('click', () => {
+        if(policeCheckbox.checked)
+        {
+            policeQuantityInput.disabled = false;
+        }
+        else
+        {
+            policeQuantityInput.disabled = true;
+        }
+    });
+}
+
+if(ambulanceCheckbox != null)
+{
+    ambulanceCheckbox.addEventListener('click', () => {
+        if(ambulanceCheckbox.checked)
+        {
+            ambulanceQuantityInput.disabled = false;
+        }
+        else
+        {
+            ambulanceQuantityInput.disabled = true;
+        }
+    });
+}
+
+if(fireFightersCheckbox != null)
+{
+    fireFightersCheckbox.addEventListener('click', () => {
+        if(fireFightersCheckbox.checked)
+        {
+            ffQuantityInput.disabled = false;
+        }
+        else
+        {
+            ffQuantityInput.disabled = true;
+        }
+    });
 }
