@@ -195,7 +195,7 @@ if(sendFormBtn != null)
 if(homeBtn != null)
 {
     homeBtn.addEventListener('click', () => {
-        ipcRenderer.send('home-button-clicked')
+        ipcRenderer.send('home-button-clicked', 'dispatcher');
     });
 }
 

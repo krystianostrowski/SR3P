@@ -2,6 +2,7 @@ const { ipcRenderer } = require('electron');
 const { RenderInfo } = require('../js/render__info');
 
 const confirmBtn = document.querySelector('#arrival-confirmation');
+const homeBtn = document.querySelector('.home');
 
 let bCanReceiveReport = true;
 let report;
@@ -26,5 +27,12 @@ if(confirmBtn != null)
 {
     confirmBtn.addEventListener('click', () => {
         ipcRenderer.send('service-reached-destination', report);
+    });
+}
+
+if(homeBtn != null)
+{
+    homeBtn.addEventListener('click', () => {
+        ipcRenderer.send('home-button-clicked', 'service');
     });
 }

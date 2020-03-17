@@ -8,9 +8,7 @@ let serviceWindow;
 const WindowState = {
     SEARCH: 'search',
     INFO: 'info',
-    FORM: 'form',
-    ONTHEWAY: 'onTheWay',
-    ATLOCATION: 'atLocation'
+    FORM: 'form'
 }
 
 let dispatcherWindowState = WindowState.SEARCH;
@@ -145,7 +143,15 @@ ipcMain.on('service-reached-destination', (event, arg) => {
     });
 }); 
 
-ipcMain.on('home-button-clicked', () => {
-    dispatcherWindowState = WindowState.SEARCH;
-    dispatcherWindow.loadFile('./html/dispatcher.html');
+ipcMain.on('home-button-clicked', (event, arg) => {
+
+    if(arg === 'dispatcher')
+    {
+        dispatcherWindowState = WindowState.SEARCH;
+        dispatcherWindow.loadFile('./html/dispatcher.html');
+    }
+    else if(arg === 'service')
+    {
+        serviceWindow.loadFile('./html/service.html');
+    }
 });
