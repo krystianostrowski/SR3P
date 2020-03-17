@@ -300,6 +300,12 @@ margin: auto;
     font-family: 'Lato';
     src: url('../resources/fonts/lato.woff2');
 }
+
+@font-face {
+    font-family: 'Cascadia Code';
+    src: url('../resources/fonts/Cascadia.ttf');
+}
+
 hr{
     padding:0;
     margin:0;
