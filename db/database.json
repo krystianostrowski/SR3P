@@ -144,6 +144,38 @@
         "dangers": "",
         "info": ""
       }
+    },
+    {
+      "id": 4,
+      "services": {
+        "ambulance": {
+          "requested": false,
+          "quantity": 0,
+          "state": null
+        },
+        "police": {
+          "requested": true,
+          "quantity": 12,
+          "state": "w drodze"
+        },
+        "fireFighters": {
+          "requested": false,
+          "quantity": 0,
+          "state": "na miejscu"
+        }
+      },
+      "data": {
+        "city": "12",
+        "street": "12",
+        "building": 12
+      },
+      "additionalInfo": {
+        "time": "17.2.2020 20:23",
+        "desc": "",
+        "victims": null,
+        "dangers": "",
+        "info": ""
+      }
     }
   ]
 }

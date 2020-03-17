@@ -25,12 +25,20 @@
         <div class="wrapper">
             <div class="top">
                 
-                   <button><img src="../resources/img/lupa.png" alt=""></button>
-                    <input type="search" placeholder="Wyszukaj">
+                   <button onclick="serviceInput()"><img src="../resources/img/lupa.png" alt=""></button>
+                    <input class="hidden" type="search" placeholder="Wyszukaj">
             </div>
             <div class="img">
             <img src="../resources/img/main-service.png" alt="">
             </div>
         </div>
+        <script>
+            function serviceInput(){
+                    const searchBar = document.querySelector("input");
+                    searchBar.classList.add("visible");
+                    searchBar.classList.remove("hidden");
+                
+            }
+        </script>
     </body>
 </html>
