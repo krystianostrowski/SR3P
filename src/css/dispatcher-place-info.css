@@ -1,0 +1,76 @@
+.main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width:100%;
+    min-height:85vh;
+    max-height: inherit;
+    background-color:var(--main) ;
+}
+.top{
+    width: 100%;
+    height: 40vh;
+    display: flex;
+    align-items: center;
+    max-height: inherit;
+}
+.top-content{
+    margin: auto;
+    border: 2px solid #1ED760;
+    width: 60%;
+    height: 60%;
+    max-height: inherit;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.hies{
+    width: 100%;
+    height: 20%;
+    border-bottom : 2px solid #1ED760;
+    display: flex;
+    align-items: center;
+}
+.bottom{
+    width: 100%;
+    height: 45vh;
+    max-height: inherit;
+    display: flex;
+    align-items: center;
+}
+.bottom-content{
+    width: 20%;
+    height:30%;
+    max-height: inherit;
+    border: 2px solid #1ED760;
+    margin: auto;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.cash{
+    width: 100%;
+    height: 50%;
+    display: flex;
+    align-items: center;
+}
+.cesh{
+    width: 100%;
+    height: 50%;
+    display: flex;
+    align-items: center;
+}
+.cesh button{
+    width: 100%;
+    height: 100%;
+    border-bottom-left-radius: 27px;
+    border-bottom-right-radius: 27px;
+    outline: none;
+    border: none;
+    background-color: #1ED760;
+    cursor: pointer;
+    font-size: 150%;
+}
+
