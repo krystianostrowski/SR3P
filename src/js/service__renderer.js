@@ -3,6 +3,7 @@ const { RenderInfo } = require('../js/render__info');
 
 const confirmBtn = document.querySelector('#arrival-confirmation');
 const homeBtn = document.querySelector('.home');
+const searchBtn = document.querySelector('#service-search-button');
 
 let bCanReceiveReport = true;
 let report;
@@ -34,5 +35,15 @@ if(homeBtn != null)
 {
     homeBtn.addEventListener('click', () => {
         ipcRenderer.send('home-button-clicked', 'service');
+    });
+}
+
+if(searchBtn != null)
+{
+    searchBtn.addEventListener('click', () => {
+        const input = document.querySelector('.search__input');
+        searchBtn.classList.toggle('search__button--active');
+        searchBtn.classList.toggle('search__button--inactive');
+        input.classList.toggle('search__input--visible');
     });
 }
