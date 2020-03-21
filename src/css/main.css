@@ -15,6 +15,14 @@ body{
     font-family: 'Lato', sans-serif;
     color: #ffffff;
 }
+::-webkit-scrollbar{
+    width:10px;
+    background-color: var(--main);
+}
+::-webkit-scrollbar-thumb{
+    background-color: rgb(21, 158, 69);
+
+}
 /* ------------TITLE BAR-----------*/
 .title-bar{ 
     display: flex;

@@ -33,13 +33,16 @@
 .top button:hover{
     cursor: pointer;
 }
-.top button:focus{
+.top button:{
     border-top-right-radius:0 ;
     border-bottom-right-radius: 0;
-    transition: .5s;
+    transition: 1s;
 }
 button img{
     margin: auto;
+}
+button:focus input{
+    margin-left:20%;
 }
 .top input{
     width: 56%;
@@ -52,6 +55,16 @@ button img{
     padding-right:2%;
     padding-left:5.2%;
     z-index: 50;
+    transition: 1s;
+    
+}
+.hidden{
+    transform-origin: left;
+    transform: scaleX(0);
+}
+.visible{
+    transform: scaleX(1);
+
 }
 .top input[type=search]::placeholder{
     color:#C4C4C4;
