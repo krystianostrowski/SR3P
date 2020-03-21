@@ -151,6 +151,7 @@ function GetReport(string) {
 
     const data = GetData();
     const reports = data.reports;
+    string = string.replace(',', '');
     const substrings = string.split(' ');
 
     for(report of reports)
@@ -263,6 +264,36 @@ const UpdateStatus = reportId => {
     SaveData(data);
 }
 
+const GetArrayOfCities = () => {
+    if(!bDbExists)
+        return;
+
+    const data = GetData();
+    const cities = data.cities;
+    const array = [];
+
+    for(city of cities)
+    {
+        const streets = [];
+
+        for(street of city.streets)
+        {
+            const buildings = [];
+
+            for(building of street.buildings)
+            {
+                buildings.push(building.number.toString());
+            }
+
+            streets.push({ name: street.name, buildings: buildings });
+        }
+
+        array.push({name: city.name, streets: streets});
+    }
+
+    return array;
+}
+
 module.exports = {
     CheckIfDBExists: () => {
        CheckIfDBExists(); 
@@ -287,5 +318,8 @@ module.exports = {
     },
     UpdateStatus: reportId => {
         UpdateStatus(reportId);
+    },
+    GetArrayOfCities: () => {
+        return GetArrayOfCities();
     }
 }

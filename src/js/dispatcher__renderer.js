@@ -22,6 +22,8 @@ const policeQuantityInput = document.querySelector('#police-quantity');
 const ambulanceQuantityInput = document.querySelector('#ambulance-quantity');
 
 let bIsSearchbarActive = false;
+let citiesArray;
+let placesArray;
 
 const ActivateSearchBar = () => {
     if(!bIsSearchbarActive)
@@ -56,31 +58,128 @@ const OnLocationClicked = e => {
     }
 };
 
+
+/**
+ * SEARCHBAR FUNCTIONS
+ */
+const PerformArrayOfStrings = citiesArray => {
+    const array = [];
+
+    for(city of citiesArray)
+    {
+        for(street of city.streets)
+        {
+            for(building of street.buildings)
+            {
+                array.push(`${street.name} ${building}, ${city.name}`)
+            }
+        }
+    }
+
+    array.forEach(string => {
+        console.log(string);
+    });
+    
+
+    return array;
+};
+
+const ClearList = list => {
+    while(list.firstChild)
+        list.removeChild(list.firstChild);
+};
+
+const AddLocationToList = (list, string) => {
+    const li = document.createElement('li');
+    li.classList.add('location--visible')
+
+    const leftDiv = document.createElement('div');
+    leftDiv.classList.add('left-li');
+
+    const img = document.createElement('img');
+    img.src = '../resources/img/lokacja.png';
+
+    leftDiv.appendChild(img);
+
+    const rightDiv = document.createElement('div');
+    rightDiv.classList.add('right-li');
+    rightDiv.classList.add('locations__item');
+    rightDiv.innerText = string;
+
+    li.appendChild(leftDiv);
+    li.appendChild(rightDiv);
+
+    list.appendChild(li);
+};
+
+const PickRandomLocation = locationsArray => {
+    //TODO: Pick random location
+    const random = Math.floor(Math.random() * locationsArray.length);
+    return locationsArray[random];
+};
+
+const FillFormRandomLocations = locations => {
+    if(locations >= placesArray.length)
+    {
+        placesArray.forEach(place => {
+            AddLocationToList(locationsList, place);
+        });
+    }
+    else
+    {
+        for(let i = 0; i < locations; i++)
+        {
+            const randomLocaion = PickRandomLocation(placesArray);
+            AddLocationToList(locationsList, randomLocaion);
+        }
+    }
+}
+
+/**
+ * SEARCHBAR FUNCTIONS END
+ */ 
+
 const OnSearchBarInput = e => {
+    if(citiesArray == null)
+        return;
+
     const input = e.target.value.toLowerCase();
 
-    locations.forEach(location => {
-        const locationText = location.textContent.toLowerCase();
+    // locations.forEach(location => {
+    //     const locationText = location.textContent.toLowerCase();
 
-        if(!locationText.includes(input))
+    //     if(!locationText.includes(input))
+    //     {
+    //         if(location.classList.contains(locationVisibleClass))
+    //         {
+    //             location.classList.remove(locationVisibleClass);
+    //         }
+
+    //         location.classList.add(locationHiddenClass);
+    //     }
+    //     else if(locationText.includes(input))
+    //     {
+    //         if(location.classList.contains(locationHiddenClass))
+    //         {
+    //             location.classList.remove(locationHiddenClass);
+    //         }
+
+    //         location.classList.add(locationVisibleClass);
+    //     }
+    // });
+    console.clear();
+    ClearList(locationsList);
+    placesArray.forEach(string => {
+        if(string == '')
+            return;
+
+        if(string.toLocaleLowerCase().includes(input))
         {
-            if(location.classList.contains(locationVisibleClass))
-            {
-                location.classList.remove(locationVisibleClass);
-            }
-
-            location.classList.add(locationHiddenClass);
-        }
-        else if(locationText.includes(input))
-        {
-            if(location.classList.contains(locationHiddenClass))
-            {
-                location.classList.remove(locationHiddenClass);
-            }
-
-            location.classList.add(locationVisibleClass);
+            console.log(string);
+            AddLocationToList(locationsList, string);
         }
     });
+    
 };
 
 const GetDataFromForm = () => {
@@ -153,7 +252,7 @@ const GetDataFromForm = () => {
     }
 
     const additionalInfo = {
-        time: `${date.getDate()}.${date.getMonth()}.${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`,
+        time: `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`,
         desc: desc.value,
         victims: (victims == '' || victims == null) ? null : parseInt(victims.value),
         dangers: dangers.value,
@@ -165,6 +264,13 @@ const GetDataFromForm = () => {
 
 ipcRenderer.on('send-report-data', (event, arg) => {
     RenderInfo(arg);
+});
+
+ipcRenderer.on('got-cities', (event, arg) => {
+    citiesArray = arg;
+    placesArray = PerformArrayOfStrings(citiesArray);
+    ClearList(locationsList);
+    FillFormRandomLocations(5);
 });
 
 searchBar.addEventListener('click', ActivateSearchBar);

@@ -60,6 +60,11 @@ const CreateWindow = () => {
 
     api.CheckIfDBExists();
     DebugLog('Created windows');
+
+    dispatcherWindow.webContents.on('dom-ready', () => {
+        const cities = api.GetArrayOfCities();
+        dispatcherWindow.webContents.send('got-cities', cities);
+    });
 };
 
 app.on('ready', CreateWindow);
@@ -72,7 +77,7 @@ app.on('window-all-closed', () => {
 app.allowRendererProcessReuse = false;
 
 ipcMain.on('search-report', (event, arg) => {
-    DebugLog(`Search: ${arg}`, LogTypes.WARN);
+    DebugLog(`Search: ${arg}`);
 
     const report = api.GetReport(arg);
 
@@ -80,7 +85,10 @@ ipcMain.on('search-report', (event, arg) => {
     {   
         DebugLog('Report not found');
         if(dispatcherWindowState != WindowState.SEARCH)
+        {
+            dispatcherWindowState = WindowState.SEARCH;
             dispatcherWindow.loadFile('./html/dispatcher.html');
+        }
 
         return;
     }
@@ -88,7 +96,10 @@ ipcMain.on('search-report', (event, arg) => {
     {
         DebugLog('Found report');
         if(dispatcherWindowState != WindowState.INFO)
+        {
+            dispatcherWindowState = WindowState.INFO;
             dispatcherWindow.loadFile('./html/dispatcher__info.html');
+        }
 
         dispatcherWindow.webContents.on('dom-ready', () => {
             dispatcherWindow.webContents.send('send-report-data', report);
