@@ -23,22 +23,13 @@
         </div>
     </div>
         <div class="wrapper">
-            <div class="top">
-                
-                   <button onclick="serviceInput()"><img src="../resources/img/lupa.png" alt=""></button>
-                    <input class="hidden" type="search" placeholder="Wyszukaj">
+            <div class="top">              
+                   <button id="service-search-button" class="search__button--inactive"><img src="../resources/img/lupa.png" alt=""></button>
+                    <input class="search__input" type="search" placeholder="Wyszukaj">
             </div>
             <div class="img">
             <img src="../resources/img/main-service.png" alt="">
             </div>
         </div>
-        <script>
-            function serviceInput(){
-                    const searchBar = document.querySelector("input");
-                    searchBar.classList.add("visible");
-                    searchBar.classList.remove("hidden");
-                
-            }
-        </script>
     </body>
 </html>
