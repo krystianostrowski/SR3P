@@ -9,26 +9,68 @@ const RenderInfo = report => {
     const policeStatus = document.querySelector('#police-status');
     const ambulanceStatus = document.querySelector('#ambulance-status');
 
-    const info = report.additionalInfo;
+    let info;
+    let services;
 
-    desc.innerText = info.desc;
-    time.innerText = info.time;
+    if(report != null)
+        info = report.additionalInfo;
+
+    if(report != null)
+        services = report.services;
+    else
+        services = null;
+
+    desc.innerText = (report == null) ? "" : info.desc;
+    time.innerText = (report == null) ? "" : info.time;
 
     //TODO: If victims are == null get people from building info
 
-    victims.innerText = (info.victims == null) ? "TBA" : info.victims;
-    addDang.innerText = info.dangers;
-    addInf.innerText = info.info;
+    if(report != null)
+        victims.innerText = (info.victims == null) ? "TBA" : info.victims;
+    else
+        victims.innerHTML = "";
 
-    const services = report.services;
+    addDang.innerText = (report == null) ? "" : info.dangers;
+    addInf.innerText = (report == null) ? "" : info.info;
 
-    ffStatus.innerText = (services.fireFighters.requested) ? services.fireFighters.state : "not requested"; 
-    policeStatus.innerText = (services.police.requested) ? services.police.state : "not requested"; 
-    ambulanceStatus.innerText = (services.ambulance.requested) ? services.ambulance.state : "not requested"; 
+    if(services != null)
+    {
+        ffStatus.innerText = (services.fireFighters.requested) ? services.fireFighters.state : "not requested"; 
+        policeStatus.innerText = (services.police.requested) ? services.police.state : "not requested"; 
+        ambulanceStatus.innerText = (services.ambulance.requested) ? services.ambulance.state : "not requested"; 
+    }
+    else
+    {
+        ffStatus.innerText = 'not requested';
+        policeStatus.innerText = 'not requested';
+        ambulanceStatus.innerText = 'not requested';
+    }
 }
+
+const RenderBuildingInfo = (adress, data) => {
+    const buildingData = data.data;
+
+    const div = document.querySelector('.top-content');
+    const adressContainer = div.querySelector('.hies');
+    const ul = div.querySelector('ul');
+    const spans = ul.querySelectorAll('span');
+
+    adressContainer.innerText += adress;
+    
+    let index = 0;
+
+    for(data in buildingData)
+    {
+        spans[index].innerText += ` ${buildingData[data]}`;
+        index++;
+    }
+};
 
 module.exports = {
     RenderInfo: report => {
         RenderInfo(report);
+    },
+    RenderBuildingInfo: (adress, data) => {
+        RenderBuildingInfo(adress, data);
     }
 }

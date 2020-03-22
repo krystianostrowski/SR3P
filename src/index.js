@@ -8,7 +8,8 @@ let serviceWindow;
 const WindowState = {
     SEARCH: 'search',
     INFO: 'info',
-    FORM: 'form'
+    FORM: 'form',
+    BUILDINGINFO: 'buildingInfo'
 }
 
 let dispatcherWindowState = WindowState.SEARCH;
@@ -83,28 +84,53 @@ ipcMain.on('search-report', (event, arg) => {
 
     if(report == false)
     {   
-        DebugLog('Report not found');
+        DebugLog('Report not found', LogTypes.ERROR);
+        dispatcherWindow.webContents.send('report-not-found');
+    }
+    else 
+    {
+        DebugLog('Found report');
+        dispatcherWindow.webContents.send('found-report', report);
+    }
+});
+
+ipcMain.on('search-building', (event, arg) => {
+    const building = api.GetBuildingInfo(arg);
+
+    if(!building)
+    {
         if(dispatcherWindowState != WindowState.SEARCH)
         {
             dispatcherWindowState = WindowState.SEARCH;
             dispatcherWindow.loadFile('./html/dispatcher.html');
         }
-
-        return;
+        
+        DebugLog('Building not found', LogTypes.ERROR);
     }
-    else 
+    else
     {
-        DebugLog('Found report');
-        if(dispatcherWindowState != WindowState.INFO)
+        if(dispatcherWindowState != WindowState.BUILDINGINFO)
         {
-            dispatcherWindowState = WindowState.INFO;
-            dispatcherWindow.loadFile('./html/dispatcher__info.html');
-        }
+            dispatcherWindowState = WindowState.BUILDINGINFO;
+            dispatcherWindow.loadFile('./html/dispatcher__place__info.html');
 
-        dispatcherWindow.webContents.on('dom-ready', () => {
-            dispatcherWindow.webContents.send('send-report-data', report);
-        });
+            dispatcherWindow.webContents.on('dom-ready', () => {
+                dispatcherWindow.webContents.send('get-building-info', { buildingInfo: building, adress: arg });
+            });
+        }
     }
+});
+
+ipcMain.on('display-dispatcher-info', (event, arg) => {
+    if(dispatcherWindowState != WindowState.INFO)
+    {
+        dispatcherWindowState = WindowState.INFO;
+        dispatcherWindow.loadFile('./html/dispatcher__info.html');
+    }
+
+    dispatcherWindow.webContents.on('dom-ready', () => {
+        dispatcherWindow.webContents.send('send-report-data', arg);
+    });
 });
 
 ipcMain.on('open-dispatcher-form', () => {
@@ -123,6 +149,7 @@ ipcMain.on('add-report-to-db', (event, arg) => {
     }
     else
     {
+        dispatcherWindowState = WindowState.INFO;
         dispatcherWindow.loadFile('./html/dispatcher__info.html');
 
         dispatcherWindow.webContents.on('dom-ready', () => {

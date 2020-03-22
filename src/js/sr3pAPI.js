@@ -59,7 +59,7 @@ const GetCity = name => {
 
     for(city of cities)
     {
-        if(city.name === name)
+        if(city.name.toLowerCase() === name.toLowerCase())
         {
             DebugLog(`City: ${city.name}`);
             return city;
@@ -84,7 +84,7 @@ const GetStreet = (city, name) => {
 
     for(street of streets)
     {
-        if(street.name === name)
+        if(street.name.toLowerCase().includes(name))
         {
             DebugLog(`Street: ${street.name}`);
             return street;
@@ -117,7 +117,61 @@ const GetBuilding = (street, number) => {
     }
 
     DebugLog(`Couldn't find building number: ${number}!`, LogTypes.WARN);
-}
+    return null;
+};
+
+const GetBuildingInfo = string => {
+    if(!bDbExists || string == null || string =='')
+        return false;
+
+    const data = GetData(); 
+    string = string.replace(',', '');
+    const substrings = string.split(' ');
+
+
+    let city = null;
+    let street = null;
+    let building = null;
+
+    for(substring of substrings)
+    {   
+        if(city == null)
+        {
+            city = GetCity(substring);
+            
+            if(city != null)
+                break;
+        }
+    }
+
+    for(substring of substrings)
+    {
+        if(street == null && city != null)
+        {
+            street = GetStreet(city, substring);
+            
+            if(street != null)
+                break;
+        }
+    }
+
+    for(substring of substrings)
+    {
+        if(building == null && street != null)
+        {
+            building = GetBuilding(street, substring);
+            
+            if(building != null)
+                break;
+        }
+    }
+
+    if(city != null && street != null && building != null)
+            return building;
+
+    DebugLog(`Couldn't find building: ${string}`, LogTypes.ERROR);
+    return false;
+};
 
 /**
  * 
@@ -307,10 +361,13 @@ module.exports = {
     GetBuilding: (street, number) => {
         return GetBuilding(street, number);
     },
+    GetBuildingInfo: string => {
+        return GetBuildingInfo(string);
+    },
     GetReportById: id => {
         return GetReportById(id);
     },
-    GetReport: (string) => {
+    GetReport: string => {
         return GetReport(string);
     },
     AddReport: (data, services, additionalInfo) => {

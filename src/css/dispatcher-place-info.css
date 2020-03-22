@@ -98,3 +98,6 @@
     border: 5px solid var(--main);
 }
 
+.see-repoer__button--hidden {
+    display: none;
+};

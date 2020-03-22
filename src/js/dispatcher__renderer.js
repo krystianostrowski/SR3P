@@ -1,5 +1,5 @@
 const { ipcRenderer } = require('electron');
-const { RenderInfo } = require('../js/render__info');
+const { RenderInfo, RenderBuildingInfo } = require('../js/render__info');
 
 const searchBar = document.querySelector('#location');
 const form = document.querySelector('form');
@@ -10,7 +10,10 @@ const adressesWrapper = document.querySelector('#adresses');
 const plusBtn = document.querySelector('.plus');
 const sendFormBtn = document.querySelector('.send');
 const homeBtn = document.querySelector('.home');
+const seeReportBtn = document.querySelector('#see-report');
 
+const locationsToDiplayOnList = 5;
+//TODO: Remove unused variables from js and classes from css
 const locationHiddenClass = 'location--hidden';
 const locationVisibleClass = 'location--visible';
 
@@ -24,6 +27,7 @@ const ambulanceQuantityInput = document.querySelector('#ambulance-quantity');
 let bIsSearchbarActive = false;
 let citiesArray;
 let placesArray;
+let report = null;
 
 const ActivateSearchBar = () => {
     if(!bIsSearchbarActive)
@@ -43,10 +47,10 @@ const DeActivateSearchBar = e => {
 
         bIsSearchbarActive = false;
     }
-}
+};
 
-const SearchReport = report => {
-    ipcRenderer.send('search-report', report);
+const SearchReport = string => {
+    ipcRenderer.send('search-building', string);
 };
 
 const OnLocationClicked = e => {
@@ -59,9 +63,6 @@ const OnLocationClicked = e => {
 };
 
 
-/**
- * SEARCHBAR FUNCTIONS
- */
 const PerformArrayOfStrings = citiesArray => {
     const array = [];
 
@@ -113,12 +114,13 @@ const AddLocationToList = (list, string) => {
 };
 
 const PickRandomLocation = locationsArray => {
-    //TODO: Pick random location
     const random = Math.floor(Math.random() * locationsArray.length);
     return locationsArray[random];
 };
 
 const FillFormRandomLocations = locations => {
+    //TODO: prevent duplicating locations
+
     if(locations >= placesArray.length)
     {
         placesArray.forEach(place => {
@@ -133,11 +135,8 @@ const FillFormRandomLocations = locations => {
             AddLocationToList(locationsList, randomLocaion);
         }
     }
-}
+};
 
-/**
- * SEARCHBAR FUNCTIONS END
- */ 
 
 const OnSearchBarInput = e => {
     if(citiesArray == null)
@@ -145,29 +144,6 @@ const OnSearchBarInput = e => {
 
     const input = e.target.value.toLowerCase();
 
-    // locations.forEach(location => {
-    //     const locationText = location.textContent.toLowerCase();
-
-    //     if(!locationText.includes(input))
-    //     {
-    //         if(location.classList.contains(locationVisibleClass))
-    //         {
-    //             location.classList.remove(locationVisibleClass);
-    //         }
-
-    //         location.classList.add(locationHiddenClass);
-    //     }
-    //     else if(locationText.includes(input))
-    //     {
-    //         if(location.classList.contains(locationHiddenClass))
-    //         {
-    //             location.classList.remove(locationHiddenClass);
-    //         }
-
-    //         location.classList.add(locationVisibleClass);
-    //     }
-    // });
-    console.clear();
     ClearList(locationsList);
     placesArray.forEach(string => {
         if(string == '')
@@ -175,7 +151,6 @@ const OnSearchBarInput = e => {
 
         if(string.toLocaleLowerCase().includes(input))
         {
-            console.log(string);
             AddLocationToList(locationsList, string);
         }
     });
@@ -270,7 +245,32 @@ ipcRenderer.on('got-cities', (event, arg) => {
     citiesArray = arg;
     placesArray = PerformArrayOfStrings(citiesArray);
     ClearList(locationsList);
-    FillFormRandomLocations(5);
+    FillFormRandomLocations(locationsToDiplayOnList);
+});
+
+ipcRenderer.on('get-building-info', (event, arg) => {
+    ipcRenderer.send('search-report', arg.adress);
+    RenderBuildingInfo(arg.adress, arg.buildingInfo);
+});
+
+ipcRenderer.on('found-report', (event, arg) => {
+    report = arg;
+
+    if(seeReportBtn != null)
+    {
+        if(seeReportBtn.classList.contains('see-repoer__button--hidden'))
+            seeReportBtn.classList.remove('see-repoer__button--hidden');
+    }
+});
+
+ipcRenderer.on('report-not-found', () => {
+    report = null;
+    
+    if(seeReportBtn != null)
+    {
+        if(!seeReportBtn.classList.contains('see-repoer__button--hidden'))
+            seeReportBtn.classList.add('see-repoer__button--hidden');
+    }
 });
 
 searchBar.addEventListener('click', ActivateSearchBar);
@@ -302,6 +302,13 @@ if(homeBtn != null)
 {
     homeBtn.addEventListener('click', () => {
         ipcRenderer.send('home-button-clicked', 'dispatcher');
+    });
+}
+
+if(seeReportBtn != null)
+{
+    seeReportBtn.addEventListener('click', () => {
+        ipcRenderer.send('display-dispatcher-info', report);
     });
 }
 
