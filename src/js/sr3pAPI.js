@@ -1,7 +1,11 @@
 const fs = require('fs');
 const { DebugLog, LogTypes } = require('./debug');
 
-const dbPath = './src/db/database.json';
+const dbDir = `${process.env.APPDATA}\\sr3p\\db`;    //JSON database directory
+const dbFile = 'database.json';                             //database file
+const dbPath = `${dbDir}\\${dbFile}`;                       //Path to JSON database
+
+// const dbPath = './src/db/database.json';
 let bDbExists = false;
 
 const CheckIfDBExists = () => {
