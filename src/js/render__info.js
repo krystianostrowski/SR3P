@@ -1,3 +1,6 @@
+const InsertImages = imgDir => {
+    //TODO: Insert images
+};
 const RenderInfo = report => {
     const desc = document.querySelector('#description');
     const time = document.querySelector('#time');
@@ -51,6 +54,10 @@ const RenderBuildingInfo = (adress, data) => {
     const buildingData = data.data;
 
     const div = document.querySelector('.top-content');
+
+    if(div == null)
+        return;
+
     const adressContainer = div.querySelector('.hies');
     const ul = div.querySelector('ul');
     const spans = ul.querySelectorAll('span');

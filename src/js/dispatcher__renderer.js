@@ -24,10 +24,21 @@ const ffQuantityInput = document.querySelector('#ff-quantity');
 const policeQuantityInput = document.querySelector('#police-quantity');
 const ambulanceQuantityInput = document.querySelector('#ambulance-quantity');
 
+const switchesPatent = document.querySelector('#switches__container');
+const overlays = document.querySelectorAll('.overlay--hidden');
+const overlaysObj = [];
+
 let bIsSearchbarActive = false;
 let citiesArray;
 let placesArray;
 let report = null;
+
+const PerformOverlaysObj = () => {
+    for(overlay of overlays)
+    {
+        overlaysObj.push({id: overlay.id, node: overlay});
+    }
+};
 
 const ActivateSearchBar = () => {
     if(!bIsSearchbarActive)
@@ -239,6 +250,7 @@ const GetDataFromForm = () => {
 
 ipcRenderer.on('send-report-data', (event, arg) => {
     RenderInfo(arg);
+    PerformOverlaysObj();
 });
 
 ipcRenderer.on('got-cities', (event, arg) => {
@@ -350,6 +362,24 @@ if(fireFightersCheckbox != null)
         else
         {
             ffQuantityInput.disabled = true;
+        }
+    });
+}
+
+if(switchesPatent != null)
+{
+    switchesPatent.addEventListener('click', e => {
+        if(e.target.classList.contains('switches__checkbox'))
+        {
+            const checkbox = e.target;
+
+            for(ov of overlaysObj)
+            {
+                if(ov.id === checkbox.getAttribute('aria-controls'))
+                {
+                    ov.node.classList.toggle('overlay--hidden');
+                }
+            }
         }
     });
 }

@@ -116,11 +116,7 @@ align-items: center;
 #map{
     display:block;
 }
-#gate,
-#water,
-#emergency-exits,
-#electricity-switch,
-#gas-valve{
+.overlay--hidden {
     display:none;
 }
 
