@@ -86,6 +86,38 @@
         "dangers": "Testowe zagrozenia",
         "info": "Testowe info"
       }
+    },
+    {
+      "id": 1,
+      "services": {
+        "ambulance": {
+          "requested": false,
+          "quantity": 0,
+          "state": null
+        },
+        "police": {
+          "requested": true,
+          "quantity": 1,
+          "state": "w drodze"
+        },
+        "fireFighters": {
+          "requested": false,
+          "quantity": 0,
+          "state": "na miejscu"
+        }
+      },
+      "data": {
+        "city": "213",
+        "street": "123",
+        "building": 213
+      },
+      "additionalInfo": {
+        "time": "22.2.2020 17:31",
+        "desc": "",
+        "victims": null,
+        "dangers": "",
+        "info": ""
+      }
     }
   ]
 }
