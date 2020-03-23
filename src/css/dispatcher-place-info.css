@@ -97,4 +97,9 @@
     font-size: 150%;
     border: 5px solid var(--main);
 }
+@media(max-width:1085px){
+    .cash{
+        font-size:90%;
+    }
+}
 

@@ -112,6 +112,70 @@
         "dangers": "",
         "info": ""
       }
+    },
+    {
+      "id": 3,
+      "services": {
+        "ambulance": {
+          "requested": false,
+          "quantity": 0,
+          "state": null
+        },
+        "police": {
+          "requested": false,
+          "quantity": 0,
+          "state": null
+        },
+        "fireFighters": {
+          "requested": false,
+          "quantity": 0,
+          "state": "na miejscu"
+        }
+      },
+      "data": {
+        "city": "",
+        "street": "",
+        "building": null
+      },
+      "additionalInfo": {
+        "time": "23.2.2020 17:53",
+        "desc": "",
+        "victims": null,
+        "dangers": "",
+        "info": ""
+      }
+    },
+    {
+      "id": 4,
+      "services": {
+        "ambulance": {
+          "requested": false,
+          "quantity": 0,
+          "state": null
+        },
+        "police": {
+          "requested": true,
+          "quantity": 22,
+          "state": "w drodze"
+        },
+        "fireFighters": {
+          "requested": false,
+          "quantity": 0,
+          "state": null
+        }
+      },
+      "data": {
+        "city": "22",
+        "street": "22",
+        "building": 22
+      },
+      "additionalInfo": {
+        "time": "23.2.2020 18:8",
+        "desc": "",
+        "victims": null,
+        "dangers": "",
+        "info": ""
+      }
     }
   ]
 }

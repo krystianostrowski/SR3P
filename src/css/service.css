@@ -18,7 +18,7 @@
   margin: auto;
 }
 .top button {
-  height: 6vh;
+  height: 60px;
   width: 4%;
   outline: none;
   border: none;
@@ -29,6 +29,7 @@
   z-index: 100;
   border-top-left-radius: 30px;
   border-bottom-left-radius: 30px;
+  margin-top:20px;
 }
 .top button:hover {
   cursor: pointer;
@@ -52,7 +53,7 @@ button:focus input {
 }
 .top input {
   width: 56%;
-  height: 6vh;
+  height: 60px;
   position: absolute;
   margin-left: 20%;
   font-size: 140%;
@@ -62,6 +63,7 @@ button:focus input {
   padding-left: 5.2%;
   z-index: 50;
   transition: 1s;
+  margin-top:10px;
 }
 .search__input {
   transform-origin: left;

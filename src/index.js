@@ -42,7 +42,7 @@ const CreateWindow = () => {
         }
     });
 
-    dispatcherWindow.loadFile('./html/dispatcher.html');
+    dispatcherWindow.loadFile('./html/dispatcher__place__info.html');
     serviceWindow.loadFile('./html/service.html');
 
     globalShortcut.register('f5', () => {
