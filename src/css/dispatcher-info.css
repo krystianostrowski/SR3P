@@ -115,9 +115,57 @@ align-items: center;
 }
 #map{
     display:block;
+    z-index: 9;
 }
+#gate{
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    left:0;
+    top:-100%;
+    
+}
+#water{
+    display:block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    left:0;
+    top:-200%;
+}
+#emergency-exits{
+    display:block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    left:0;
+    top:-300%;
+}
+#electricity-switch{
+    display:block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    left:0;
+    top:-400%;
+}
+#gas-valve{
+    display:block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    left:0;
+    top:-500%;
+}
+
 .overlay--hidden {
-    display:none;
+    visibility: hidden;
 }
 
 /*________SHOW MORE INFORMATIONS ABOUT THIS LOCATION__________*/
