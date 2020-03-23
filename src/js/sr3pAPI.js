@@ -1,7 +1,7 @@
 const fs = require('fs');
 const { DebugLog, LogTypes } = require('./debug');
 
-const dbPath = './db/database.json';
+const dbPath = './src/db/database.json';
 let bDbExists = false;
 
 const CheckIfDBExists = () => {
