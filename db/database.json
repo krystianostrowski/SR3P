@@ -80,6 +80,38 @@
         "dangers": "",
         "info": ""
       }
+    },
+    {
+      "id": 2,
+      "services": {
+        "ambulance": {
+          "requested": false,
+          "quantity": 0,
+          "state": null
+        },
+        "police": {
+          "requested": true,
+          "quantity": 22,
+          "state": "w drodze"
+        },
+        "fireFighters": {
+          "requested": false,
+          "quantity": 0,
+          "state": "na miejscu"
+        }
+      },
+      "data": {
+        "city": "22",
+        "street": "22",
+        "building": 22
+      },
+      "additionalInfo": {
+        "time": "23.2.2020 16:22",
+        "desc": "",
+        "victims": null,
+        "dangers": "",
+        "info": ""
+      }
     }
   ]
 }
