@@ -70,13 +70,13 @@ body{
 .location{
     background-color: var(--location-background-color);
     width: 100%;
-    height:12vh ;
+    height:120px ;
     display: flex;
 }
 .case{
     width:60%;
     margin:auto;
-    height:6vh;
+    height:60px;
     display: flex;
     z-index: 100;
     transition: 0.2s;
@@ -125,7 +125,7 @@ form{
     background-color: #C4C4C4;
 }
 .adresses{
-    top:8.5%;
+    top:90px;
     left:20%;
     width: 60%;
     height: inherit;
@@ -136,9 +136,9 @@ form{
 }
 .home{
     position: absolute;
-    margin-left:5%;
-    margin-top:3vh;
-    height:6vh;
+    margin-left:85%;
+    margin-top:30px;
+    height:60px;
     width:75px;
     background-color: #1ED760;
     border-radius: 50%;
@@ -158,8 +158,8 @@ margin: auto;
 .plus{
     position: absolute;
     margin-left:5%;
-    margin-top:3vh;
-    height:6vh;
+    margin-top:30px;
+    height:60px;
     width:75px;
     background-color: #1ED760;
     border-radius: 50%;
@@ -268,7 +268,7 @@ margin: auto;
         padding-left:12%;
     }
     .center img{
-        width:10%;
+        width:11%;
     }
     .left-li{
         width: 10%;
@@ -293,6 +293,7 @@ margin: auto;
     .right-li{
         width: 87%;
     }
+    
 }
 /*_____________________________________________*/
 @font-face {
@@ -327,21 +328,3 @@ hr{
     display: block;
 }
 
-@media(max-height:700px){
-    .case{
-        height:7vh;
-    }
-}
-@media(max-height:1000px){
-    .plus{
-        width:60px;
-    }
-    .home{
-        width:60px;
-    }
-}
-@media(max-height:600px){
-    .home{
-        width:40px;
-    }
-}
