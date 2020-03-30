@@ -53,6 +53,8 @@ const RenderInfo = report => {
 const RenderBuildingInfo = (adress, data) => {
     const buildingData = data.data;
 
+    console.log("object");
+
     const div = document.querySelector('.top-content');
 
     if(div == null)

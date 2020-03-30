@@ -41,7 +41,7 @@ const CreateWindow = () => {
         }
     });
 
-    dispatcherWindow.loadFile('./html/dispatcher__place__info.html');
+    dispatcherWindow.loadFile('./html/dispatcher.html');
     serviceWindow.loadFile('./html/service.html');
 
     globalShortcut.register('f5', () => {
@@ -118,6 +118,10 @@ ipcMain.on('search-building', (event, arg) => {
                 dispatcherWindow.webContents.send('get-building-info', { buildingInfo: building, adress: arg });
             });
         }
+
+        dispatcherWindow.webContents.send('get-building-info', { buildingInfo: building, adress: arg });
+
+        DebugLog("Found building");
     }
 });
 
