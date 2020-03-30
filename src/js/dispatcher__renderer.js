@@ -88,11 +88,6 @@ const PerformArrayOfStrings = citiesArray => {
         }
     }
 
-    array.forEach(string => {
-        console.log(string);
-    });
-    
-
     return array;
 };
 
@@ -130,7 +125,7 @@ const PickRandomLocation = locationsArray => {
 };
 
 const FillFormRandomLocations = locations => {
-    //TODO: prevent duplicating locations
+    const pickedLocations = [];
 
     if(locations >= placesArray.length)
     {
@@ -142,8 +137,13 @@ const FillFormRandomLocations = locations => {
     {
         for(let i = 0; i < locations; i++)
         {
-            const randomLocaion = PickRandomLocation(placesArray);
+            let randomLocaion = PickRandomLocation(placesArray);
+
+            while(pickedLocations.includes(randomLocaion))
+                randomLocaion = PickRandomLocation(placesArray);
+
             AddLocationToList(locationsList, randomLocaion);
+            pickedLocations.push(randomLocaion);
         }
     }
 };
