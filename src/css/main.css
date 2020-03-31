@@ -132,7 +132,7 @@ form{
     background-color: white;
     position: absolute;
     z-index: 50;
-    display:none;
+    display:block;
 }
 .home{
     position: absolute;
