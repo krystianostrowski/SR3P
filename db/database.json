@@ -9,6 +9,44 @@
           "buildings": [
             {
               "number": 5,
+              "data": {
+                "age": 120,
+                "rozklad": "-",
+                "basement": "Nie",
+                "heating": "TBA",
+                "residents": "nie dotyczy",
+                "wjazd": "brama z lewej strony budynku",
+                "material": "konstrukcja drewniana"
+              }
+            },
+            {
+              "number": 6,
+              "data": {}
+            },
+            {
+              "number": 7,
+              "data": {}
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Sławno",
+      "streets": [
+        {
+          "name": "Dąbrowskiego",
+          "buildings": [
+            {
+              "number": 5,
+              "data": {}
+            },
+            {
+              "number": 6,
+              "data": {}
+            },
+            {
+              "number": 7,
               "data": {}
             }
           ]

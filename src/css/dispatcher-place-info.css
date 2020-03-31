@@ -103,3 +103,6 @@
     }
 }
 
+.see-repoer__button--hidden {
+    display: none;
+};

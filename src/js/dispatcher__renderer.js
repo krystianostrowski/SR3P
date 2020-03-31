@@ -1,5 +1,5 @@
 const { ipcRenderer } = require('electron');
-const { RenderInfo } = require('../js/render__info');
+const { RenderInfo, RenderBuildingInfo } = require('../js/render__info');
 
 const searchBar = document.querySelector('#location');
 const form = document.querySelector('form');
@@ -10,7 +10,10 @@ const adressesWrapper = document.querySelector('#adresses');
 const plusBtn = document.querySelector('.plus');
 const sendFormBtn = document.querySelector('.send');
 const homeBtn = document.querySelector('.home');
+const seeReportBtn = document.querySelector('#see-report');
 
+const locationsToDiplayOnList = 5;
+//TODO: Remove unused variables from js and classes from css
 const locationHiddenClass = 'location--hidden';
 const locationVisibleClass = 'location--visible';
 
@@ -21,7 +24,21 @@ const ffQuantityInput = document.querySelector('#ff-quantity');
 const policeQuantityInput = document.querySelector('#police-quantity');
 const ambulanceQuantityInput = document.querySelector('#ambulance-quantity');
 
+const switchesPatent = document.querySelector('#switches__container');
+const overlays = document.querySelectorAll('.overlay--hidden');
+const overlaysObj = [];
+
 let bIsSearchbarActive = false;
+let citiesArray;
+let placesArray;
+let report = null;
+
+const PerformOverlaysObj = () => {
+    for(overlay of overlays)
+    {
+        overlaysObj.push({id: overlay.id, node: overlay});
+    }
+};
 
 const ActivateSearchBar = () => {
     if(!bIsSearchbarActive)
@@ -41,10 +58,10 @@ const DeActivateSearchBar = e => {
 
         bIsSearchbarActive = false;
     }
-}
+};
 
-const SearchReport = report => {
-    ipcRenderer.send('search-report', report);
+const SearchReport = string => {
+    ipcRenderer.send('search-building', string);
 };
 
 const OnLocationClicked = e => {
@@ -56,31 +73,99 @@ const OnLocationClicked = e => {
     }
 };
 
+
+const PerformArrayOfStrings = citiesArray => {
+    const array = [];
+
+    for(city of citiesArray)
+    {
+        for(street of city.streets)
+        {
+            for(building of street.buildings)
+            {
+                array.push(`${street.name} ${building}, ${city.name}`)
+            }
+        }
+    }
+
+    array.forEach(string => {
+        console.log(string);
+    });
+    
+
+    return array;
+};
+
+const ClearList = list => {
+    while(list.firstChild)
+        list.removeChild(list.firstChild);
+};
+
+const AddLocationToList = (list, string) => {
+    const li = document.createElement('li');
+    li.classList.add('location--visible')
+
+    const leftDiv = document.createElement('div');
+    leftDiv.classList.add('left-li');
+
+    const img = document.createElement('img');
+    img.src = '../resources/img/lokacja.png';
+
+    leftDiv.appendChild(img);
+
+    const rightDiv = document.createElement('div');
+    rightDiv.classList.add('right-li');
+    rightDiv.classList.add('locations__item');
+    rightDiv.innerText = string;
+
+    li.appendChild(leftDiv);
+    li.appendChild(rightDiv);
+
+    list.appendChild(li);
+};
+
+const PickRandomLocation = locationsArray => {
+    const random = Math.floor(Math.random() * locationsArray.length);
+    return locationsArray[random];
+};
+
+const FillFormRandomLocations = locations => {
+    //TODO: prevent duplicating locations
+
+    if(locations >= placesArray.length)
+    {
+        placesArray.forEach(place => {
+            AddLocationToList(locationsList, place);
+        });
+    }
+    else
+    {
+        for(let i = 0; i < locations; i++)
+        {
+            const randomLocaion = PickRandomLocation(placesArray);
+            AddLocationToList(locationsList, randomLocaion);
+        }
+    }
+};
+
+
 const OnSearchBarInput = e => {
+    if(citiesArray == null)
+        return;
+
     const input = e.target.value.toLowerCase();
 
-    locations.forEach(location => {
-        const locationText = location.textContent.toLowerCase();
+    ClearList(locationsList);
+    placesArray.forEach(string => {
+        if(string == '')
+            return;
 
-        if(!locationText.includes(input))
+        if(string.toLocaleLowerCase().includes(input))
         {
-            if(location.classList.contains(locationVisibleClass))
-            {
-                location.classList.remove(locationVisibleClass);
-            }
-
-            location.classList.add(locationHiddenClass);
-        }
-        else if(locationText.includes(input))
-        {
-            if(location.classList.contains(locationHiddenClass))
-            {
-                location.classList.remove(locationHiddenClass);
-            }
-
-            location.classList.add(locationVisibleClass);
+            AddLocationToList(locationsList, string);
         }
     });
+    
 };
 
 const GetDataFromForm = () => {
@@ -153,7 +238,7 @@ const GetDataFromForm = () => {
     }
 
     const additionalInfo = {
-        time: `${date.getDate()}.${date.getMonth()}.${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`,
+        time: `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`,
         desc: desc.value,
         victims: (victims == '' || victims == null) ? null : parseInt(victims.value),
         dangers: dangers.value,
@@ -165,6 +250,39 @@ const GetDataFromForm = () => {
 
 ipcRenderer.on('send-report-data', (event, arg) => {
     RenderInfo(arg);
+    PerformOverlaysObj();
+});
+
+ipcRenderer.on('got-cities', (event, arg) => {
+    citiesArray = arg;
+    placesArray = PerformArrayOfStrings(citiesArray);
+    ClearList(locationsList);
+    FillFormRandomLocations(locationsToDiplayOnList);
+});
+
+ipcRenderer.on('get-building-info', (event, arg) => {
+    ipcRenderer.send('search-report', arg.adress);
+    RenderBuildingInfo(arg.adress, arg.buildingInfo);
+});
+
+ipcRenderer.on('found-report', (event, arg) => {
+    report = arg;
+
+    if(seeReportBtn != null)
+    {
+        if(seeReportBtn.classList.contains('see-repoer__button--hidden'))
+            seeReportBtn.classList.remove('see-repoer__button--hidden');
+    }
+});
+
+ipcRenderer.on('report-not-found', () => {
+    report = null;
+    
+    if(seeReportBtn != null)
+    {
+        if(!seeReportBtn.classList.contains('see-repoer__button--hidden'))
+            seeReportBtn.classList.add('see-repoer__button--hidden');
+    }
 });
 
 searchBar.addEventListener('click', ActivateSearchBar);
@@ -195,7 +313,14 @@ if(sendFormBtn != null)
 if(homeBtn != null)
 {
     homeBtn.addEventListener('click', () => {
-        ipcRenderer.send('home-button-clicked')
+        ipcRenderer.send('home-button-clicked', 'dispatcher');
+    });
+}
+
+if(seeReportBtn != null)
+{
+    seeReportBtn.addEventListener('click', () => {
+        ipcRenderer.send('display-dispatcher-info', report);
     });
 }
 
@@ -237,6 +362,24 @@ if(fireFightersCheckbox != null)
         else
         {
             ffQuantityInput.disabled = true;
+        }
+    });
+}
+
+if(switchesPatent != null)
+{
+    switchesPatent.addEventListener('click', e => {
+        if(e.target.classList.contains('switches__checkbox'))
+        {
+            const checkbox = e.target;
+
+            for(ov of overlaysObj)
+            {
+                if(ov.id === checkbox.getAttribute('aria-controls'))
+                {
+                    ov.node.classList.toggle('overlay--hidden');
+                }
+            }
         }
     });
 }

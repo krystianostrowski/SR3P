@@ -9,8 +9,7 @@ const WindowState = {
     SEARCH: 'search',
     INFO: 'info',
     FORM: 'form',
-    ONTHEWAY: 'onTheWay',
-    ATLOCATION: 'atLocation'
+    BUILDINGINFO: 'buildingInfo'
 }
 
 let dispatcherWindowState = WindowState.SEARCH;
@@ -62,6 +61,11 @@ const CreateWindow = () => {
 
     api.CheckIfDBExists();
     DebugLog('Created windows');
+
+    dispatcherWindow.webContents.on('dom-ready', () => {
+        const cities = api.GetArrayOfCities();
+        dispatcherWindow.webContents.send('got-cities', cities);
+    });
 };
 
 app.on('ready', CreateWindow);
@@ -74,28 +78,59 @@ app.on('window-all-closed', () => {
 app.allowRendererProcessReuse = false;
 
 ipcMain.on('search-report', (event, arg) => {
-    DebugLog(`Search: ${arg}`, LogTypes.WARN);
+    DebugLog(`Search: ${arg}`);
 
     const report = api.GetReport(arg);
 
     if(report == false)
     {   
-        DebugLog('Report not found');
-        if(dispatcherWindowState != WindowState.SEARCH)
-            dispatcherWindow.loadFile('./html/dispatcher.html');
-
-        return;
+        DebugLog('Report not found', LogTypes.ERROR);
+        dispatcherWindow.webContents.send('report-not-found');
     }
     else 
     {
         DebugLog('Found report');
-        if(dispatcherWindowState != WindowState.INFO)
-            dispatcherWindow.loadFile('./html/dispatcher__info.html');
-
-        dispatcherWindow.webContents.on('dom-ready', () => {
-            dispatcherWindow.webContents.send('send-report-data', report);
-        });
+        dispatcherWindow.webContents.send('found-report', report);
     }
+});
+
+ipcMain.on('search-building', (event, arg) => {
+    const building = api.GetBuildingInfo(arg);
+
+    if(!building)
+    {
+        if(dispatcherWindowState != WindowState.SEARCH)
+        {
+            dispatcherWindowState = WindowState.SEARCH;
+            dispatcherWindow.loadFile('./html/dispatcher.html');
+        }
+        
+        DebugLog('Building not found', LogTypes.ERROR);
+    }
+    else
+    {
+        if(dispatcherWindowState != WindowState.BUILDINGINFO)
+        {
+            dispatcherWindowState = WindowState.BUILDINGINFO;
+            dispatcherWindow.loadFile('./html/dispatcher__place__info.html');
+
+            dispatcherWindow.webContents.on('dom-ready', () => {
+                dispatcherWindow.webContents.send('get-building-info', { buildingInfo: building, adress: arg });
+            });
+        }
+    }
+});
+
+ipcMain.on('display-dispatcher-info', (event, arg) => {
+    if(dispatcherWindowState != WindowState.INFO)
+    {
+        dispatcherWindowState = WindowState.INFO;
+        dispatcherWindow.loadFile('./html/dispatcher__info.html');
+    }
+
+    dispatcherWindow.webContents.on('dom-ready', () => {
+        dispatcherWindow.webContents.send('send-report-data', arg);
+    });
 });
 
 ipcMain.on('open-dispatcher-form', () => {
@@ -114,6 +149,7 @@ ipcMain.on('add-report-to-db', (event, arg) => {
     }
     else
     {
+        dispatcherWindowState = WindowState.INFO;
         dispatcherWindow.loadFile('./html/dispatcher__info.html');
 
         dispatcherWindow.webContents.on('dom-ready', () => {
@@ -145,7 +181,15 @@ ipcMain.on('service-reached-destination', (event, arg) => {
     });
 }); 
 
-ipcMain.on('home-button-clicked', () => {
-    dispatcherWindowState = WindowState.SEARCH;
-    dispatcherWindow.loadFile('./html/dispatcher.html');
+ipcMain.on('home-button-clicked', (event, arg) => {
+
+    if(arg === 'dispatcher')
+    {
+        dispatcherWindowState = WindowState.SEARCH;
+        dispatcherWindow.loadFile('./html/dispatcher.html');
+    }
+    else if(arg === 'service')
+    {
+        serviceWindow.loadFile('./html/service.html');
+    }
 });

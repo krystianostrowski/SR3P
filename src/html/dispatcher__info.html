@@ -125,17 +125,17 @@
             </div>
             <div class="map">
                   <img id="map" src="../resources/img/maps/KarolaSzymanowskiego_5.png" alt="">
-                  <img id="gate" src="../resources/img/maps/gate.png" alt="">
-                  <img id="water" src="../resources/img/maps/water.png" alt="">
-                  <img id="emergency-exits" src="../resources/img/maps/emeregency-exit.png" alt="">
-                  <img id="electricity-switch" src="../resources/img/maps/electricity-switch.png" alt="">
-                  <img id="gas-valve" src="../resources/img/maps/gas-valve.png" alt="">
+                  <img id="gate" class="overlay--hidden" src="../resources/img/maps/gate.png" alt="">
+                  <img id="water" class="overlay--hidden" src="../resources/img/maps/water.png" alt="">
+                  <img id="emergency-exits" class="overlay--hidden" src="../resources/img/maps/emeregency-exit.png" alt="">
+                  <img id="electricity-switch" class="overlay--hidden" src="../resources/img/maps/electricity-switch.png" alt="">
+                  <img id="gas-valve" class="overlay--hidden" src="../resources/img/maps/gas-valve.png" alt="">
             </div>  
-            <div class="show">
+            <div class="show" id="switches__container">
                 <div class="element">
                     <div class="element-left">
                         <label  class="switch">
-                            <input type="checkbox" class="gateCheckbox">
+                            <input type="checkbox" class="switches__checkbox" aria-controls="gate">
                             <span class="slider round"></span>
                         </label>
                     </div>
@@ -147,7 +147,7 @@
                 <div class="element">
                     <div class="element-left">
                         <label  class="switch">
-                            <input type="checkbox">
+                            <input type="checkbox" class="switches__checkbox" aria-controls="water">
                             <span class="slider round"></span>
                         </label>
                     </div>
@@ -159,7 +159,7 @@
                 <div class="element">
                     <div class="element-left">
                         <label  class="switch">
-                            <input type="checkbox">
+                            <input type="checkbox" class="switches__checkbox" aria-controls="emergency-exits">
                             <span class="slider round"></span>
                         </label>
                     </div>
@@ -171,7 +171,7 @@
                 <div class="element">
                     <div class="element-left">
                         <label  class="switch">
-                            <input type="checkbox">
+                            <input type="checkbox" class="switches__checkbox" aria-controls="electricity-switch">
                             <span class="slider round"></span>
                         </label>
                     </div>
@@ -183,7 +183,7 @@
                 <div class="element">
                     <div class="element-left">
                         <label  class="switch">
-                            <input type="checkbox">
+                            <input type="checkbox" class="switches__checkbox" aria-controls="gas-valve">
                             <span class="slider round"></span>
                         </label>
                     </div>
@@ -193,16 +193,6 @@
                 </div>
             </div>
         </div>
-
-
     </div>
-    <script>
-        const locationImage = document.querySelector('#map');
-        const gateImage = document.querySelector('#gate');
-        const gateCheckbox = document.querySelector('.gateCheckbox');
-
-        
-    </script>
-
 </body>
 </html>

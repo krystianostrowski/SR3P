@@ -1,7 +1,11 @@
 const fs = require('fs');
 const { DebugLog, LogTypes } = require('./debug');
 
-const dbPath = './db/database.json';
+const dbDir = `${process.env.APPDATA}\\sr3p\\db`;    //JSON database directory
+const dbFile = 'database.json';                             //database file
+const dbPath = `${dbDir}\\${dbFile}`;                       //Path to JSON database
+
+// const dbPath = './src/db/database.json';
 let bDbExists = false;
 
 const CheckIfDBExists = () => {
@@ -59,7 +63,7 @@ const GetCity = name => {
 
     for(city of cities)
     {
-        if(city.name === name)
+        if(city.name.toLowerCase() === name.toLowerCase())
         {
             DebugLog(`City: ${city.name}`);
             return city;
@@ -84,7 +88,7 @@ const GetStreet = (city, name) => {
 
     for(street of streets)
     {
-        if(street.name === name)
+        if(street.name.toLowerCase().includes(name))
         {
             DebugLog(`Street: ${street.name}`);
             return street;
@@ -117,7 +121,61 @@ const GetBuilding = (street, number) => {
     }
 
     DebugLog(`Couldn't find building number: ${number}!`, LogTypes.WARN);
-}
+    return null;
+};
+
+const GetBuildingInfo = string => {
+    if(!bDbExists || string == null || string =='')
+        return false;
+
+    const data = GetData(); 
+    string = string.replace(',', '');
+    const substrings = string.split(' ');
+
+
+    let city = null;
+    let street = null;
+    let building = null;
+
+    for(substring of substrings)
+    {   
+        if(city == null)
+        {
+            city = GetCity(substring);
+            
+            if(city != null)
+                break;
+        }
+    }
+
+    for(substring of substrings)
+    {
+        if(street == null && city != null)
+        {
+            street = GetStreet(city, substring);
+            
+            if(street != null)
+                break;
+        }
+    }
+
+    for(substring of substrings)
+    {
+        if(building == null && street != null)
+        {
+            building = GetBuilding(street, substring);
+            
+            if(building != null)
+                break;
+        }
+    }
+
+    if(city != null && street != null && building != null)
+            return building;
+
+    DebugLog(`Couldn't find building: ${string}`, LogTypes.ERROR);
+    return false;
+};
 
 /**
  * 
@@ -151,6 +209,7 @@ function GetReport(string) {
 
     const data = GetData();
     const reports = data.reports;
+    string = string.replace(',', '');
     const substrings = string.split(' ');
 
     for(report of reports)
@@ -263,6 +322,36 @@ const UpdateStatus = reportId => {
     SaveData(data);
 }
 
+const GetArrayOfCities = () => {
+    if(!bDbExists)
+        return;
+
+    const data = GetData();
+    const cities = data.cities;
+    const array = [];
+
+    for(city of cities)
+    {
+        const streets = [];
+
+        for(street of city.streets)
+        {
+            const buildings = [];
+
+            for(building of street.buildings)
+            {
+                buildings.push(building.number.toString());
+            }
+
+            streets.push({ name: street.name, buildings: buildings });
+        }
+
+        array.push({name: city.name, streets: streets});
+    }
+
+    return array;
+}
+
 module.exports = {
     CheckIfDBExists: () => {
        CheckIfDBExists(); 
@@ -276,10 +365,13 @@ module.exports = {
     GetBuilding: (street, number) => {
         return GetBuilding(street, number);
     },
+    GetBuildingInfo: string => {
+        return GetBuildingInfo(string);
+    },
     GetReportById: id => {
         return GetReportById(id);
     },
-    GetReport: (string) => {
+    GetReport: string => {
         return GetReport(string);
     },
     AddReport: (data, services, additionalInfo) => {
@@ -287,5 +379,8 @@ module.exports = {
     },
     UpdateStatus: reportId => {
         UpdateStatus(reportId);
+    },
+    GetArrayOfCities: () => {
+        return GetArrayOfCities();
     }
 }
