@@ -76,6 +76,12 @@ button:focus input {
 .top input[type="search"]::placeholder {
   color: #c4c4c4;
 }
+.adresses{
+  width: 56%!important;
+ margin-top: -0.5%;
+ z-index:49!important;
+  
+}
 @media (max-width: 1396px) {
   .top button {
     width: 5%;
