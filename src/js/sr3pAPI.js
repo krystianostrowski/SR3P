@@ -350,7 +350,23 @@ const GetArrayOfCities = () => {
     }
 
     return array;
-}
+};
+
+const GetArrayOfReports = () => {
+    if(!bDbExists)
+        return;
+
+    const data = GetData();
+    const reports = data.reports;
+    const array = [];
+
+    for(report of reports)
+    {
+        array.push({ city: report.data.city, street: report.data.street, building: report.data.building });
+    }
+
+    return array;
+};
 
 module.exports = {
     CheckIfDBExists: () => {
@@ -382,5 +398,8 @@ module.exports = {
     },
     GetArrayOfCities: () => {
         return GetArrayOfCities();
+    },
+    GetArrayOfReports: () => {
+        return GetArrayOfReports();
     }
 }

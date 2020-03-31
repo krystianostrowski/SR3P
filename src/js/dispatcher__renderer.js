@@ -1,5 +1,6 @@
 const { ipcRenderer } = require('electron');
 const { RenderInfo, RenderBuildingInfo } = require('../js/render__info');
+const { ClearList, PerformArrayOfStrings, FillFormRandomLocations, AddLocationToList } = require('../js/searchbar');
 
 const searchBar = document.querySelector('#location');
 const form = document.querySelector('form');
@@ -70,81 +71,6 @@ const OnLocationClicked = e => {
         searchBar.value = e.target.textContent;
 
         SearchReport(e.target.textContent.toLowerCase());
-    }
-};
-
-
-const PerformArrayOfStrings = citiesArray => {
-    const array = [];
-
-    for(city of citiesArray)
-    {
-        for(street of city.streets)
-        {
-            for(building of street.buildings)
-            {
-                array.push(`${street.name} ${building}, ${city.name}`)
-            }
-        }
-    }
-
-    return array;
-};
-
-const ClearList = list => {
-    while(list.firstChild)
-        list.removeChild(list.firstChild);
-};
-
-const AddLocationToList = (list, string) => {
-    const li = document.createElement('li');
-    li.classList.add('location--visible')
-
-    const leftDiv = document.createElement('div');
-    leftDiv.classList.add('left-li');
-
-    const img = document.createElement('img');
-    img.src = '../resources/img/lokacja.png';
-
-    leftDiv.appendChild(img);
-
-    const rightDiv = document.createElement('div');
-    rightDiv.classList.add('right-li');
-    rightDiv.classList.add('locations__item');
-    rightDiv.innerText = string;
-
-    li.appendChild(leftDiv);
-    li.appendChild(rightDiv);
-
-    list.appendChild(li);
-};
-
-const PickRandomLocation = locationsArray => {
-    const random = Math.floor(Math.random() * locationsArray.length);
-    return locationsArray[random];
-};
-
-const FillFormRandomLocations = locations => {
-    const pickedLocations = [];
-
-    if(locations >= placesArray.length)
-    {
-        placesArray.forEach(place => {
-            AddLocationToList(locationsList, place);
-        });
-    }
-    else
-    {
-        for(let i = 0; i < locations; i++)
-        {
-            let randomLocaion = PickRandomLocation(placesArray);
-
-            while(pickedLocations.includes(randomLocaion))
-                randomLocaion = PickRandomLocation(placesArray);
-
-            AddLocationToList(locationsList, randomLocaion);
-            pickedLocations.push(randomLocaion);
-        }
     }
 };
 
@@ -257,7 +183,7 @@ ipcRenderer.on('got-cities', (event, arg) => {
     citiesArray = arg;
     placesArray = PerformArrayOfStrings(citiesArray);
     ClearList(locationsList);
-    FillFormRandomLocations(locationsToDiplayOnList);
+    FillFormRandomLocations(locationsToDiplayOnList, placesArray, locationsList);
 });
 
 ipcRenderer.on('get-building-info', (event, arg) => {

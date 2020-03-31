@@ -66,6 +66,11 @@ const CreateWindow = () => {
         const cities = api.GetArrayOfCities();
         dispatcherWindow.webContents.send('got-cities', cities);
     });
+
+    serviceWindow.webContents.on('dom-ready', () => {
+        const reports = api.GetArrayOfReports();
+        serviceWindow.webContents.send('got-reports', reports);
+    });
 };
 
 app.on('ready', CreateWindow);

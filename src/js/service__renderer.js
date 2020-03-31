@@ -1,12 +1,43 @@
 const { ipcRenderer } = require('electron');
 const { RenderInfo } = require('../js/render__info');
+const { FillFormRandomLocations, ClearList, AddLocationToList, PerformArrayOfreportsStrings } = require('../js/searchbar');
 
 const confirmBtn = document.querySelector('#arrival-confirmation');
 const homeBtn = document.querySelector('.home');
 const searchBtn = document.querySelector('#service-search-button');
 
+const searchBar = document.querySelector('.search__input');
+const reportsList = document.querySelector('#reports-list');
+const numberOfReportsOnList = 5;
+let reportsArray = [];
+let reportsStrings = [];
+
 let bCanReceiveReport = true;
 let report;
+
+const OnSearchBarInput = e => {
+    if(reportsArray == null)
+        return;
+
+    const text = e.target.value.toLowerCase();
+
+    ClearList(reportsList);
+    reportsStrings.forEach(string => {
+        if(string == '')
+            return;
+
+        if(string.toLowerCase().includes(text))
+        {
+            AddLocationToList(reportsList, string);
+        }
+    });
+};
+
+ipcRenderer.on('got-reports', (event, arg) => {
+    reportsArray = arg;
+    reportsStrings = PerformArrayOfreportsStrings(reportsArray);
+    FillFormRandomLocations(numberOfReportsOnList, reportsStrings, reportsList);
+});
 
 ipcRenderer.on('request-sending-report', (event, arg) => {
     if(bCanReceiveReport)
@@ -23,6 +54,11 @@ ipcRenderer.on('receive-report', (event, arg) => {
 ipcRenderer.on('sending-data', (event, arg) => {
     report = arg;
 });
+
+if(searchBar != null)
+{
+    searchBar.addEventListener('input', OnSearchBarInput);
+}
 
 if(confirmBtn != null)
 {
