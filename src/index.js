@@ -99,6 +99,27 @@ ipcMain.on('search-report', (event, arg) => {
     }
 });
 
+ipcMain.on('search-report-service', (event, arg) => {
+    DebugLog(`Search: ${arg}`);
+
+    const report = api.GetReport(arg);
+
+    if(report == false)
+    {   
+        DebugLog('Report not found', LogTypes.ERROR);
+        serviceWindow.webContents.send('report-not-found');
+    }
+    else 
+    {
+        DebugLog('Found report');
+        serviceWindow.loadFile('./html/service__info.html');
+
+        serviceWindow.webContents.on('dom-ready', () => {
+            serviceWindow.webContents.send('found-report', report);
+        });
+    }
+});
+
 ipcMain.on('search-building', (event, arg) => {
     const building = api.GetBuildingInfo(arg);
 

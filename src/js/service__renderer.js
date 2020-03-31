@@ -21,7 +21,9 @@ const OnSearchBarInput = e => {
 
     const text = e.target.value.toLowerCase();
 
-    ClearList(reportsList);
+    if(reportsList != null)
+        ClearList(reportsList);
+
     reportsStrings.forEach(string => {
         if(string == '')
             return;
@@ -33,9 +35,31 @@ const OnSearchBarInput = e => {
     });
 };
 
+const SearchReport = string => {
+    ipcRenderer.send('search-report-service', string);
+};
+
+const OnReportClick = e => {
+    if(e.target.classList.contains('locations__item'))
+    {
+        searchBar.value = e.target.textContent;
+
+        SearchReport(e.target.textContent.toLowerCase());
+    }
+};
+
+ipcRenderer.on('found-report', (event, arg) => {
+    RenderInfo(arg);
+});
+
 ipcRenderer.on('got-reports', (event, arg) => {
     reportsArray = arg;
     reportsStrings = PerformArrayOfreportsStrings(reportsArray);
+
+    if(reportsList == null)
+        return;
+
+    ClearList(reportsList);
     FillFormRandomLocations(numberOfReportsOnList, reportsStrings, reportsList);
 });
 
@@ -82,4 +106,9 @@ if(searchBtn != null)
         searchBtn.classList.toggle('search__button--inactive');
         input.classList.toggle('search__input--visible');
     });
+}
+
+if(reportsList != null)
+{
+    reportsList.addEventListener('click', OnReportClick);
 }
