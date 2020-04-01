@@ -15,6 +15,27 @@ let reportsStrings = [];
 let bCanReceiveReport = true;
 let report;
 
+const adressesWrapper = document.querySelector('#adresses');
+let bIsSearchbarActive = false;
+
+const ActivateSearchBar = () => {
+    if(!bIsSearchbarActive)
+    {
+        adressesWrapper.classList.add('locations--active');
+
+        bIsSearchbarActive = true;
+    }
+};
+
+const DeActivateSearchBar = e => {
+    if(bIsSearchbarActive && e.target.id != "location")
+    {
+        adressesWrapper.classList.remove('locations--active');
+
+        bIsSearchbarActive = false;
+    }
+};
+
 const OnSearchBarInput = e => {
     if(reportsArray == null)
         return;
@@ -112,3 +133,6 @@ if(reportsList != null)
 {
     reportsList.addEventListener('click', OnReportClick);
 }
+
+searchBar.addEventListener('click', ActivateSearchBar);
+document.addEventListener('click', DeActivateSearchBar);

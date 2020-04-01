@@ -81,7 +81,6 @@ button:focus input {
   width: 56%!important;
  margin-top: -0.5%;
  z-index:49!important;
-  
 }
 @media (max-width: 1396px) {
   .top button {
