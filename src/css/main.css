@@ -2,6 +2,7 @@
     --location-background-color: #000000;
     --input-background-color: #ffffff;
     --main: #121212;
+    
   }
   
 *,
@@ -14,6 +15,7 @@ body{
     padding:0;
     font-family: 'Lato', sans-serif;
     color: #ffffff;
+   
 }
 ::-webkit-scrollbar{
     width:10px;
@@ -125,14 +127,17 @@ form{
     background-color: #C4C4C4;
 }
 .adresses{
-    top:90px;
+    top:85px;
     left:20%;
     width: 60%;
-    height: inherit;
+    height: initial;
     background-color: white;
     position: absolute;
     z-index: 50;
-    display:block;
+    display:none;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+
 }
 .home{
     position: absolute;
@@ -182,7 +187,7 @@ margin: auto;
 }
 .out{
     width:100%;
-    height:3vh;
+    height:30px;
     background-color:white;
    
 }
@@ -233,7 +238,24 @@ margin: auto;
     display: flex;
     align-items: center;
 }
-
+@media(max-height:724px){
+    .location{
+        height: 100px;
+    }
+    .case{
+        height: 50px;
+    }
+    .plus{
+        margin-top:23px;
+        height:50px;
+        width:65px;
+    }
+    .home{
+        margin-top:23px;
+        height:50px;
+        width:65px;
+    }
+}
 @media(max-height:876px){
     #hi{
         font-size:90%;
@@ -243,11 +265,13 @@ margin: auto;
     #hi{
         font-size:80%;
     }
+    
 }
 @media(max-height:666px){
     #hi{
         font-size:70%;
     }
+    
 }
 @media(max-width:1000px){
     

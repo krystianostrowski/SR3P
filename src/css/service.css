@@ -6,7 +6,7 @@
   height: 10vh;
   width: 100%;
   display: flex;
-  align-items: center;
+  
 }
 .img {
   height: 87.5vh;
@@ -29,7 +29,7 @@
   z-index: 100;
   border-top-left-radius: 30px;
   border-bottom-left-radius: 30px;
-  margin-top:20px;
+  margin-top:30px;
 }
 .top button:hover {
   cursor: pointer;
@@ -47,6 +47,7 @@
 }
 button img {
   margin: auto;
+  width:35px;
 }
 button:focus input {
   margin-left: 20%;
@@ -63,7 +64,7 @@ button:focus input {
   padding-left: 5.2%;
   z-index: 50;
   transition: 1s;
-  margin-top:10px;
+  margin-top:30px;
 }
 .search__input {
   transform-origin: left;

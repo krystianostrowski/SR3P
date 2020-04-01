@@ -255,9 +255,22 @@ align-items: center;
     height: 0;
 }
 /*______________________________________________*/
-@media(max-width:1225px){
+@media(max-width:1400px){
     .home{
-        margin-left:50%!important;
+    height:50px;
+    width:65px;
+    }
+}
+@media(max-width:1177px){
+    .home{
+    height:40px;
+    width:55px;
+    }
+}
+@media(max-width:967px){
+    .home{
+    height:30px;
+    width:40px;
     }
 }
 @media(max-width:1155px){
