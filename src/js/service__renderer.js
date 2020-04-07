@@ -8,10 +8,12 @@ const searchBtn = document.querySelector('#service-search-button');
 
 const searchBar = document.querySelector('.search__input');
 const reportsList = document.querySelector('#reports-list');
+const adressesWrapper = document.querySelector('#adresses');
 const numberOfReportsOnList = 5;
 let reportsArray = [];
 let reportsStrings = [];
 
+let bIsSearchbarActive = false;
 let bCanReceiveReport = true;
 let report;
 
@@ -44,6 +46,24 @@ const OnSearchBarInput = e => {
             AddLocationToList(reportsList, string);
         }
     });
+};
+
+const ActivateSearchBar = () => {
+    if(!bIsSearchbarActive)
+    {
+        adressesWrapper.classList.add('locations--active');
+
+        bIsSearchbarActive = true;
+    }
+};
+
+const DeActivateSearchBar = e => {
+    if(bIsSearchbarActive && e.target.id != "location")
+    {
+        adressesWrapper.classList.remove('locations--active');
+
+        bIsSearchbarActive = false;
+    }
 };
 
 const SearchReport = string => {
@@ -94,6 +114,8 @@ ipcRenderer.on('sending-data', (event, arg) => {
 if(searchBar != null)
 {
     searchBar.addEventListener('input', OnSearchBarInput);
+    searchBar.addEventListener('click', ActivateSearchBar);
+    document.addEventListener('click', DeActivateSearchBar);
 }
 
 if(confirmBtn != null)
