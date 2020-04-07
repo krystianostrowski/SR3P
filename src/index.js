@@ -1,6 +1,7 @@
 const { app, BrowserWindow, globalShortcut, ipcMain } = require('electron');
 const { DebugLog, LogTypes } = require('./js/debug');
 const api = require('./js/sr3pAPI');
+const path = require('path');
 
 let dispatcherWindow;
 let serviceWindow;
@@ -13,6 +14,59 @@ const WindowState = {
 }
 
 let dispatcherWindowState = WindowState.SEARCH;
+
+if(handleSquirrelEvent()) {
+    return;
+}
+
+function handleSquirrelEvent() {
+    if(process.argv.length === 1)
+        return false;
+
+    const ChildProcess = require('child_process');
+    const squirrelEvents = process.argv[1];
+    
+    const appFolder = path.resolve(process.execPath, '..');
+    const rootAtomFolder = path.resolve(appFolder, '..');
+    const updateDotExe = path.resolve(path.join(rootAtomFolder, 'Update.exe'));
+    const exeName = path.basename(process.execPath);
+    
+    const spawn = (command, args) => {
+        let spawnedProcess, error;
+    
+        try
+        {
+            spawnedProcess = ChildProcess.spawn(command, args, { detached: true });
+        }
+        catch(error) {}
+    
+        return spawnedProcess;
+    };
+    
+    const spawnUpdate = args => {
+        return spawn(updateDotExe, args);
+    }
+    
+    switch(squirrelEvents)
+    {
+        case '--squirrel-install':
+        case '--squirrel-updated':
+            spawnUpdate(['--createShortcut', exeName]);
+    
+            setTimeout(app.quit, 1000);
+            return true;
+    
+        case '--squirrel-uninstall':
+            spawnUpdate(['--removeShortcut', exeName]);
+    
+            setTimeout(app.quit, 1000);
+            return true;
+    
+        case '--squirrel-obsolete':
+            app.quit();
+            return true;
+    }  
+};
 
 const CreateWindow = () => {
     dispatcherWindow = new BrowserWindow({

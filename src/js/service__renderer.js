@@ -103,6 +103,8 @@ ipcRenderer.on('sending-data', (event, arg) => {
 if(searchBar != null)
 {
     searchBar.addEventListener('input', OnSearchBarInput);
+    searchBar.addEventListener('click', ActivateSearchBar);
+    document.addEventListener('click', DeActivateSearchBar);
 }
 
 if(confirmBtn != null)
@@ -133,6 +135,3 @@ if(reportsList != null)
 {
     reportsList.addEventListener('click', OnReportClick);
 }
-
-searchBar.addEventListener('click', ActivateSearchBar);
-document.addEventListener('click', DeActivateSearchBar);
