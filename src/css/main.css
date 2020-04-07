@@ -151,9 +151,9 @@ form{
     cursor: pointer;
 }
 .home img{
-height: 70%;
-width: 100%;
-margin: auto;
+    height: 70%;
+    width: 100%;
+    margin: auto;
 }
 .plus{
     position: absolute;
@@ -328,3 +328,6 @@ hr{
     display: block;
 }
 
+.overlay--hidden {
+    visibility: hidden;
+}
