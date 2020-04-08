@@ -56,6 +56,22 @@ const CreateWindow = () => {
         DebugLog('Opened DevTools');
     });
 
+    //----------------------------------------------
+
+    globalShortcut.register('f1', () => {
+        serviceWindow.loadFile('./html/service.html');
+    });
+
+    globalShortcut.register('f2', () => { 
+        serviceWindow.loadFile('./html/service__map.html');
+    });
+
+    globalShortcut.register('f3', () => {
+        serviceWindow.loadFile('./html/service__info.html');
+    });
+
+    //----------------------------------------------
+
     dispatcherWindow.on('closed', () => app.quit());
     serviceWindow.on('closed', () => app.quit());
 

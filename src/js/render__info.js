@@ -60,17 +60,18 @@ const RenderBuildingInfo = (adress, data) => {
     if(div == null)
         return;
 
-    const adressContainer = div.querySelector('.hies');
+    let adressContainer = div.querySelector('.hies');
+    adressContainer = adressContainer.querySelector('#building-address');
     const ul = div.querySelector('ul');
-    const spans = ul.querySelectorAll('span');
+    const spans = ul.querySelectorAll('.building-info');
 
-    adressContainer.innerText += adress;
+    adressContainer.innerText = adress;
     
     let index = 0;
 
     for(data in buildingData)
     {
-        spans[index].innerText += ` ${buildingData[data]}`;
+        spans[index].innerText = ` ${buildingData[data]}`;
         index++;
     }
 };
