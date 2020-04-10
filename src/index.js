@@ -165,7 +165,11 @@ ipcMain.on('search-report', (event, arg) => {
     else 
     {
         DebugLog('Found report');
-        dispatcherWindow.webContents.send('found-report', report);
+
+        const building = api.GetBuildingInfo(arg);
+        const dir = api.GetMapDir(building);
+
+        dispatcherWindow.webContents.send('found-report', {report, dir});
     }
 });
 
@@ -232,7 +236,7 @@ ipcMain.on('display-dispatcher-info', (event, arg) => {
     }
 
     dispatcherWindow.webContents.on('dom-ready', () => {
-        dispatcherWindow.webContents.send('send-report-data', arg);
+        dispatcherWindow.webContents.send('send-report-data', {report: arg.report, dir: arg.dir});
     });
 });
 

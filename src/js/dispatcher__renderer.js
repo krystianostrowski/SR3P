@@ -1,5 +1,5 @@
 const { ipcRenderer } = require('electron');
-const { RenderInfo, RenderBuildingInfo } = require('../js/render__info');
+const { RenderInfo, RenderBuildingInfo, InsertImages } = require('../js/render__info');
 const { ClearList, PerformArrayOfStrings, FillFormRandomLocations, AddLocationToList } = require('../js/searchbar');
 
 const searchBar = document.querySelector('#location');
@@ -30,6 +30,7 @@ let bIsSearchbarActive = false;
 let citiesArray;
 let placesArray;
 let report = null;
+let dir = "";
 
 const PerformOverlaysObj = () => {
     for(overlay of overlays)
@@ -171,7 +172,8 @@ const GetDataFromForm = () => {
 };
 
 ipcRenderer.on('send-report-data', (event, arg) => {
-    RenderInfo(arg);
+    RenderInfo(arg.report);
+    InsertImages(arg.dir);
     PerformOverlaysObj();
 });
 
@@ -188,7 +190,8 @@ ipcRenderer.on('get-building-info', (event, arg) => {
 });
 
 ipcRenderer.on('found-report', (event, arg) => {
-    report = arg;
+    report = arg.report;
+    dir = arg.dir
 
     if(seeReportBtn != null)
     {
@@ -242,7 +245,7 @@ if(homeBtn != null)
 if(seeReportBtn != null)
 {
     seeReportBtn.addEventListener('click', () => {
-        ipcRenderer.send('display-dispatcher-info', report);
+        ipcRenderer.send('display-dispatcher-info', {report, dir});
     });
 }
 
