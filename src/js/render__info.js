@@ -37,8 +37,6 @@ const RenderInfo = report => {
     desc.innerText = (report == null) ? "" : info.desc;
     time.innerText = (report == null) ? "" : info.time;
 
-    //TODO: If victims are == null get people from building info
-
     if(report != null)
         victims.innerText = (info.victims == null) ? "TBA" : info.victims;
     else
