@@ -1,5 +1,16 @@
 const InsertImages = imgDir => {
-    //TODO: Insert images
+    const mapPath = '../resources/img/maps'
+    const continer = document.querySelector('.map');
+    const imgs = continer.querySelectorAll('img');
+
+    console.log(imgDir);
+
+    for(img of imgs)
+    {
+        const id = img.id;
+        const path = `${mapPath}/${imgDir}/${id}.png`; 
+        img.src = path; 
+    }
 };
 const RenderInfo = report => {
     const desc = document.querySelector('#description');
@@ -82,5 +93,6 @@ module.exports = {
     },
     RenderBuildingInfo: (adress, data) => {
         RenderBuildingInfo(adress, data);
-    }
+    },
+    InsertImages: InsertImages
 }

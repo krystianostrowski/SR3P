@@ -1,5 +1,5 @@
 const { ipcRenderer } = require('electron');
-const { RenderInfo } = require('../js/render__info');
+const { RenderInfo, InsertImages } = require('../js/render__info');
 const { FillFormRandomLocations, ClearList, AddLocationToList, PerformArrayOfreportsStrings } = require('../js/searchbar');
 
 const confirmBtn = document.querySelector('#arrival-confirmation');
@@ -80,7 +80,8 @@ const OnReportClick = e => {
 };
 
 ipcRenderer.on('found-report', (event, arg) => {
-    RenderInfo(arg);
+    RenderInfo(arg.report);
+    InsertImages(arg.dir);
     PerformOverlaysObj();
 });
 

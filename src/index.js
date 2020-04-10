@@ -130,8 +130,11 @@ ipcMain.on('search-report-service', (event, arg) => {
         DebugLog('Found report');
         serviceWindow.loadFile('./html/service__info.html');
 
+        const building = api.GetBuildingInfo(arg);
+        const dir = api.GetMapDir(building);
+
         serviceWindow.webContents.on('dom-ready', () => {
-            serviceWindow.webContents.send('found-report', report);
+            serviceWindow.webContents.send('found-report', {report, dir });
         });
     }
 });

@@ -368,6 +368,14 @@ const GetArrayOfReports = () => {
     return array;
 };
 
+/**
+ * 
+ * @param {Object} building 
+ */
+const GetMapDir = building => {
+    return building.data.mapDir;
+};
+
 module.exports = {
     CheckIfDBExists: () => {
        CheckIfDBExists(); 
@@ -401,5 +409,6 @@ module.exports = {
     },
     GetArrayOfReports: () => {
         return GetArrayOfReports();
-    }
+    },
+    GetMapDir: GetMapDir
 }
