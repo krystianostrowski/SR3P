@@ -16,38 +16,9 @@
                 "heating": "TBA",
                 "residents": "nie dotyczy",
                 "wjazd": "brama z lewej strony budynku",
-                "material": "konstrukcja drewniana"
+                "material": "konstrukcja drewniana",
+                "mapDir": "1"
               }
-            },
-            {
-              "number": 6,
-              "data": {}
-            },
-            {
-              "number": 7,
-              "data": {}
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Sławno",
-      "streets": [
-        {
-          "name": "Dąbrowskiego",
-          "buildings": [
-            {
-              "number": 5,
-              "data": {}
-            },
-            {
-              "number": 6,
-              "data": {}
-            },
-            {
-              "number": 7,
-              "data": {}
             }
           ]
         }
@@ -173,7 +144,7 @@
       "data": {
         "city": "",
         "street": "",
-        "building": null
+        "building": 1
       },
       "additionalInfo": {
         "time": "23.2.2020 17:53",

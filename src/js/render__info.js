@@ -1,5 +1,16 @@
 const InsertImages = imgDir => {
-    //TODO: Insert images
+    const mapPath = '../resources/img/maps'
+    const continer = document.querySelector('.map');
+    const imgs = continer.querySelectorAll('img');
+
+    console.log(imgDir);
+
+    for(img of imgs)
+    {
+        const id = img.id;
+        const path = `${mapPath}/${imgDir}/${id}.png`; 
+        img.src = path; 
+    }
 };
 const RenderInfo = report => {
     const desc = document.querySelector('#description');
@@ -25,8 +36,6 @@ const RenderInfo = report => {
 
     desc.innerText = (report == null) ? "" : info.desc;
     time.innerText = (report == null) ? "" : info.time;
-
-    //TODO: If victims are == null get people from building info
 
     if(report != null)
         victims.innerText = (info.victims == null) ? "TBA" : info.victims;
@@ -60,17 +69,18 @@ const RenderBuildingInfo = (adress, data) => {
     if(div == null)
         return;
 
-    const adressContainer = div.querySelector('.hies');
+    let adressContainer = div.querySelector('.hies');
+    adressContainer = adressContainer.querySelector('#building-address');
     const ul = div.querySelector('ul');
-    const spans = ul.querySelectorAll('span');
+    const spans = ul.querySelectorAll('.building-info');
 
-    adressContainer.innerText += adress;
+    adressContainer.innerText = adress;
     
     let index = 0;
 
     for(data in buildingData)
     {
-        spans[index].innerText += ` ${buildingData[data]}`;
+        spans[index].innerText = ` ${buildingData[data]}`;
         index++;
     }
 };
@@ -81,5 +91,6 @@ module.exports = {
     },
     RenderBuildingInfo: (adress, data) => {
         RenderBuildingInfo(adress, data);
-    }
+    },
+    InsertImages: InsertImages
 }

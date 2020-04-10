@@ -14,9 +14,6 @@ const homeBtn = document.querySelector('.home');
 const seeReportBtn = document.querySelector('#see-report');
 
 const locationsToDiplayOnList = 5;
-//TODO: Remove unused variables from js and classes from css
-const locationHiddenClass = 'location--hidden';
-const locationVisibleClass = 'location--visible';
 
 const policeCheckbox = document.querySelector('#police__checkbox');
 const ambulanceCheckbox = document.querySelector('#ambulance__checkbox');
@@ -73,7 +70,6 @@ const OnLocationClicked = e => {
         SearchReport(e.target.textContent.toLowerCase());
     }
 };
-
 
 const OnSearchBarInput = e => {
     if(citiesArray == null)
@@ -196,8 +192,8 @@ ipcRenderer.on('found-report', (event, arg) => {
 
     if(seeReportBtn != null)
     {
-        if(seeReportBtn.classList.contains('see-repoer__button--hidden'))
-            seeReportBtn.classList.remove('see-repoer__button--hidden');
+        if(seeReportBtn.classList.contains('see-report__button--hidden'))
+            seeReportBtn.classList.remove('see-report__button--hidden');
     }
 });
 
@@ -206,8 +202,8 @@ ipcRenderer.on('report-not-found', () => {
     
     if(seeReportBtn != null)
     {
-        if(!seeReportBtn.classList.contains('see-repoer__button--hidden'))
-            seeReportBtn.classList.add('see-repoer__button--hidden');
+        if(!seeReportBtn.classList.contains('see-report__button--hidden'))
+            seeReportBtn.classList.add('see-report__button--hidden');
     }
 });
 

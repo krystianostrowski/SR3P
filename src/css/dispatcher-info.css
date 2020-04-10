@@ -164,10 +164,6 @@ align-items: center;
     top:-500%;
 }
 
-.overlay--hidden {
-    visibility: hidden;
-}
-
 /*________SHOW MORE INFORMATIONS ABOUT THIS LOCATION__________*/
 .show{
     width:30%;

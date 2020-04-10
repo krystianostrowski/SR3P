@@ -110,6 +110,22 @@ const CreateWindow = () => {
         DebugLog('Opened DevTools');
     });
 
+    //----------------------------------------------
+
+    globalShortcut.register('f1', () => {
+        serviceWindow.loadFile('./html/service.html');
+    });
+
+    globalShortcut.register('f2', () => { 
+        serviceWindow.loadFile('./html/service__map.html');
+    });
+
+    globalShortcut.register('f3', () => {
+        serviceWindow.loadFile('./html/service__info.html');
+    });
+
+    //----------------------------------------------
+
     dispatcherWindow.on('closed', () => app.quit());
     serviceWindow.on('closed', () => app.quit());
 
@@ -168,8 +184,11 @@ ipcMain.on('search-report-service', (event, arg) => {
         DebugLog('Found report');
         serviceWindow.loadFile('./html/service__info.html');
 
+        const building = api.GetBuildingInfo(arg);
+        const dir = api.GetMapDir(building);
+
         serviceWindow.webContents.on('dom-ready', () => {
-            serviceWindow.webContents.send('found-report', report);
+            serviceWindow.webContents.send('found-report', {report, dir });
         });
     }
 });

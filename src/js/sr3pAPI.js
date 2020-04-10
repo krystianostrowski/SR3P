@@ -1,11 +1,10 @@
 const fs = require('fs');
 const { DebugLog, LogTypes } = require('./debug');
 
-const dbDir = `${process.env.APPDATA}\\sr3p\\db`;    //JSON database directory
-const dbFile = 'database.json';                             //database file
-const dbPath = `${dbDir}\\${dbFile}`;                       //Path to JSON database
+const dbDir = `${process.env.APPDATA}\\sr3p\\db`;
+const dbFile = 'database.json';                        
+const dbPath = `${dbDir}\\${dbFile}`;                       
 
-// const dbPath = './src/db/database.json';
 let bDbExists = false;
 
 const CheckIfDBExists = () => {
@@ -368,6 +367,14 @@ const GetArrayOfReports = () => {
     return array;
 };
 
+/**
+ * 
+ * @param {Object} building 
+ */
+const GetMapDir = building => {
+    return building.data.mapDir;
+};
+
 module.exports = {
     CheckIfDBExists: () => {
        CheckIfDBExists(); 
@@ -401,5 +408,6 @@ module.exports = {
     },
     GetArrayOfReports: () => {
         return GetArrayOfReports();
-    }
+    },
+    GetMapDir: GetMapDir
 }

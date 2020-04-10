@@ -1,5 +1,5 @@
 const { ipcRenderer } = require('electron');
-const { RenderInfo } = require('../js/render__info');
+const { RenderInfo, InsertImages } = require('../js/render__info');
 const { FillFormRandomLocations, ClearList, AddLocationToList, PerformArrayOfreportsStrings } = require('../js/searchbar');
 
 const confirmBtn = document.querySelector('#arrival-confirmation');
@@ -8,31 +8,23 @@ const searchBtn = document.querySelector('#service-search-button');
 
 const searchBar = document.querySelector('.search__input');
 const reportsList = document.querySelector('#reports-list');
+const adressesWrapper = document.querySelector('#adresses');
 const numberOfReportsOnList = 5;
 let reportsArray = [];
 let reportsStrings = [];
 
+let bIsSearchbarActive = false;
 let bCanReceiveReport = true;
 let report;
 
-const adressesWrapper = document.querySelector('#adresses');
-let bIsSearchbarActive = false;
+const switchesPatent = document.querySelector('#switches__container');
+const overlays = document.querySelectorAll('.overlay--hidden');
+const overlaysObj = [];
 
-const ActivateSearchBar = () => {
-    if(!bIsSearchbarActive)
+const PerformOverlaysObj = () => {
+    for(overlay of overlays)
     {
-        adressesWrapper.classList.add('locations--active');
-
-        bIsSearchbarActive = true;
-    }
-};
-
-const DeActivateSearchBar = e => {
-    if(bIsSearchbarActive && e.target.id != "location")
-    {
-        adressesWrapper.classList.remove('locations--active');
-
-        bIsSearchbarActive = false;
+        overlaysObj.push({id: overlay.id, node: overlay});
     }
 };
 
@@ -56,6 +48,24 @@ const OnSearchBarInput = e => {
     });
 };
 
+const ActivateSearchBar = () => {
+    if(!bIsSearchbarActive)
+    {
+        adressesWrapper.classList.add('locations--active');
+
+        bIsSearchbarActive = true;
+    }
+};
+
+const DeActivateSearchBar = e => {
+    if(bIsSearchbarActive && e.target.id != "location")
+    {
+        adressesWrapper.classList.remove('locations--active');
+
+        bIsSearchbarActive = false;
+    }
+};
+
 const SearchReport = string => {
     ipcRenderer.send('search-report-service', string);
 };
@@ -70,7 +80,9 @@ const OnReportClick = e => {
 };
 
 ipcRenderer.on('found-report', (event, arg) => {
-    RenderInfo(arg);
+    RenderInfo(arg.report);
+    InsertImages(arg.dir);
+    PerformOverlaysObj();
 });
 
 ipcRenderer.on('got-reports', (event, arg) => {
@@ -134,4 +146,22 @@ if(searchBtn != null)
 if(reportsList != null)
 {
     reportsList.addEventListener('click', OnReportClick);
+}
+
+if(switchesPatent != null)
+{
+    switchesPatent.addEventListener('click', e => {
+        if(e.target.classList.contains('switches__checkbox'))
+        {
+            const checkbox = e.target;
+
+            for(ov of overlaysObj)
+            {
+                if(ov.id === checkbox.getAttribute('aria-controls'))
+                {
+                    ov.node.classList.toggle('overlay--hidden');
+                }
+            }
+        }
+    });
 }
