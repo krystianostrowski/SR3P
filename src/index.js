@@ -1,6 +1,6 @@
 const { app, BrowserWindow, globalShortcut, ipcMain } = require('electron');
-const { DebugLog, LogTypes } = require('./js/debug');
-const api = require('./js/sr3pAPI');
+const { DebugLog, LogTypes } = require('./dispatcher/js/debug');
+const api = require('./dispatcher/js/sr3pAPI');
 const path = require('path');
 
 let dispatcherWindow;
@@ -95,8 +95,8 @@ const CreateWindow = () => {
         }
     });
 
-    dispatcherWindow.loadFile('./html/dispatcher.html');
-    serviceWindow.loadFile('./html/service.html');
+    dispatcherWindow.loadFile('./dispatcher/html/dispatcher.html');
+    serviceWindow.loadFile('./service/html/service.html');
 
     globalShortcut.register('f5', () => {
         dispatcherWindow.reload();
@@ -113,15 +113,15 @@ const CreateWindow = () => {
     //----------------------------------------------
 
     globalShortcut.register('f1', () => {
-        serviceWindow.loadFile('./html/service.html');
+        serviceWindow.loadFile('./service/html/service.html');
     });
 
     globalShortcut.register('f2', () => { 
-        serviceWindow.loadFile('./html/service__map.html');
+        serviceWindow.loadFile('./service/html/service__map.html');
     });
 
     globalShortcut.register('f3', () => {
-        serviceWindow.loadFile('./html/service__info.html');
+        serviceWindow.loadFile('./service/html/service__info.html');
     });
 
     //----------------------------------------------
@@ -186,7 +186,7 @@ ipcMain.on('search-report-service', (event, arg) => {
     else 
     {
         DebugLog('Found report');
-        serviceWindow.loadFile('./html/service__info.html');
+        serviceWindow.loadFile('./service/html/service__info.html');
 
         const building = api.GetBuildingInfo(arg);
         const dir = api.GetMapDir(building);
@@ -205,7 +205,7 @@ ipcMain.on('search-building', (event, arg) => {
         if(dispatcherWindowState != WindowState.SEARCH)
         {
             dispatcherWindowState = WindowState.SEARCH;
-            dispatcherWindow.loadFile('./html/dispatcher.html');
+            dispatcherWindow.loadFile('./dispatcher/html/dispatcher.html');
         }
         
         DebugLog('Building not found', LogTypes.ERROR);
@@ -215,7 +215,7 @@ ipcMain.on('search-building', (event, arg) => {
         if(dispatcherWindowState != WindowState.BUILDINGINFO)
         {
             dispatcherWindowState = WindowState.BUILDINGINFO;
-            dispatcherWindow.loadFile('./html/dispatcher__place__info.html');
+            dispatcherWindow.loadFile('./dispatcher/html/dispatcher__place__info.html');
 
             dispatcherWindow.webContents.on('dom-ready', () => {
                 dispatcherWindow.webContents.send('get-building-info', { buildingInfo: building, adress: arg });
@@ -232,7 +232,7 @@ ipcMain.on('display-dispatcher-info', (event, arg) => {
     if(dispatcherWindowState != WindowState.INFO)
     {
         dispatcherWindowState = WindowState.INFO;
-        dispatcherWindow.loadFile('./html/dispatcher__info.html');
+        dispatcherWindow.loadFile('./dispatcher/html/dispatcher__info.html');
     }
 
     dispatcherWindow.webContents.on('dom-ready', () => {
@@ -242,7 +242,7 @@ ipcMain.on('display-dispatcher-info', (event, arg) => {
 
 ipcMain.on('open-dispatcher-form', () => {
     dispatcherWindowState = WindowState.FORM;
-    dispatcherWindow.loadFile('./html/dispatcher__form.html');
+    dispatcherWindow.loadFile('./dispatcher/html/dispatcher__form.html');
 });
 
 ipcMain.on('add-report-to-db', (event, arg) => {
@@ -257,7 +257,7 @@ ipcMain.on('add-report-to-db', (event, arg) => {
     else
     {
         dispatcherWindowState = WindowState.INFO;
-        dispatcherWindow.loadFile('./html/dispatcher__info.html');
+        dispatcherWindow.loadFile('./dispatcher/html/dispatcher__info.html');
 
         dispatcherWindow.webContents.on('dom-ready', () => {
             dispatcherWindow.webContents.send('send-report-data', report);
@@ -268,7 +268,7 @@ ipcMain.on('add-report-to-db', (event, arg) => {
 });
 
 ipcMain.on('request-accepted', (event, arg) => {
-    serviceWindow.loadFile('./html/service__map.html');
+    serviceWindow.loadFile('./service/html/service__map.html');
 
     serviceWindow.webContents.on('dom-ready', () => {
         serviceWindow.webContents.send('sending-data', arg);
@@ -276,7 +276,7 @@ ipcMain.on('request-accepted', (event, arg) => {
 });
 
 ipcMain.on('service-reached-destination', (event, arg) => {
-    serviceWindow.loadFile('./html/service__info.html');
+    serviceWindow.loadFile('./service/html/service__info.html');
 
     api.UpdateStatus(arg.id);
     arg.services.fireFighters.state = "na miejscu";
@@ -293,10 +293,10 @@ ipcMain.on('home-button-clicked', (event, arg) => {
     if(arg === 'dispatcher')
     {
         dispatcherWindowState = WindowState.SEARCH;
-        dispatcherWindow.loadFile('./html/dispatcher.html');
+        dispatcherWindow.loadFile('./dispatcher/html/dispatcher.html');
     }
     else if(arg === 'service')
     {
-        serviceWindow.loadFile('./html/service.html');
+        serviceWindow.loadFile('./service/html/service.html');
     }
 });
