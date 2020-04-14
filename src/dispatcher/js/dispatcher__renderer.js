@@ -308,3 +308,28 @@ if(switchesPatent != null)
         }
     });
 }
+/* XDDDDDDDDDDDD */
+const locationBtn = document.querySelector("#open-location");
+
+if(locationBtn != null)
+{
+    locationBtn.addEventListener('click', () => {
+        const location = document.querySelector('.location');
+        locationBtn.classList.toggle('open__location--active');
+        location.classList.toggle('location--visible');
+    });
+}
+
+const locationCloseBtn = document.querySelector("#close-location");
+if(locationBtn != null)
+{
+    locationCloseBtn.addEventListener('click', () => {
+        const locationBtn = document.querySelector("#open-location");
+        const location = document.querySelector('.location');
+        location.classList.remove('location--visible');
+        locationBtn.classList.remove('open__location--active');
+        locationBtn.classList.toggle('open__location--inactive');
+
+    });
+}
+/* :) */

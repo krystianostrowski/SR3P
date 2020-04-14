@@ -22,8 +22,9 @@
     </div>
     
     <div class="wrapper">
+        <button id="open-location"><img src="../resources/img/lupa.png" alt=""></button>
         <div class="location">
-
+            <button id="close-location">▲ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Zwiń&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ▲ </button>
             <div class="case">
                 <div class="center">
                     <form id="location-form">
@@ -32,7 +33,7 @@
                     </form>
                 </div>
             </div>
-
+            
             <div id="adresses" class="adresses">
 
 
@@ -72,7 +73,7 @@
                     </li>
                 </ul>
             </div>
-
+            
             <button class="plus">
                 <img src="../resources/img/plus.png" alt="">
             </button>
@@ -80,22 +81,31 @@
             <button class="home">
                 <img src="../resources/img/home.png" alt="">
             </button>
-
+            
         </div>
-        <hr>
         <div class="main">
             <div class="top">
                 <div class="top-content">
-                    <div class="hies"><span style="font-size:130%;margin: auto;">Informacje o budynku: &nbsp;[Adres] <span id="building-address"></span></div>
-                    <ul>
-                        <li><span style="margin: auto;">Wiek budynku <span class="building-info"></span> </span></li>
-                        <li><span style="margin: auto;">rozkład mieszkań ( jeśli to blok) <span class="building-info"></span></span></li>
-                        <li><span style="margin: auto;">Podpiwniczenie ( tak lub nie ) <span class="building-info"></span></span></li>
-                        <li><span style="margin: auto;">Rodzaj ogrzewania <span class="building-info"></span></span></li>
-                        <li><span style="margin: auto;">liczba zameldowanych osób <span class="building-info"></span></span></li>
-                        <li><span style="margin: auto;">info o wjeździe/wjazdach <span class="building-info"></span></span></li>
-                        <li><span style="margin: auto;">materiał z jakiego budynek jest zbudowany <span class="building-info"></span></span></li>
-                    </ul>
+                    <div class="hies"><span style="font-size:130%;margin: auto;">Informacje o budynku: &nbsp; <span id="building-address"></span></div>
+                    <div class="build-info-table">
+                        <div class="build-info-element">
+                            <span style="margin: auto;font-size:110%;">Wiek budynku: &nbsp; <span class="building-info"></span> </span>
+                        </div>
+                        <div class="build-info-element">
+                            <span style="margin: auto;font-size:110%;">Podpiwniczenie ( tak lub nie ): &nbsp; <span class="building-info"></span></span>
+                        </div>
+                        <div class="build-info-element">
+                            <span style="margin: auto;font-size:110%;">Rodzaj ogrzewania: &nbsp; <span class="building-info"></span></span>
+                        </div>
+                        <div class="build-info-element-l">
+                            <span style="margin: auto;font-size:110%;">Liczba zameldowanych osób: &nbsp; <span class="building-info"></span></span>
+                        </div>
+                    </div>
+                    <div class="build-info-table-b">
+                        <div class="build-info-element-b"><span style="margin: auto;font-size:110%;">Rozkład mieszkań ( jeśli to blok): <br> <span style="font-size:120%; class="building-info"></span></span></div>
+                        <div class="build-info-element-b"><span style="margin: auto;font-size:110%;">Wjazd/wjazdy: <br><span style="font-size:120%;" class="building-info"></span></span></div>
+                        <div class="build-info-element-b-l"><span style="margin: auto;font-size:110%;">Materiał z jakiego budynek jest zbudowany: <br><span style="font-size:120%;" class="building-info">Drewno</span></span></div>
+                    </div>
                 </div>
             </div>
             <div class="bottom">

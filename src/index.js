@@ -95,7 +95,7 @@ const CreateWindow = () => {
         }
     });
 
-    dispatcherWindow.loadFile('./dispatcher/html/dispatcher.html');
+    dispatcherWindow.loadFile('./dispatcher/html/dispatcher__place__info.html');
     serviceWindow.loadFile('./service/html/service.html');
 
     globalShortcut.register('f5', () => {

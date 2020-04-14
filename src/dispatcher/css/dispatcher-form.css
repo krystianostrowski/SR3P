@@ -3,11 +3,61 @@
     --input-background-color: #ffffff;
     --main: #121212;
   }
+  .location{
+    position:absolute;
+    transform-origin: top;
+    transform: scaleY(0);
+    border-bottom:2px solid #1ED760;
+    transition: .5s;
+
+}
+.location--visible{
+    transform: scaleY(1);
+    
+}
+#open-location{
+    position: fixed;
+    left:1vw;
+    top:4vh;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    outline: none;
+    border:3px solid #1ED760; 
+    background-color: #c4c4c4;
+    cursor: pointer;
+}
+#open-location img{
+    width: 40px;
+    height: 40px;
+}
+.open__location--active{
+    display:none;
+}
+.open__location--inactive{
+    display:block;
+}
+#close-location{
+    position: absolute;
+    width: 10%;
+    height: 20px;
+    bottom:0;
+    left:45%;
+    cursor: pointer;
+    outline: none;
+    background-color: #1ED760;
+    border: none;
+    border-top-left-radius:10px;
+    border-top-right-radius:10px;
+}
+.adresses{
+    top:65px;
+ }
 .main{
     width:100%;
-    min-height:85vh;
+    min-height:97.5vh;
     background-color:var(--main) ;
-    padding-top:3vh;
+    padding-top:15vh;
     
 }
 
@@ -222,4 +272,9 @@ input[type="checkbox"]{
     .send{
         font-size: 120%;
     }
+}
+@media(max-height:800px){
+    .adresses{
+        top:55px;
+     }
 }
