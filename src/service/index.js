@@ -5,22 +5,24 @@ const io = require('socket.io-client');
 const path = require('path');
 const url = require('url');
 
-let window; 
-let windowState;
+let window;
 let bIsConnectedToServer;
 let bCanConnectToAPI;
+let bCanReceiveReport = true;
 
 //TODO: Move to comfig file
 const serverIP = '127.0.0.1';
 const serverPort = 3000;
 const API = `http://${serverIP}:${serverPort}/api`;
 
-const Sate = {
-    SEARCH: 'search',
-    INFO: 'info',
-    FORM: 'form',
-    BUILDINGINFO: 'buildingInfo'
-};
+// const WindowState = {
+//     SEARCH: 'search',
+//     INFO: 'info',
+//     FORM: 'form',
+//     BUILDINGINFO: 'buildingInfo'
+// }
+
+// let dispatcherWindowState = WindowState.SEARCH;
 
 const GetDataFromAPI = async (path) => {
     try {
@@ -96,19 +98,19 @@ const CreateWindow = () => {
         width: 800,
         height: 600,
         resizable: false,
-        x: 0,
+        x: 1000,
         y: 0,
+        backgroundColor: '#212121',
         webPreferences: {
             nodeIntegration: true
         }
     });
 
-    window.loadFile('./html/dispatcher.html');
-    windowState = Sate.SEARCH;
+    window.loadFile('./html/service.html');
 
     globalShortcut.register('f5', () => {
         window.reload();
-        DebugLog('Reloaded window.');
+        DebugLog('Reloaded window');
     });
 
     globalShortcut.register('f6', () => {
@@ -119,29 +121,24 @@ const CreateWindow = () => {
     //#region dev shortcuts
 
     globalShortcut.register('f1', () => {
-        serviceWindow.loadFile('./html/dispatcher.html');
+        window.loadFile('./html/service.html');
     });
 
     globalShortcut.register('f2', () => { 
-        serviceWindow.loadFile('./html/dispatcher__form.html');
+        window.loadFile('./html/service__map.html');
     });
 
     globalShortcut.register('f3', () => {
-        serviceWindow.loadFile('./html/dispatcher__info.html');
-    });
-
-    globalShortcut.register('f4', () => {
-        serviceWindow.loadFile('./html/dispatcher__place__info.html');
+        window.loadFile('./html/service__info.html');
     });
 
     //#endregion
 
     window.webContents.on('dom-ready', () => {
-        GetDataFromAPI('getCities')
-        .then(response => window.webContents.send('got-cities', response));
+        GetDataFromAPI('getReports')
+        .then(data => window.webContents.send('got-reports', data));
     });
-
-}
+};
 
 app.on('ready', CreateWindow);
 
@@ -152,7 +149,7 @@ app.on('window-all-closed', () => {
 
 app.allowRendererProcessReuse = false;
 //#endregion
-//#region connection to the server
+//#region connecting to the serverIP
 DebugLog('Connecting to communication server.');
 const socket = io(`http://${serverIP}:${serverPort}`);
 
@@ -184,12 +181,10 @@ GetDataFromAPI('connection').then(response => {
     }
 });
 //#endregion
-
 //#region events
-ipcMain.on('search-report', (event, arg) => {
+ipcMain.on('search-report-service', (event, arg) => {
     DebugLog(`Search: ${arg}`);
 
-    // const report = api.GetReport(arg);
     GetDataFromAPI(`getReport/${arg}`).then(report => {
         if(report == false)
         {   
@@ -199,95 +194,62 @@ ipcMain.on('search-report', (event, arg) => {
         else 
         {
             DebugLog('Found report');
+            window.loadFile('./html/service__info.html');
 
-            GetDataFromAPI(`getBuildingInfo/${arg}`).then(response => {
-                const dir = response.data.mapDir;
-                
-                window.webContents.send('found-report', {report, dir});
+            GetDataFromAPI(`getBuildingInfo/${arg}`).then(building => {
+                const dir = building.data.mapDir;
+
+                window.webContents.on('dom-ready', () => {
+                    window.webContents.send('found-report', {report, dir });
+                });
             });
         }
     });
 });
 
-ipcMain.on('search-building', (event, arg) => {
-    GetDataFromAPI(`getBuildingInfo/${arg}`).then(building => {
-        if(!building)
-        {
-            if(windowState != Sate.SEARCH)
-            {
-                windowState = Sate.SEARCH;
-                window.loadFile('./html/dispatcher.html');
-            }
-            
-            DebugLog('Building not found', LogTypes.ERROR);
-        }
-        else
-        {
-            if(windowState != Sate.BUILDINGINFO)
-            {
-                windowState = Sate.BUILDINGINFO;
-                window.loadFile('./html/dispatcher__place__info.html');
-
-                window.webContents.on('dom-ready', () => {
-                    window.webContents.send('get-building-info', { buildingInfo: building, adress: arg });
-                });
-            }
-
-            window.webContents.send('get-building-info', { buildingInfo: building, adress: arg });
-
-            DebugLog("Found building");
-        }
-    });
+socket.on('request-sending-report', () => {
+    if(bCanReceiveReport)
+    {
+        bCanReceiveReport = false;
+        socket.emit('can-receive-report');
+    }
 });
 
-ipcMain.on('display-dispatcher-info', (event, arg) => {
-    if(windowState != Sate.INFO)
-    {
-        windowState = Sate.INFO;
-        window.loadFile('./html/dispatcher__info.html');
-    }
+socket.on('sending-report', data => {
+    window.loadFile('./html/service__map.html');
 
     window.webContents.on('dom-ready', () => {
-        window.webContents.send('send-report-data', {report: arg.report, dir: arg.dir});
+        window.webContents.send('sending-data', data);
     });
 });
 
-ipcMain.on('open-dispatcher-form', () => {
-    windowState = Sate.FORM;
-    window.loadFile('./html/dispatcher__form.html');
-});
+//TODO: confirmation of arrival
 
-ipcMain.on('add-report-to-db', (event, arg) => {
-    socket.emit('add-report', arg);
-});
+ipcMain.on('service-reached-destination', (event, arg) => {
+    window.loadFile('./html/service__info.html');
 
-socket.on('added-report', report => {
-    if(report == false)
-    {
-        //TODO: show error on screen
-        DebugLog('Error while adding report to database', LogTypes.ERROR);
-    }
-    else
-    {
-        windowState = Sate.INFO;
-        window.loadFile('./html/dispatcher__info.html');
+    //TODO: Update status and send info to dispatcher
+    //api.UpdateStatus(arg.id);
+    arg.services.fireFighters.state = "na miejscu";
 
-        window.webContents.on('dom-ready', () => {
-            window.webContents.send('send-report-data', report);
-        });
-    }
-});
+    //dispatcherWindow.webContents.send('send-report-data', arg);
+
+    window.webContents.on('dom-ready', () => {
+        window.webContents.send('receive-report', arg)
+    });
+}); 
 
 ipcMain.on('home-button-clicked', (event, arg) => {
-
+    //TODO: refactor
     if(arg === 'dispatcher')
     {
-        windowState = Sate.SEARCH;
-        window.loadFile('./html/dispatcher.html');
+        dispatcherWindowState = WindowState.SEARCH;
+        dispatcherWindow.loadFile('./dispatcher/html/dispatcher.html');
     }
     else if(arg === 'service')
     {
-        window.loadFile('./service/html/service.html');
+        window.loadFile('./html/service.html');
     }
 });
+
 //#endregion
