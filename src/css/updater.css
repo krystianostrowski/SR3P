@@ -34,5 +34,8 @@
     background-color: #1ED760;
     border: #1ED760;
     font-size:20px;
-    visibility:hidden ;
+}
+
+.btn--hidden {
+    display: none;
 }
