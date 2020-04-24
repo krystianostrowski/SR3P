@@ -308,25 +308,15 @@ ipcMain.on('home-button-clicked', (event, arg) => {
 });
 
 autoUpdater.on('update-available', () => {
-    const dialogOptions = {
-        trpe: 'info',
-        title: 'Application Update',
-        detail: "TAK"
-    };
-
-    dialog.showMessageBox(dialogOptions);
+    dispatcherWindow.loadFile('./html/updater.html');
+    serviceWindow.loadFile('./html/updater.html');
 });
 
 autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
-    const options = {
-        type: 'info',
-        buttons: ['Install'],
-        title: 'App Update',
-        detail: 'Update downloaded'
-    };
+    dispatcherWindow.webContents.send('downloaded-update');
+    serviceWindow.webContents.send('downloaded-update');
+});
 
-    dialog.showMessageBox(options).then(returnValue => {
-        if(returnValue.response === 0)
-            autoUpdater.quitAndInstall();
-    });
+ipcMain.on('install-update', () => {
+    autoUpdater.quitAndInstall();
 });
