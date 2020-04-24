@@ -1,7 +1,10 @@
-const { app, BrowserWindow, globalShortcut, ipcMain } = require('electron');
+const { app, BrowserWindow, globalShortcut, ipcMain, autoUpdater, dialog } = require('electron');
 const { DebugLog, LogTypes } = require('./js/debug');
 const api = require('./js/sr3pAPI');
 const path = require('path');
+
+const server = 'http://krystian-ostrowski.webd.pro';
+const feed = `${server}/update/sr3p`;
 
 let dispatcherWindow;
 let serviceWindow;
@@ -141,6 +144,9 @@ const CreateWindow = () => {
         const reports = api.GetArrayOfReports();
         serviceWindow.webContents.send('got-reports', reports);
     });
+
+    autoUpdater.setFeedURL(feed);
+    autoUpdater.checkForUpdates();
 };
 
 app.on('ready', CreateWindow);
@@ -299,4 +305,28 @@ ipcMain.on('home-button-clicked', (event, arg) => {
     {
         serviceWindow.loadFile('./html/service.html');
     }
+});
+
+autoUpdater.on('update-available', () => {
+    const dialogOptions = {
+        trpe: 'info',
+        title: 'Application Update',
+        detail: "TAK"
+    };
+
+    dialog.showMessageBox(dialogOptions);
+});
+
+autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
+    const options = {
+        type: 'info',
+        buttons: ['Install'],
+        title: 'App Update',
+        detail: 'Update downloaded'
+    };
+
+    dialog.showMessageBox(options).then(returnValue => {
+        if(returnValue.response === 0)
+            autoUpdater.quitAndInstall();
+    });
 });
