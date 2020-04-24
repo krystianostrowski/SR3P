@@ -1,19 +1,16 @@
 const { app, BrowserWindow, globalShortcut, ipcMain } = require('electron');
 const { DebugLog, LogTypes } = require('./js/debug');
+const { IP, Port } = require('./config.json');
 const fetch = require('node-fetch');
 const io = require('socket.io-client');
 const path = require('path');
-const url = require('url');
 
 let window; 
 let windowState;
 let bIsConnectedToServer;
 let bCanConnectToAPI;
 
-//TODO: Move to comfig file
-const serverIP = '127.0.0.1';
-const serverPort = 3000;
-const API = `http://${serverIP}:${serverPort}/api`;
+const API = `http://${IP}:${Port}/api`;
 
 const Sate = {
     SEARCH: 'search',
@@ -58,7 +55,9 @@ function handleSquirrelEvent() {
         {
             spawnedProcess = ChildProcess.spawn(command, args, { detached: true });
         }
-        catch(error) {}
+        catch(error) {
+            return DebugLog(error, LogTypes.ERROR);
+        }
     
         return spawnedProcess;
     };
@@ -154,10 +153,10 @@ app.allowRendererProcessReuse = false;
 //#endregion
 //#region connection to the server
 DebugLog('Connecting to communication server.');
-const socket = io(`http://${serverIP}:${serverPort}`);
+const socket = io(`http://${IP}:${Port}`);
 
 socket.on('connect', () => {
-    DebugLog(`Connected to communication server: http://${serverIP}:${serverPort}`);
+    DebugLog(`Connected to communication server: http://${IP}:${Port}`);
     DebugLog(`Client id: ${socket.id}`);
 
     bIsConnectedToServer = true;
@@ -189,7 +188,6 @@ GetDataFromAPI('connection').then(response => {
 ipcMain.on('search-report', (event, arg) => {
     DebugLog(`Search: ${arg}`);
 
-    // const report = api.GetReport(arg);
     GetDataFromAPI(`getReport/${arg}`).then(report => {
         if(report == false)
         {   

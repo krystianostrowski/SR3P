@@ -5,7 +5,6 @@ const { ClearList, PerformArrayOfStrings, FillFormRandomLocations, AddLocationTo
 const searchBar = document.querySelector('#location');
 const form = document.querySelector('form');
 const locationsList = document.querySelector('ul');
-const locations = locationsList.querySelectorAll('li');
 const shadow = document.querySelector('.case');
 const adressesWrapper = document.querySelector('#adresses');
 const plusBtn = document.querySelector('.plus');
@@ -173,6 +172,10 @@ const GetDataFromForm = () => {
 
 ipcRenderer.on('send-report-data', (event, arg) => {
     RenderInfo(arg.report);
+
+    if(arg.dir == undefined)
+        return;
+
     InsertImages(arg.dir);
     PerformOverlaysObj();
 });
@@ -321,7 +324,7 @@ if(locationBtn != null)
 }
 
 const locationCloseBtn = document.querySelector("#close-location");
-if(locationBtn != null)
+if(locationCloseBtn != null)
 {
     locationCloseBtn.addEventListener('click', () => {
         const locationBtn = document.querySelector("#open-location");

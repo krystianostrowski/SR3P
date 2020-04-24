@@ -15,8 +15,8 @@
   "scripts": {
     "start": "electron src/index.js",
     "server": "node src/server/index.js",
-    "service": "electron src/service/index.js",
-    "dispatcher": "electron src/dispatcher/index.js"
+    "service": "electron src/service/index.js & cls",
+    "dispatcher": "electron src/dispatcher/index.js & cls"
   },
   "repository": {
     "type": "git",

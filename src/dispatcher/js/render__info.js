@@ -12,6 +12,7 @@ const InsertImages = imgDir => {
         img.src = path; 
     }
 };
+
 const RenderInfo = report => {
     const desc = document.querySelector('#description');
     const time = document.querySelector('#time');

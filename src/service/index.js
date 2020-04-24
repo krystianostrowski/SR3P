@@ -1,28 +1,16 @@
-const { app, BrowserWindow, globalShortcut, ipcMain } = require('electron');
+const { app, BrowserWindow, globalShortcut, ipcMain, autoUpdater } = require('electron');
 const { DebugLog, LogTypes } = require('./js/debug');
+const { IP, Port, UpdateServer } = require('./config.json');
 const fetch = require('node-fetch');
 const io = require('socket.io-client');
 const path = require('path');
-const url = require('url');
 
 let window;
 let bIsConnectedToServer;
 let bCanConnectToAPI;
 let bCanReceiveReport = true;
 
-//TODO: Move to comfig file
-const serverIP = '127.0.0.1';
-const serverPort = 3000;
-const API = `http://${serverIP}:${serverPort}/api`;
-
-// const WindowState = {
-//     SEARCH: 'search',
-//     INFO: 'info',
-//     FORM: 'form',
-//     BUILDINGINFO: 'buildingInfo'
-// }
-
-// let dispatcherWindowState = WindowState.SEARCH;
+const API = `http://${IP}:${Port}/api`;
 
 const GetDataFromAPI = async (path) => {
     try {
@@ -151,10 +139,10 @@ app.allowRendererProcessReuse = false;
 //#endregion
 //#region connecting to the serverIP
 DebugLog('Connecting to communication server.');
-const socket = io(`http://${serverIP}:${serverPort}`);
+const socket = io(`http://${IP}:${Port}`);
 
 socket.on('connect', () => {
-    DebugLog(`Connected to communication server: http://${serverIP}:${serverPort}`);
+    DebugLog(`Connected to communication server: http://${IP}:${Port}`);
     DebugLog(`Client id: ${socket.id}`);
 
     bIsConnectedToServer = true;
@@ -183,6 +171,9 @@ GetDataFromAPI('connection').then(response => {
 //#endregion
 //#region events
 ipcMain.on('search-report-service', (event, arg) => {
+    if(!bCanConnectToAPI)
+        return;
+
     DebugLog(`Search: ${arg}`);
 
     GetDataFromAPI(`getReport/${arg}`).then(report => {
@@ -208,7 +199,7 @@ ipcMain.on('search-report-service', (event, arg) => {
 });
 
 socket.on('request-sending-report', () => {
-    if(bCanReceiveReport)
+    if(bCanReceiveReport && bIsConnectedToServer)
     {
         bCanReceiveReport = false;
         socket.emit('can-receive-report');
@@ -241,15 +232,22 @@ ipcMain.on('service-reached-destination', (event, arg) => {
 
 ipcMain.on('home-button-clicked', (event, arg) => {
     //TODO: refactor
-    if(arg === 'dispatcher')
-    {
-        dispatcherWindowState = WindowState.SEARCH;
-        dispatcherWindow.loadFile('./dispatcher/html/dispatcher.html');
-    }
-    else if(arg === 'service')
-    {
+    // if(arg === 'dispatcher')
+    // {
+    //     dispatcherWindowState = WindowState.SEARCH;
+    //     dispatcherWindow.loadFile('./dispatcher/html/dispatcher.html');
+    // }
+    // else if(arg === 'service')
+    // {
         window.loadFile('./html/service.html');
-    }
+    //}
 });
 
+autoUpdater.on('update-available', () => {
+    //TODO: Display update available notification
+});
+
+autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
+    //TODO: Display restart and install request
+});
 //#endregion
