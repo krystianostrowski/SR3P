@@ -1,6 +1,6 @@
 {
   "name": "sr3p",
-  "version": "0.8.0",
+  "version": "0.9.1",
   "description": "SR3P",
   "main": "./index.js",
   "dependencies": {
