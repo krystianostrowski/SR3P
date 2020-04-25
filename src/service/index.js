@@ -85,7 +85,7 @@ const CreateWindow = () => {
         frame: false,
         width: 800,
         height: 600,
-        resizable: false,
+        resizable: true,
         x: 1000,
         y: 0,
         backgroundColor: '#121212',
@@ -233,17 +233,8 @@ ipcMain.on('service-reached-destination', (event, arg) => {
     });
 }); 
 
-ipcMain.on('home-button-clicked', (event, arg) => {
-    //TODO: refactor
-    // if(arg === 'dispatcher')
-    // {
-    //     dispatcherWindowState = WindowState.SEARCH;
-    //     dispatcherWindow.loadFile('./dispatcher/html/dispatcher.html');
-    // }
-    // else if(arg === 'service')
-    // {
+ipcMain.on('home-button-clicked', () => {
         window.loadFile('./html/service.html');
-    //}
 });
 
 autoUpdater.on('update-available', () => {

@@ -1,6 +1,8 @@
 .wrapper {
-  height: 97.5vh;
+  height: 100%;
   background-color: #121212;
+  min-height: 625npm run px;
+ 
 }
 .top {
   height: 100px;

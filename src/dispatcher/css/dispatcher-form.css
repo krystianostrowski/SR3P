@@ -55,7 +55,7 @@
  }
 .main{
     width:100%;
-    min-height:97.5vh;
+    min-height:97.8vh;
     background-color:var(--main) ;
     padding-top:15vh;
     
@@ -277,4 +277,9 @@ input[type="checkbox"]{
     .adresses{
         top:55px;
      }
+}
+@media(max-width:753px){
+    .arrow-top{
+        display:none;
+    }
 }

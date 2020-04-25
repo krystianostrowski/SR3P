@@ -94,7 +94,7 @@ const CreateWindow = () => {
         frame: false,
         width: 800,
         height: 600,
-        resizable: false,
+        resizable: true,
         x: 0,
         y: 0,
         backgroundColor: '#121212',
@@ -280,17 +280,9 @@ socket.on('added-report', report => {
     }
 });
 
-ipcMain.on('home-button-clicked', (event, arg) => {
-
-    if(arg === 'dispatcher')
-    {
-        windowState = Sate.SEARCH;
-        window.loadFile('./html/dispatcher.html');
-    }
-    else if(arg === 'service')
-    {
-        window.loadFile('./service/html/service.html');
-    }
+ipcMain.on('home-button-clicked', () => {
+    windowState = Sate.SEARCH;
+    window.loadFile('./html/dispatcher.html');
 });
 
 autoUpdater.on('update-available', () => {
