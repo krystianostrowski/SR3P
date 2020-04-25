@@ -126,6 +126,9 @@ const CreateWindow = () => {
         GetDataFromAPI('getReports')
         .then(data => window.webContents.send('got-reports', data));
     });
+
+    autoUpdater.setFeedURL(UpdateServer);
+    autoUpdater.checkForUpdates();
 };
 
 app.on('ready', CreateWindow);
@@ -244,10 +247,14 @@ ipcMain.on('home-button-clicked', (event, arg) => {
 });
 
 autoUpdater.on('update-available', () => {
-    //TODO: Display update available notification
+    window.loadFile('./html/updater.html');
 });
 
 autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
-    //TODO: Display restart and install request
+    window.webContents.send('downloaded-update');
+});
+
+ipcMain.on('install-update', () => {
+    autoUpdater.quitAndInstall();
 });
 //#endregion

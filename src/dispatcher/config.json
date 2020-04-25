@@ -1,5 +1,5 @@
 {
-    "IP": "127.0.0.1",
-    "Port": 3000,
-    "UpdateServer": ""
+    "IP": "91.236.21.77",
+    "Port": 27017,
+    "UpdateServer": "http://krystian-ostrowski.wedb.pro/update/sr3p/dispatcher"
 }
