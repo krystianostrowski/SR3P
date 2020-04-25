@@ -1,5 +1,5 @@
 {
-  "name": "sr3p-service",
+  "name": "sr3pservice",
   "version": "1.0.0",
   "description": "SR3P",
   "main": "./index.js",

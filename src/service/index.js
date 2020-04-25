@@ -88,7 +88,7 @@ const CreateWindow = () => {
         resizable: false,
         x: 1000,
         y: 0,
-        backgroundColor: '#212121',
+        backgroundColor: '#121212',
         webPreferences: {
             nodeIntegration: true
         }
