@@ -414,3 +414,8 @@ align-items: center;
         top:55px;
      }
 }
+@media(max-width:753px){
+    .arrow-top{
+        display:none;
+    }
+}

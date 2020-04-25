@@ -85,7 +85,7 @@ const CreateWindow = () => {
         frame: false,
         width: 800,
         height: 600,
-        resizable: false,
+        resizable: true,
         x: 1000,
         y: 0,
         backgroundColor: '#212121',
