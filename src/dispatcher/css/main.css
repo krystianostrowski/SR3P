@@ -351,12 +351,7 @@ margin: auto;
 /*_____________________________________________*/
 @font-face {
     font-family: 'Lato';
-    src: url('../resources/fonts/lato.woff2');
-}
-
-@font-face {
-    font-family: 'Cascadia Code';
-    src: url('../resources/fonts/Cascadia.ttf');
+    src: url('../resources/fonts/Lato-Regular.woff');
 }
 
 hr{
