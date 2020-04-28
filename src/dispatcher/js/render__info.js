@@ -24,6 +24,10 @@ const RenderInfo = report => {
     const policeStatus = document.querySelector('#police-status');
     const ambulanceStatus = document.querySelector('#ambulance-status');
 
+    const ambulance = document.querySelector('.pogotowie');
+    const fireFighters = document.querySelector('.straz');
+    const police = document.querySelector('.policja');
+
     let info;
     let services;
 
@@ -48,9 +52,9 @@ const RenderInfo = report => {
 
     if(services != null)
     {
-        ffStatus.innerText = (services.fireFighters.requested) ? services.fireFighters.state : "not requested"; 
-        policeStatus.innerText = (services.police.requested) ? services.police.state : "not requested"; 
-        ambulanceStatus.innerText = (services.ambulance.requested) ? services.ambulance.state : "not requested"; 
+        ffStatus.innerText = (services.fireFighters.requested) ? services.fireFighters.state : fireFighters.classList.add('service--hidden'); 
+        policeStatus.innerText = (services.police.requested) ? services.police.state : police.classList.add('service--hidden'); 
+        ambulanceStatus.innerText = (services.ambulance.requested) ? services.ambulance.state : ambulance.classList.add('service--hidden'); 
     }
     else
     {

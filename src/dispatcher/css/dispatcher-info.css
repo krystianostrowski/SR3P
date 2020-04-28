@@ -84,8 +84,14 @@
     width:40%;
     height: 25vh;
     display: flex;
+    justify-content: flex-end;
     float:left;
 }
+
+.service--hidden {
+    display: none;
+}
+
 .straz,.policja,.pogotowie{
     width:33%;
     height:90%;

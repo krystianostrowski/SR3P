@@ -271,13 +271,17 @@ socket.on('added-report', report => {
     }
     else
     {
-        windowState = Sate.INFO;
-        window.loadFile('./html/dispatcher__info.html');
-
-        window.webContents.on('dom-ready', () => {
-            window.webContents.send('send-report-data', report);
-        });
+        socket.emit('getMapDir', report);
     }
+});
+
+socket.on('got-map-dir', data => {
+    windowState = Sate.INFO;
+    window.loadFile('./html/dispatcher__info.html');
+
+    window.webContents.on('dom-ready', () => {
+        window.webContents.send('send-report-data', { report: data.report, dir: data.dir});
+    });
 });
 
 ipcMain.on('home-button-clicked', () => {
