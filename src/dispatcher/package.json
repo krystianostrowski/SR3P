@@ -1,5 +1,5 @@
 {
-  "name": "sr3p-dispatcher",
+  "name": "sr3pdispatcher",
   "version": "1.0.0",
   "description": "SR3P",
   "main": "./index.js",

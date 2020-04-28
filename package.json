@@ -13,10 +13,12 @@
     "electron-winstaller": "^4.0.0"
   },
   "scripts": {
-    "start": "electron src/index.js",
-    "server": "node src/server/index.js",
     "service": "electron src/service/index.js & cls",
-    "dispatcher": "electron src/dispatcher/index.js & cls"
+    "dispatcher": "electron src/dispatcher/index.js & cls",
+    "package-service": "electron-packager ./src/service --out ./build/service --overwrite",
+    "package-dispatcher": "electron-packager ./src/dispatcher --out ./build/dispatcher --overwrite",
+    "build-service": "node installer.js",
+    "build-dispatcher": "node installer-dispathcer.js"
   },
   "repository": {
     "type": "git",

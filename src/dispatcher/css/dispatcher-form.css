@@ -57,13 +57,13 @@
     width:100%;
     min-height:97.8vh;
     background-color:var(--main) ;
-    padding-top:15vh;
+    padding-top:8vh;
     
 }
 
 .services{
-    height: 70vh;
-    width: 20%;
+    height: 80vh;
+    width: 25%;
     float: left;
 } 
 .service-body{
@@ -71,67 +71,54 @@
     height: 30%;
     margin: auto;
     display: flex;
-    flex-direction: column;
-   
+    flex-wrap: wrap;
 }
-.service-top{
+.service-header{
     width: 100%;
-    height: 70%;
+    height: 15%;
+   font-size:150%;
+   display: flex;
+   align-items: center;
+}
+.service-top-left{
+    width: 60%;
+    height:45%;
     display: flex;
     align-items: center;
-    padding-top:5%;
-    padding-bottom:5%;
-    padding-left: 5%;
-    padding-right: 5%;
 }
-.service-top img{
+.service-top-left img{
     margin: auto;
-   
+    height: 80%;
 }
-.service-bottom{
-    width: 100%;
-    height: 30%;
-    
+.service-top-right{
+    width: 40%;
+    height: 45%;
     display: flex;
-}
-.service-bottom-left{
-    width: 70%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-.just-top{
-    width: 100%;
-    height: 50%;
-    display: flex;
-    align-items: center;
-}
-.just-bottom{
-    width: 100%;
-    height: 50%;
-    display: flex;
-    align-items: center;
-    padding-left:5% ;
-}
-.just-bottom input{
-    width: 30%;
-    height: 90%;
-    margin-right: auto;
-}
-.service-bottom-right{
-    width: 30%;
-    height: 100%;
-    display:flex;
     align-items: center;
 }
 input[type="checkbox"]{
-    width: 100%;
-    height: 100%;
-    outline: none;
+    width: 45%;
+    height: 45%;
+    min-width: 40px;
+    min-height: 40px;
     margin: auto;
 }
-
+.service-bottom{
+    width: 100%;
+    height: 40%;
+    display: flex;
+    align-items: center;
+    font-size:130%;
+}
+#police-quantity,
+#ambulance-quantity,
+#ff-quantity{
+    width: 70px;
+    height: 30px;
+    font-size:90%;
+    padding-left: 1%;
+    outline: none;
+}
 .content{
     width:60%;
     height:inherit;
@@ -139,14 +126,13 @@ input[type="checkbox"]{
     flex-direction: column;
     float: left;
     margin: auto;
-   
+   margin-top:7vh;
 }
 .row{
     width: 100%;
     height:10vh;
     display: flex;
     margin-bottom:3vh;
-
 }
 .first-row-element{
     width:30%;
@@ -174,12 +160,12 @@ input[type="checkbox"]{
     font-size:130%;
     padding-left: 5%;
     border-radius: 30px;
+    min-height: 39px;
+   
 }
 .description{
     width:65%;
     height: 10vh;
-    
-
 }
 .number-of-people{
     width:30%;
@@ -207,45 +193,41 @@ input[type="checkbox"]{
     border-radius: 30px;
     cursor: pointer;
 }
-
-@media(max-width:1138px){
-    .just-top{
-        font-size:80%;
+@media(max-width:1135px){
+    .service-bottom{
+        font-size:110%;
+    }
+    #police-quantity,
+    #ambulance-quantity,
+    #ff-quantity{
+    width: 60px;
+    height: 25px;
     }
 }
-@media(max-width:916px){
-    .just-top{
-        font-size:60%;
+@media(max-width:967px){
+    .service-bottom{
+        font-size:100%;
+    }
+    #police-quantity,
+    #ambulance-quantity,
+    #ff-quantity{
+    width: 50px;
+    height: 20px;
     }
 }
-@media(max-width:678px){
-    .service-top img{
-        width: 80%;
+@media(max-height:837px){
+    .service-header{
+        font-size:120%;
     }
 }
-@media(max-height:746px){
-    .service-top img{
-        height: 90%;
+@media(max-width:775px){
+    .service-header{
+        font-size:110%;
     }
 }
-@media(max-width:890px){
-    .service-bottom-left{
-        font-size: 90%;
-    }
-}
-@media(max-width:800px){
-    .service-bottom-left{
-        font-size: 80%;
-    }
-}
-@media(max-width:716px){
-    .service-bottom-left{
-        font-size: 70%;
-    }
-}
-@media(max-width:614px){
-    .service-bottom-left{
-        font-size: 60%;
+@media(max-width:1400px){
+    .service-top-left img{
+        height: 80%;
     }
 }
 @media(max-width:1076px){

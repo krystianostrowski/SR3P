@@ -1,6 +1,6 @@
-const { app, BrowserWindow, globalShortcut, ipcMain } = require('electron');
+const { app, BrowserWindow, globalShortcut, ipcMain, autoUpdater } = require('electron');
 const { DebugLog, LogTypes } = require('./js/debug');
-const { IP, Port } = require('./config.json');
+const { IP, Port, UpdateServer } = require('./config.json');
 const fetch = require('node-fetch');
 const io = require('socket.io-client');
 const path = require('path');
@@ -97,6 +97,7 @@ const CreateWindow = () => {
         resizable: true,
         x: 0,
         y: 0,
+        backgroundColor: '#121212',
         webPreferences: {
             nodeIntegration: true
         }
@@ -139,6 +140,9 @@ const CreateWindow = () => {
         GetDataFromAPI('getCities')
         .then(response => window.webContents.send('got-cities', response));
     });
+
+    autoUpdater.setFeedURL(UpdateServer);
+    autoUpdater.checkForUpdates();
 
 }
 
@@ -276,16 +280,20 @@ socket.on('added-report', report => {
     }
 });
 
-ipcMain.on('home-button-clicked', (event, arg) => {
+ipcMain.on('home-button-clicked', () => {
+    windowState = Sate.SEARCH;
+    window.loadFile('./html/dispatcher.html');
+});
 
-    if(arg === 'dispatcher')
-    {
-        windowState = Sate.SEARCH;
-        window.loadFile('./html/dispatcher.html');
-    }
-    else if(arg === 'service')
-    {
-        window.loadFile('./service/html/service.html');
-    }
+autoUpdater.on('update-available', () => {
+    window.loadFile('./html/updater.html');
+});
+
+autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
+    window.webContents.send('downloaded-update');
+});
+
+ipcMain.on('install-update', () => {
+    autoUpdater.quitAndInstall();
 });
 //#endregion

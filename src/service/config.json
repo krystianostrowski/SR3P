@@ -1,5 +1,5 @@
 {
     "IP": "91.236.21.77",
     "Port": 27017,
-    "UpdateServer": "http://krystian-ostrowski.wedb.pro/sr3p/update/service"
+    "UpdateServer": "http://krystian-ostrowski.wedb.pro/update/sr3p/service"
 }

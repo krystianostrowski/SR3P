@@ -129,7 +129,7 @@ if(confirmBtn != null)
 if(homeBtn != null)
 {
     homeBtn.addEventListener('click', () => {
-        ipcRenderer.send('home-button-clicked', 'service');
+        ipcRenderer.send('home-button-clicked');
     });
 }
 
