@@ -1,14 +1,14 @@
+const { IP, Port } = require('../config.json');
+const ImgPath = `http://${IP}:${Port}`;
+
 const InsertImages = imgDir => {
-    const mapPath = '../resources/img/maps'
     const continer = document.querySelector('.map');
     const imgs = continer.querySelectorAll('img');
-
-    console.log(imgDir);
 
     for(img of imgs)
     {
         const id = img.id;
-        const path = `${mapPath}/${imgDir}/${id}.png`; 
+        const path = `${ImgPath}/${imgDir}/${id}.png`; 
         img.src = path; 
     }
 };
