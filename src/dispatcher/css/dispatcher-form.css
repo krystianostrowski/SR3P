@@ -137,7 +137,7 @@ input[type="checkbox"]{
 .first-row-element{
     width:30%;
     height:100%;
-    
+    z-index:2;
     display: flex;
     flex-direction: column;
 }
@@ -161,11 +161,42 @@ input[type="checkbox"]{
     padding-left: 5%;
     border-radius: 30px;
     min-height: 39px;
-   
+}
+.places__list{
+    width: 100%;
+    background-color: white;
+    margin-top:-2.5vh;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    padding-top:2.5vh;
+    background-color: #e2e1e1;
+}
+.places__list ul{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    border-bottom-left-radius: 23px;
+    border-bottom-right-radius: 23px;
+}
+.places__list ul > li{
+    background-color: #e2e1e1;
+    color:black;
+    cursor: pointer;
+    height:30px;
+    display: flex;
+    align-items: center;
+}
+.places__list ul > li:last-child{
+border-bottom-left-radius: 30px;
+border-bottom-right-radius: 30px;
+}
+.places__list ul > li:hover{
+    background-color: #c2c2c2;
 }
 .description{
     width:65%;
     height: 10vh;
+    z-index: 1;
 }
 .number-of-people{
     width:30%;
