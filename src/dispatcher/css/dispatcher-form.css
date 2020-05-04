@@ -193,6 +193,15 @@ border-bottom-right-radius: 30px;
 .places__list ul > li:hover{
     background-color: #c2c2c2;
 }
+
+.list--hidden {
+    display: none;
+}
+
+input:disabled {
+    opacity: .5;
+}
+
 .description{
     width:65%;
     height: 10vh;

@@ -5,6 +5,8 @@ const fetch = require('node-fetch');
 const io = require('socket.io-client');
 const path = require('path');
 
+const devBuild = true;
+
 let window; 
 let windowState;
 let bIsConnectedToServer;
@@ -141,8 +143,12 @@ const CreateWindow = () => {
         .then(response => window.webContents.send('got-cities', response));
     });
 
-    autoUpdater.setFeedURL(UpdateServer);
-    autoUpdater.checkForUpdates();
+
+    if(!devBuild)
+    {
+        autoUpdater.setFeedURL(UpdateServer);
+        autoUpdater.checkForUpdates();
+    }
 
 }
 
@@ -257,9 +263,13 @@ ipcMain.on('display-dispatcher-info', (event, arg) => {
 ipcMain.on('open-dispatcher-form', () => {
     windowState = Sate.FORM;
     window.loadFile('./html/dispatcher__form.html');
+    window.webContents.on('dom-ready', () => {
+        window.webContents.send('load');
+    });
 });
 
 ipcMain.on('add-report-to-db', (event, arg) => {
+    DebugLog('Add report', LogTypes.ERROR);
     socket.emit('add-report', arg);
 });
 

@@ -6,7 +6,10 @@
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/dispatcher-form.css">
     <link rel="stylesheet" href="../resources/icons/css/fontawesome.css">
-    <script defer src="../js/dispatcher__renderer.js"></script>
+    <script defer src="../js/renderers/dispatcher__renderer.js"></script>
+    <script defer src="../js/renderers/searchbar__renderer.js"></script>
+    <script defer src="../js/renderers/form__renderer.js"></script>
+    <script defer src="../js/renderers/buttons__renderer.js"></script>
     <script defer src="../js/titlebar.js"></script>
 </head>
 <body>
@@ -136,9 +139,9 @@
                         <div class="top">
                             <span style="margin:auto">Miejscowość: </span>
                         </div>
-                        <div class="bottom">
+                        <div class="bottom" id="city">
                             <input type="text" id="city__input">
-                            <div class="places__list">
+                            <div class="places__list list--hidden">
                                 <ul>
                                     <li><span style="margin: auto;"> Słupsk</span></li>
                                     <li><span style="margin: auto;"> Słupsk</span></li>
@@ -155,9 +158,9 @@
                         <div class="top">
                             <span style="margin:auto">Ulica: </span>
                         </div>
-                        <div class="bottom">
+                        <div class="bottom" id="street">
                             <input type="text" id="street__input">
-                            <div class="places__list">
+                            <div class="places__list list--hidden">
                                 <ul>
                                     <li><span style="margin: auto;"> Słupsk</span></li>
                                     
@@ -169,9 +172,9 @@
                         <div class="top">
                             <span style="margin:auto">Numer Budynku: </span>
                         </div>
-                        <div class="bottom">
+                        <div class="bottom" id="building">
                             <input type="text" id="building__input">
-                            <div class="places__list">
+                            <div class="places__list list--hidden">
                                 <ul>
                                     <li><span style="margin: auto;"> Słupsk</span></li>
                                     
