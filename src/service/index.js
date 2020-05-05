@@ -94,7 +94,7 @@ const CreateWindow = () => {
         }
     });
 
-    window.loadFile('./html/service.html');
+    window.loadFile('./html/service__map.html');
 
     globalShortcut.register('f5', () => {
         window.reload();
