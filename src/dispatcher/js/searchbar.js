@@ -35,25 +35,39 @@ const ClearList = list => {
         list.removeChild(list.firstChild);
 };
 
-const AddLocationToList = (list, string) => {
+const AddLocationToList = (list, string, bForm = false) => {
     const li = document.createElement('li');
     li.classList.add('location--visible')
 
-    const leftDiv = document.createElement('div');
-    leftDiv.classList.add('left-li');
+    if(!bForm)
+    {
+        const leftDiv = document.createElement('div');
+        leftDiv.classList.add('left-li');
 
-    const img = document.createElement('img');
-    img.src = '../resources/img/lokacja.png';
+        const img = document.createElement('img');
+        img.src = '../resources/img/lokacja.png';
 
-    leftDiv.appendChild(img);
+        leftDiv.appendChild(img);
 
-    const rightDiv = document.createElement('div');
-    rightDiv.classList.add('right-li');
-    rightDiv.classList.add('locations__item');
-    rightDiv.innerText = string;
+        const rightDiv = document.createElement('div');
+        rightDiv.classList.add('right-li');
+        rightDiv.classList.add('locations__item');
+        rightDiv.innerText = string;
 
-    li.appendChild(leftDiv);
-    li.appendChild(rightDiv);
+        li.appendChild(leftDiv);
+        li.appendChild(rightDiv);
+    }
+    else
+    {
+        li.classList.add('list__item');
+
+        const span = document.createElement('span');
+        span.style.margin = 'auto';
+
+        span.innerText = string;
+
+        li.appendChild(span);
+    }
 
     list.appendChild(li);
 };
@@ -69,13 +83,13 @@ const PickRandomLocation = locationsArray => {
  * @param {String[]} placesArray - array of locations strings 
  * @param {Object} locationsList - list node
  */
-const FillFormRandomLocations = (locations, placesArray, locationsList) => {
+const FillFormRandomLocations = (locations, placesArray, locationsList, bForm = false) => {
     const pickedLocations = [];
 
     if(locations >= placesArray.length)
     {
         placesArray.forEach(place => {
-            AddLocationToList(locationsList, place);
+            AddLocationToList(locationsList, place, bForm);
         });
     }
     else
@@ -87,25 +101,21 @@ const FillFormRandomLocations = (locations, placesArray, locationsList) => {
             while(pickedLocations.includes(randomLocaion))
                 randomLocaion = PickRandomLocation(placesArray);
 
-            AddLocationToList(locationsList, randomLocaion);
+            AddLocationToList(locationsList, randomLocaion, bForm);
             pickedLocations.push(randomLocaion);
         }
     }
 };
 
 module.exports = {
-    FillFormRandomLocations: (locations, placesArray, locationsList) => {
-        FillFormRandomLocations(locations, placesArray, locationsList);
-    },
+    FillFormRandomLocations: FillFormRandomLocations,
     ClearList: list => {
         ClearList(list);
     },
     PerformArrayOfStrings: citiesArray => {
         return PerformArrayOfStrings(citiesArray);
     },
-    AddLocationToList: (locationsList, string) => {
-        AddLocationToList(locationsList, string);
-    },
+    AddLocationToList: AddLocationToList,
     PerformArrayOfreportsStrings: reportsArray => {
         return PerformArrayOfreportsStrings(reportsArray);
     }

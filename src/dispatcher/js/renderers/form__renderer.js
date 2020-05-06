@@ -14,9 +14,19 @@ const buildingInputList = buildingInputParent.querySelector('ul');
 
 const lists = [cityInputList, streetInputList, buildingInputList];
 
+let citiesObject;
+let citiesStrings = [];
+let streetStrings = [];
+let buildingsNumbers = [];
+
 let selectedCity = null;
 let selectedStreet = null;
 let selectedBuilding = null;
+
+let openedList = null;
+let openedListId = null;
+
+const locationsToDisplay = 5;
 
 const sendFormBtn = document.querySelector('.send');
 
@@ -27,12 +37,78 @@ const ffQuantityInput = document.querySelector('#ff-quantity');
 const policeQuantityInput = document.querySelector('#police-quantity');
 const ambulanceQuantityInput = document.querySelector('#ambulance-quantity');
 
-const ShowList = listNode => {
-    listNode.parentElement.classList.remove('list--hidden');  
+const HideList = (event, listNode) => {
+    if(event == null && listNode != null)
+    {
+        listNode.parentElement.classList.add('list--hidden');
+        openedList = null;
+        openedListId = null;
+
+        return;
+    }
+
+    if(listNode != null && !event.target.classList.contains('list__item') && event.target.id != openedListId)
+    {
+        listNode.parentElement.classList.add('list--hidden');
+        openedList = null;
+        openedListId = null;
+    }
 };
 
-const HideList = listNode => {
-    listNode.parentElement.classList.add('list--hidden');
+const ShowList = (listNode, id) => {
+    HideList(null, openedList);
+
+    openedList = listNode;
+    openedListId = id;
+    listNode.parentElement.classList.remove('list--hidden');
+};
+
+const PerformCitiesArray = obj => {
+    const array = [];
+
+    for(city of obj)
+    {
+        array.push(city.name);
+    }
+
+    return array;
+};
+
+const PerformStreets = cityName => {
+    const array = [];
+    let streets = [];
+
+    for(city of citiesObject)
+    {
+        if(city.name == cityName)
+            streets = city.streets;  
+    }
+
+    for(street of streets)
+    {
+        array.push(street.name);
+    }
+
+    return array;
+};
+
+const PerformBuildings = (cityName, streetName) => {
+    let array = [];
+    let streets = []; 
+
+    for(city of citiesObject)
+    {
+        if(city.name == cityName)
+            streets = city.streets;  
+    }
+
+    for(street of streets)
+    {
+        if(street.name == streetName)
+            array = street.buildings;
+    }
+
+    return array;
 };
 
 const GetDataFromForm = () => {
@@ -116,6 +192,67 @@ const GetDataFromForm = () => {
     ipcRenderer.send('add-report-to-db', {data, services, additionalInfo});
 };
 
+const OnListItemClicked = (e, input) => {
+    if(e.target.classList.contains('list__item'))
+    {
+        let inputNode;
+        let nextInputNode;
+        const text = e.target.textContent;
+
+        console.log(input);
+
+        switch(input)
+        {
+            case 'city':
+                selectedCity = text;
+                inputNode = cityInput;
+                nextInputNode = streetInput;
+                streetStrings = PerformStreets(text);
+                ClearList(streetInputList);
+                FillFormRandomLocations(locationsToDisplay, streetStrings, streetInputList, true);
+                break;
+            
+            case 'street':
+                selectedStreet = text;
+                inputNode = streetInput;
+                nextInputNode = buildingInput;
+                buildingsNumbers = PerformBuildings(selectedCity, selectedStreet);
+                ClearList(buildingInputList);
+                FillFormRandomLocations(locationsToDisplay, buildingsNumbers, buildingInputList, true);
+                break;
+
+            case 'building':
+                selectedBuilding = text;
+                inputNode = buildingInput;
+                nextInputNode = null;
+                break;
+        }
+
+        inputNode.value = text;
+
+        if(nextInputNode != null)
+            nextInputNode.disabled = false;
+    }
+};
+
+const OnInput = (e, list, array) => {
+    if(citiesStrings == null)
+        return;
+
+    const input = e.target.value.toLowerCase();
+
+    ClearList(list);
+    array.forEach(string => {
+        if(string == '')
+            return;
+
+        if(string.toLocaleLowerCase().includes(input))
+        {
+            AddLocationToList(list, string, true);
+        }
+    });
+};
+
 if(policeCheckbox != null)
 {
     policeCheckbox.addEventListener('click', () => {
@@ -163,50 +300,44 @@ if(sendFormBtn != null)
     sendFormBtn.addEventListener('click', GetDataFromForm);
 }
 
-ipcRenderer.on('load', () => {
-    let index = 0; // 0 - city, 1 - street, 2 - building
+ipcRenderer.on('load', (event, arg) => {
+    citiesObject = arg;
 
     for(list of lists)
     {
-        //ClearList(list);
-        //FillFormRandomLocations(5, null, list);
-        index++;
-        
+        ClearList(list);
     }
+
+    citiesStrings = PerformCitiesArray(citiesObject);
+    FillFormRandomLocations(locationsToDisplay, citiesStrings, cityInputList, true);
 
     streetInput.disabled = true;
     buildingInput.disabled = true;
 });
 
-const x = [
-    {
-        "city": "Słupsk",
-        "streets": [
-            {
-                "name": "X",
-                "buildings": [
-                    1,2,3,4,5,6,7,8,9,10,2222222
-                ]
-            }
-        ]
-    },
-    {
-        "city": "Słupsk",
-        "streets": [
-            {
-                "name": "X",
-                "buildings": [
-                    1,2,3,4,5,6,7,8,9,10,2222222
-                ]
-            }
-        ]
-    }
-]
-
 cityInput.addEventListener('click', () => {
-    ShowList(cityInputList);
+    ShowList(cityInputList, cityInput.id);
 });
 
-cityInput.addEventListener('input', () => {
+cityInput.addEventListener('input', e => {
+    OnInput(e, cityInputList, citiesStrings);
+});
 
+streetInput.addEventListener('click', () => {
+    ShowList(streetInputList, streetInput.id);
+});
+
+buildingInput.addEventListener('click', () => {
+    ShowList(buildingInputList, buildingInput.id);
+});
+
+document.addEventListener('click', e => {
+    console.log(e.target.classList);
+    if(e.target.classList.contains('list__item'))
+    {
+        const input = e.target.parentElement.getAttribute('input');
+        OnListItemClicked(e, input);
+    }
+
+    HideList(e, openedList);
 });

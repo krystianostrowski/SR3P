@@ -264,7 +264,9 @@ ipcMain.on('open-dispatcher-form', () => {
     windowState = Sate.FORM;
     window.loadFile('./html/dispatcher__form.html');
     window.webContents.on('dom-ready', () => {
-        window.webContents.send('load');
+        GetDataFromAPI('GetCities').then(data => {
+            window.webContents.send('load', data);
+        });
     });
 });
 
