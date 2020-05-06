@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../resources/icons/css/fontawesome.css">
     <script defer src="../js/titlebar.js"></script>
     <script defer src="../js/service__renderer.js"></script>
+    <script defer src="../js/map__window.js"></script>
 </head>
 
 <body>
@@ -31,42 +32,79 @@
             <div class="map"><img src="../resources/img/map.png" alt="Mapa"></div>
             <div class="notificaton-info notificaton-info--active"><img src="../resources/img/info-white.png" alt="Informacje"></div>
         </div>
-        <div class="notificaton-info-window">
+        <button id="arrival-confirmation">Potwierdź przybycie</button>
+        <div class="notificaton-info-window ">
             <div class="info-header">
                 <h1>Zgłoszenie numer : 20200505180639</h1>
             </div>
             <div class="half-info">
                 <div class="info-window">
                     <table>
-                        <tr>
-                            <td><b>Miejsce:</b>&nbsp;</td>
-                            <td>Słupsk, ul. Szymanowskiego 5</td>
+                        <tr class="small-tr">
+                            <td style="width:25%;"><b>Miejsce:</b>&nbsp;</td>
+                            <td style="width:75%;"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="info-window">
+                    <table>
+                        <tr class="small-tr" >
+                            <td style="width: 70%;"><b>Godzina zgłoszenia:</b></td>
+                            <td style="width: 30%;"></td>
                         </tr>
                     </table>
                 </div>
                 <div class="info-window">
                     <table>
                         <tr>
-                            <td><b>Godzina zgłoszenia:</b></td>
-                            <td>18:06:23</td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="info-window">
-                    <table>
-                        <tr>
-                            <td class="other-td"><b>Dodatkowe zagrożenia:</b></td>
+                            <td class="other-td small-tr"><b>Dodatkowe zagrożenia:</b></td>
                         </tr>
                         <tr>
-                            <td class="other-td xd-td">SFSDFDFsadfsfasfdasdfsafdsad</td>
+                            <td class="other-td xd-td"></td>
                         </tr>
                     </table>
                 </div>
             </div>
             <div class="half-info">
-                <div class="info-window"></div>
-                <div class="info-window"></div>
-                <div class="info-window"></div>
+                <div class="info-window">
+                    <table>
+                        <tr class="small-tr" >
+                            <td style="width:80%;"><b>Orientacyjna liczba osób zagrożonych:</b></td>
+                            <td style="width:20%;"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="info-window">
+                    <table>
+                        <tr>
+                            <td class="other-td small-tr"><b>Opis zdarzenia:</b></td>
+                        </tr>
+                        <tr>
+                            <td class="other-td xd-td"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="info-window">
+                    <table>
+                        <tr>
+                            <td class="other-td small-tr"><b>Dodatkowe informacje:</b></td>
+                        </tr>
+                        <tr>
+                            <td class="other-td xd-td"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="map-window">
+            <div class="map-header">
+                <h1>Zgłoszenie numer : 20200505180639</h1>
+            </div>
+            <div class="map-center">
+                <div class="map-view">
+
+                </div>
             </div>
         </div>
     </div>
