@@ -14,6 +14,10 @@ const buildingInputList = buildingInputParent.querySelector('ul');
 
 const lists = [cityInputList, streetInputList, buildingInputList];
 
+const FORM_ERROR_CLASS = 'input--error';
+const FORM_SUCCESS_CLASS = 'input--success';
+const FORM_BORDER_CLASS = 'input--border';
+
 let citiesObject;
 let citiesStrings = [];
 let streetStrings = [];
@@ -22,6 +26,8 @@ let buildingsNumbers = [];
 let selectedCity = null;
 let selectedStreet = null;
 let selectedBuilding = null;
+
+let validationStatus = [false, false, false, false];
 
 let openedList = null;
 let openedListId = null;
@@ -36,6 +42,23 @@ const fireFightersCheckbox = document.querySelector('#fire-fighters__checkbox');
 const ffQuantityInput = document.querySelector('#ff-quantity');
 const policeQuantityInput = document.querySelector('#police-quantity');
 const ambulanceQuantityInput = document.querySelector('#ambulance-quantity');
+
+const desc = document.querySelector('#desc');
+const victims = document.querySelector('#victims');
+const dangers = document.querySelector('#dangers');
+const info = document.querySelector('#additional-info');
+
+const SetInputErrorBorder = node => {
+    node.classList.remove(FORM_BORDER_CLASS);
+    node.classList.remove(FORM_SUCCESS_CLASS);
+    node.classList.add(FORM_ERROR_CLASS);
+};
+
+const SetInputSuccessBorder = node => {
+    node.classList.remove(FORM_BORDER_CLASS);
+    node.classList.remove(FORM_ERROR_CLASS);
+    node.classList.add(FORM_SUCCESS_CLASS);
+};
 
 const HideList = (event, listNode) => {
     if(event == null && listNode != null)
@@ -111,15 +134,24 @@ const PerformBuildings = (cityName, streetName) => {
     return array;
 };
 
+const Validate = () => {
+    if(!selectedCity || !selectedStreet || !selectedBuilding)
+        return false;
+    else
+    {
+        for(status of validationStatus)
+        {
+            if(!status)
+                return false;
+        }
+    }
+
+    return true;
+};
+
 const GetDataFromForm = () => {
-    DebugLog("Button clicked", LogTypes.ERROR);
-    // const cityInput = document.querySelector('#city__input');
-    // const streetInput = document.querySelector('#street__input');
-    // const buildingInput = document.querySelector('#building__input');
-    const desc = document.querySelector('#desc');
-    const victims = document.querySelector('#victims');
-    const dangers = document.querySelector('#dangers');
-    const info = document.querySelector('#additional-info');
+    if(!Validate())
+        return;
     
     const date = new Date();
 
@@ -199,17 +231,27 @@ const OnListItemClicked = (e, input) => {
         let nextInputNode;
         const text = e.target.textContent;
 
-        console.log(input);
-
         switch(input)
         {
             case 'city':
+
+                if(selectedCity != text)
+                {
+                    streetInput.value = '';
+                    buildingInput.value = '';
+                    buildingInput.disabled = true;
+                    
+                    selectedBuilding = null;
+                    selectedStreet = null;
+                }
+
                 selectedCity = text;
                 inputNode = cityInput;
                 nextInputNode = streetInput;
                 streetStrings = PerformStreets(text);
                 ClearList(streetInputList);
                 FillFormRandomLocations(locationsToDisplay, streetStrings, streetInputList, true);
+                SetInputSuccessBorder(cityInput);
                 break;
             
             case 'street':
@@ -219,12 +261,15 @@ const OnListItemClicked = (e, input) => {
                 buildingsNumbers = PerformBuildings(selectedCity, selectedStreet);
                 ClearList(buildingInputList);
                 FillFormRandomLocations(locationsToDisplay, buildingsNumbers, buildingInputList, true);
+                SetInputSuccessBorder(streetInput);
                 break;
 
             case 'building':
                 selectedBuilding = text;
                 inputNode = buildingInput;
-                nextInputNode = null;
+                nextInputNode = null;  
+                SetInputSuccessBorder(buildingInput);
+
                 break;
         }
 
@@ -320,6 +365,33 @@ cityInput.addEventListener('click', () => {
 });
 
 cityInput.addEventListener('input', e => {
+    if(cityInput.value == '' || !citiesStrings.includes(cityInput.value))
+    {
+        selectedCity = null;
+        selectedStreet = null;
+        selectedBuilding = null;
+
+        streetInput.disabled = true;
+        buildingInput.disabled = true;
+        
+        streetInput.value = '';
+        buildingInput.value = '';
+
+        SetInputErrorBorder(cityInput);
+    }
+    else if(citiesStrings.includes(cityInput.value))
+    {
+        streetInput.disabled = false;
+        selectedCity = cityInput.value;
+        streetStrings = PerformStreets(selectedCity);
+        streetInput.focus();
+        ClearList(streetInputList);
+        FillFormRandomLocations(locationsToDisplay, streetStrings, streetInputList, true);
+        ShowList(streetInputList, streetInput.id);
+
+        SetInputSuccessBorder(cityInput);
+    }
+
     OnInput(e, cityInputList, citiesStrings);
 });
 
@@ -327,12 +399,56 @@ streetInput.addEventListener('click', () => {
     ShowList(streetInputList, streetInput.id);
 });
 
+streetInput.addEventListener('input', e => {
+    if(streetInput.value == '' || !streetStrings.includes(streetInput.value))
+    {
+        selectedStreet = null;
+        selectedBuilding = null;
+
+        buildingInput.disabled = true;
+        
+        buildingInput.value = '';
+
+        SetInputErrorBorder(streetInput);
+    }
+    else if(streetStrings.includes(streetInput.value))
+    {
+        buildingInput.disabled = false;
+        selectedStreet = streetInput.value;
+        buildingsNumbers = PerformBuildings(selectedCity, selectedStreet);
+        buildingInput.focus();
+        ClearList(buildingInputList);
+        FillFormRandomLocations(locationsToDisplay, buildingsNumbers, buildingInputList, true);
+        ShowList(buildingInputList, buildingInput.id);
+
+        SetInputSuccessBorder(streetInput);
+    }
+
+    OnInput(e, streetInputList, streetStrings);
+});
+
 buildingInput.addEventListener('click', () => {
     ShowList(buildingInputList, buildingInput.id);
 });
 
+buildingInput.addEventListener('input', e => {
+    if(buildingInput.value == '' || !buildingsNumbers.includes(buildingInput.value))
+    {
+        selectedBuilding = null;
+
+        SetInputErrorBorder(buildingInput);
+    }
+    else if(buildingsNumbers.includes(buildingInput.value))
+    {
+        selectedBuilding = buildingInput.value;
+
+        SetInputSuccessBorder(buildingInput)
+    }
+
+    OnInput(e, buildingInputList, buildingsNumbers);
+});
+
 document.addEventListener('click', e => {
-    console.log(e.target.classList);
     if(e.target.classList.contains('list__item'))
     {
         const input = e.target.parentElement.getAttribute('input');
@@ -340,4 +456,61 @@ document.addEventListener('click', e => {
     }
 
     HideList(e, openedList);
+});
+
+desc.addEventListener('input', () => {
+    if(desc.value.length < 5)
+    {
+        validationStatus[0] = false;
+        SetInputErrorBorder(desc);
+    }
+    else
+    {
+        validationStatus[0] = true;
+        SetInputSuccessBorder(desc);
+    }
+});
+
+victims.addEventListener('input', () => {
+    if(victims.value != '')
+    {
+        let num = parseInt(victims.value);
+
+        if(isNaN(num))
+        {
+            validationStatus[1] = false;
+            SetInputErrorBorder(victims);
+
+            return;
+        }
+    }
+
+    validationStatus[1] = true;
+    SetInputSuccessBorder(victims);
+});
+
+dangers.addEventListener('input', () => {
+    if(dangers.value.length < 5)
+    {
+        validationStatus[2] = false;
+        SetInputErrorBorder(dangers);
+    }
+    else
+    {
+        validationStatus[2] = true;
+        SetInputSuccessBorder(dangers);
+    }
+});
+
+info.addEventListener('input', () => {
+    if(dangers.value.length < 5)
+    {
+        validationStatus[3] = false;
+        SetInputErrorBorder(info);
+    }
+    else
+    {
+        validationStatus[3] = true;
+        SetInputSuccessBorder(info);
+    }
 });

@@ -271,7 +271,6 @@ ipcMain.on('open-dispatcher-form', () => {
 });
 
 ipcMain.on('add-report-to-db', (event, arg) => {
-    DebugLog('Add report', LogTypes.ERROR);
     socket.emit('add-report', arg);
 });
 
