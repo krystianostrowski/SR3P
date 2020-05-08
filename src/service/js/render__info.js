@@ -45,7 +45,7 @@ const RenderInfo = report => {
     addDang.innerText = (report == null) ? "" : info.dangers;
     addInf.innerText = (report == null) ? "" : info.info;
 
-    if(services != null)
+    /*if(services != null)
     {
         ffStatus.innerText = (services.fireFighters.requested) ? services.fireFighters.state : "not requested"; 
         policeStatus.innerText = (services.police.requested) ? services.police.state : "not requested"; 
@@ -56,7 +56,7 @@ const RenderInfo = report => {
         ffStatus.innerText = 'not requested';
         policeStatus.innerText = 'not requested';
         ambulanceStatus.innerText = 'not requested';
-    }
+    }*/
 }
 
 const RenderBuildingInfo = (adress, data) => {
