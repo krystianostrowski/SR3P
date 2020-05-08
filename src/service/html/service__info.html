@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../resources/icons/css/fontawesome.css">
     <script defer src="../js/titlebar.js"></script>
     <script defer src="../js/service__renderer.js"></script>
+    <script defer src="../js/info__switch__cards.js"></script>
 </head>
 
 <body>
@@ -28,9 +29,14 @@
     <div class="wrapper">
         <div class="main">
         <div class="left-side">
-            <img src="../resources/img/info.png" alt="">
+            <div class="info-info">
+            <img id="info__info" src="../resources/img/info.png" alt="">
+            </div>
+            <div class="build-info-info">
+            <img id="build__info" src="../resources/img/build.png" alt="">
+            </div>
         </div>
-        <div class="info">
+        <div class="info ">
             <span class="info-text" style="font-size:130%">Opis Zdarzenia <span style="color:#1ED760">:</span><span id="description"></span><br>
             <span style="font-size:100%">Godzina zgłoszenia <span style="color:#1ED760">:</span><span id="time"></span><br>
             <span style="font-size:100%">Orientacyjna liczba osób zagrożonych <span style="color:#1ED760">:</span><span id="victims"></span><br>
@@ -38,34 +44,15 @@
             <span style="font-size:100%">Dodatkowe informacje <span style="color:#1ED760">:</span><span id="additional-informations"></span><br>
             
         </div>
-        <div class="services">
-            <div class="straz">
-                <div class="service-top">
-                <img src="../resources/img/strazak.png" alt="">
-                </div>
-                <div class="straz-body">
-                    <div class="body-top"><span style="margin:auto">Straż Pożarna</span></div>
-                    <div class="body-bottom"><span style="margin:auto">Status: <span id="fire-fighters-status"></span></span></div>
-                </div>
-            </div>
-
-            <div class="policja">
-                <div class="service-top"><img src="../resources/img/policjant.png" alt=""></div>
-                <div class="policja-body">
-                    <div class="body-top"><span style="margin:auto">Straż Pożarna</span></div>
-                    <div class="body-bottom"><span style="margin:auto">Status: <span id="police-status"></span></span></div>
-                </div>
-            </div>
-
-            <div class="pogotowie">
-                <div class="service-top"><img src="../resources/img/pogotowie.png" alt=""></div>
-                <div class="pogotowie-body">
-                    <div class="body-top"><span style="margin:auto">Straż Pożarna</span></div>
-                    <div class="body-bottom"><span style="margin:auto">Status: <span id="ambulance-status"></span></span></div>
-                    </div>
-           
-            </div>
+        <div class="build-info">
+            <span class="info-text" style="font-size:130%">sdfsf <span style="color:#1ED760">:</span><span id="description"></span><br>
+            <span style="font-size:100%">sadfsdf <span style="color:#1ED760">:</span><span id="time"></span><br>
+            <span style="font-size:100%">Orsadfsasadfsdf <span style="color:#1ED760">:</span><span id="victims"></span><br>
+            <span style="font-size:100%">Dsadfsdf <span style="color:#1ED760">:</span><span id="additional-dangers"></span><br>
+            <span style="font-size:100%">sdfsadf <span style="color:#1ED760">:</span><span id="additional-informations"></span>
+            
         </div>
+        
         <div class="map">
             <img id="map" src="" alt="">
             <img id="gate" class="overlay--hidden" src="../resources/img/maps/1/gate.png" alt="">
@@ -73,6 +60,17 @@
             <img id="emergency-exits" class="overlay--hidden" src="../resources/img/maps/1/emeregency-exit.png" alt="">
             <img id="electricity-switch" class="overlay--hidden" src="../resources/img/maps/1/electricity-switch.png" alt="">
             <img id="gas-valve" class="overlay--hidden" src="../resources/img/maps/1/gas-valve.png" alt="">
+        </div>
+        <div class="services">
+            <div class="services-element">
+            <img src="../resources/img/pogotowie-small.png" alt="">
+            </div>
+            <div class="services-element">
+            <img src="../resources/img/strazak-small.png" alt="">
+            </div>
+            <div class="services-element">
+            <img src="../resources/img/policjant-small.png" alt="">
+            </div>
         </div>
         <div class="show" id="switches__container">
             <div class="element">
@@ -135,6 +133,7 @@
                  </div>
             </div>
         </div>
+        <button id="finish">Zakończ</button>
     </div>
     </body>
 </html>

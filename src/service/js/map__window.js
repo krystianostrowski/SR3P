@@ -17,3 +17,4 @@ infoSwitch.addEventListener('click',() =>{
     infoWindow.classList.remove("notificaton-info-window--inactive");
     mapWindow.classList.remove("map-window--active");
 });
+

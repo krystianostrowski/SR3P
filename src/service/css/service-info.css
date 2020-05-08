@@ -1,22 +1,49 @@
 body{
     background-color:  #121212;
 }
+.main{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
 .wrapper{
     padding-top:5%;
 }
 .left-side{
     width: 5%;
-    height: 83vh;
-    float:left;
+    height:25vh;
+}
+#build__info{
+    width: 60px;
+    height: 80px;
+    margin: auto;
 }
 .home{
     margin-top:1vh!important;
     margin-left:0.5%!important;
 }
+.info-info{
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+#info__info{
+    margin: auto;
+}
+.build-info-info{
+    width: 100%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
 /*__________________INFORMATIONS ABOUT CALL___________ */
 .info{
     font-size:105%;
-    width:55%;
+    width:35%;
     height: 25vh;
     border-left:5px solid #1ED760;
     border-radius: 5px;
@@ -24,80 +51,45 @@ body{
     text-align: left;
     padding-left:0.7vw;
 }
+.info--inactive{
+    display: none;
+}
+.build-info{
+    font-size:105%;
+    width:35%;
+    height: 25vh;
+    border-left:5px solid #1ED760;
+    border-radius: 5px;
+    float:left;
+    text-align: left;
+    padding-left:0.7vw;
+    display: none;
+}
+.build-info--active{
+    display: block;
+}
 /*____________SERVICES STATUS____________________*/
 .services{
-    width:40%;
-    height: 25vh;
-    display: flex;
-    float:left;
-}
-.straz,.policja,.pogotowie{
-    width:33%;
-    height:90%;
-}
-.straz{
-background-color: rgb(255, 74, 92);
-margin-right:1vw;
-}
-.service-top{
-    height: 60%;
-    width: 100%;
-    background-color: transparent;
-    display: flex;
-    align-items: center;
-
-}
-.service-top img{
-    margin:auto;
-}
-.straz-body{
-    height: 40%;
-    width: 100%;
-    background-color:rgb(194, 62, 75);
-    padding: 4% 0%;
     display: flex;
     flex-direction: column;
-    
-    
+    align-items: center;
+    width: 10%;
+    height: 60vh;
 }
-
-.policja{
-    background-color:rgb(37, 113, 228) ;
-    margin-right: 1vw;
+.services-element{
+    width: 80px;
+    height: 80px;
+    margin-top: 10%;
 }
-.policja-body{
-    height: 40%;
-    width: 100%;
-    background-color:rgb(15, 90, 201);
-    padding: 4% 0%;
-    
-}
-.pogotowie{
-    background-color: rgb(252, 191, 61);
-}
-.pogotowie-body{
-    height: 40%;
-    width: 100%;
-    background-color:rgb(235, 165, 15);
-    padding: 4% 0%;
-}
-.body-top{
-width: 100%;
-height: 46%;
-display: flex;
-align-items: center;
-
-}
-.body-bottom{
-    width: 100%;
-    height: 46%;
+.services img{
+    width: 80px;
+    height: 80px;
 }
 /*_______________________________________*/
 /*__________MAP WITH LOCATION___________*/
 .map{
-    width: 65%;
-    height: 53vh;
-    float:left;
+    width: 50%;
+    height: 60vh;
     margin-top:3vh;
     border:2px solid #1ED760;
 }
@@ -158,10 +150,10 @@ align-items: center;
 
 /*________SHOW MORE INFORMATIONS ABOUT THIS LOCATION__________*/
 .show{
+    position: absolute;
     width:30%;
     height: 53vh;
-    float: left;
-    margin-top:3vh;
+    top:40%;
     padding-left:1vw;
     padding-top:2vh;
     padding-bottom:2vh;
@@ -249,6 +241,24 @@ align-items: center;
     width: 0;
     height: 0;
 }
+#finish{
+    position: absolute;
+    width: 15%;
+    height: 50px;
+    margin-left:58%;
+    margin-top:70vh;
+    min-width: 300px;
+    border-radius: 20px;
+    outline:none;
+    border: 3px solid #1ED760;
+    font-size:130%;
+    transition: .3s;
+    cursor: pointer;
+}
+#finish:hover{
+    background-color: #1ED760;
+    color:white;
+}
 /*______________________________________________*/
 @media(max-width:1400px){
     .home{
@@ -274,20 +284,6 @@ align-items: center;
         }
         .info-text{
             font-size:110%!important;
-        }
-        .map{
-            width: 92%;
-
-        }
-        .main{
-            min-height: 98vh;
-        }
-        .show{
-            width: 90%;
-            height: 12vh;
-            display: flex;
-            padding: 0;
-            margin-top:4vh;
         }
         .element{
             width:100%;
