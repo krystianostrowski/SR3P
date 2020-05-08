@@ -10,6 +10,8 @@ let bIsConnectedToServer;
 let bCanConnectToAPI;
 let bCanReceiveReport = true;
 
+const bDev = true;
+
 const API = `http://${IP}:${Port}/api`;
 
 const GetDataFromAPI = async (path) => {
@@ -127,8 +129,11 @@ const CreateWindow = () => {
         .then(data => window.webContents.send('got-reports', data));
     });
 
-    autoUpdater.setFeedURL(UpdateServer);
-    autoUpdater.checkForUpdates();
+    if(!bDev)
+    {
+        autoUpdater.setFeedURL(UpdateServer);
+        autoUpdater.checkForUpdates();
+    }
 };
 
 app.on('ready', CreateWindow);
@@ -179,7 +184,7 @@ ipcMain.on('search-report-service', (event, arg) => {
 
     DebugLog(`Search: ${arg}`);
 
-    GetDataFromAPI(`getReport/${arg}`).then(report => {
+    /*GetDataFromAPI(`getReport/${arg}`).then(report => {
         if(report == false)
         {   
             DebugLog('Report not found', LogTypes.ERROR);
@@ -198,7 +203,24 @@ ipcMain.on('search-report-service', (event, arg) => {
                 });
             });
         }
-    });
+    });*/
+    console.log(arg);
+    GetDataFromAPI(`getReportsArray/${arg}`).then(reports => {
+        if(!reports.length)
+        {
+            DebugLog('Report not found', LogTypes.ERROR);
+            window.webContents.send('report-not-found');
+        }
+        else
+        {
+            DebugLog('Found report');
+            window.loadFile('./html/notification__list.html');
+
+            window.webContents.on('dom-ready', () => {
+                window.webContents.send('render-reports-table', reports);
+            });
+        }
+    }); 
 });
 
 socket.on('request-sending-report', () => {
