@@ -95,8 +95,8 @@ body{
     margin-left:-30vw;
     position: absolute;
     width:30%;
+    min-height: 40px;
     height: auto;
-    min-height: 80px;
     transform: scaleX(0);
     transition: .3s;
     transform-origin: 30vw;
@@ -110,9 +110,28 @@ body{
     width: 100%;
     height: 40px;
     border-bottom: 2px solid white;
+    display: flex;
 }
 .status:last-child{
     border-bottom: none;
+}
+.service-id{
+    height: 100%;
+    width: 60%;
+    display: flex;
+    align-items: center;
+    border-right:2px solid #fff;
+}
+.service-status{
+    width: 40%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.service-id span,
+.service-status span{
+    margin: auto;
+    text-align:center;
 }
 /*_______________________________________*/
 /*__________MAP WITH LOCATION___________*/
