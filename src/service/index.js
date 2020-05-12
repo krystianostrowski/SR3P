@@ -4,6 +4,7 @@ const { IP, Port, UpdateServer } = require('./config.json');
 const fetch = require('node-fetch');
 const io = require('socket.io-client');
 const path = require('path');
+const { ClientRequest } = require('http');
 
 let window;
 let bIsConnectedToServer;
@@ -204,7 +205,6 @@ ipcMain.on('search-report-service', (event, arg) => {
             });
         }
     });*/
-    console.log(arg);
     GetDataFromAPI(`getReportsArray/${arg}`).then(reports => {
         if(!reports.length)
         {
@@ -254,6 +254,26 @@ ipcMain.on('service-reached-destination', (event, arg) => {
         window.webContents.send('receive-report', arg)
     });
 }); 
+
+ipcMain.on('get-report-data', (event, arg) => {
+    GetDataFromAPI(`getReportByID/${arg}`).then(data => {
+        const buildingData = data.data;
+        const address = `${buildingData.city}, ${buildingData.street} ${buildingData.building}`;
+
+        GetDataFromAPI(`getBuildingInfo/${address}`).then(building => {
+            window.loadFile('./html/service__info.html');
+
+            window.webContents.on('dom-ready', () => {
+                window.webContents.send('render-report', { report: data, building: building });
+            });
+        });
+    });
+});
+
+ipcMain.on('close-report', () => {
+    //TODO: update report status
+    window.loadFile('./html/service.html');
+});
 
 ipcMain.on('home-button-clicked', () => {
         window.loadFile('./html/service.html');

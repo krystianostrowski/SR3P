@@ -5,6 +5,7 @@ const { FillFormRandomLocations, ClearList, AddLocationToList, PerformArrayOfrep
 const confirmBtn = document.querySelector('#arrival-confirmation');
 const homeBtn = document.querySelector('.home');
 const searchBtn = document.querySelector('#service-search-button');
+const finishButton = document.querySelector('#finish');
 
 const searchBar = document.querySelector('.search__input');
 const reportsList = document.querySelector('#reports-list');
@@ -79,12 +80,6 @@ const OnReportClick = e => {
     }
 };
 
-ipcRenderer.on('found-report', (event, arg) => {
-    RenderInfo(arg.report);
-    InsertImages(arg.dir);
-    PerformOverlaysObj();
-});
-
 ipcRenderer.on('got-reports', (event, arg) => {
     reportsArray = arg;
     reportsStrings = PerformArrayOfreportsStrings(reportsArray);
@@ -103,9 +98,17 @@ ipcRenderer.on('request-sending-report', (event, arg) => {
         ipcRenderer.send('request-rejected');     
 });
 
-ipcRenderer.on('receive-report', (event, arg) => {
-    bCanReceiveReport = false;
-    RenderInfo(arg);
+ipcRenderer.on('render-report', (event, arg) => {
+    RenderInfo(arg.report);
+    //RenderBuildingInfo(arg.building);
+    InsertImages(arg.building.data.mapDir);
+    PerformOverlaysObj();
+
+    if(!arg.report.isActive)
+        finishButton.classList.add('button--hidden');
+    else
+        finishButton.classList.remove('button--hidden');
+    //TODO: else check status
 });
 
 ipcRenderer.on('sending-data', (event, arg) => {
@@ -166,9 +169,9 @@ if(switchesPatent != null)
     });
 }
 
-
-
-
-
-
-
+if(finishButton != null)
+{
+    finishButton.addEventListener('click', () => {
+        ipcRenderer.send('close-report');
+    });
+}
