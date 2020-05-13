@@ -10,6 +10,8 @@ const ClearTable = tableBody => {
 };
 
 const RenderTable = (array, tableBody) => {
+    ClearTable(tableBody);
+
     for(item of array)
     {
         const tr = document.createElement('tr');
@@ -48,10 +50,10 @@ const PerformArrays = reportsArray => {
 ipcRenderer.on('render-reports-table', (event, arg) => {
     PerformArrays(arg);
 
-    ClearTable(activeTable);
+    //ClearTable(activeTable);
     RenderTable(activeArray, activeTable);
 
-    ClearTable(archiveTable);
+    //ClearTable(archiveTable);
     RenderTable(archiveArray, archiveTable);
 });
 

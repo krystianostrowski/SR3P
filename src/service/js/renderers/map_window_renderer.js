@@ -18,3 +18,22 @@ infoSwitch.addEventListener('click',() =>{
     mapWindow.classList.remove("map-window--active");
 });
 
+ipcRenderer.on('sending-data', (event, arg) => {
+    const report = arg;
+    const place = report.data;
+    const info = report.additionalInfo;
+    
+    const address = document.querySelector('#address');
+    const time = document.querySelector('#time');
+    const dangers = document.querySelector('#dangers');
+    const victims = document.querySelector("#victims");
+    const desc = document.querySelector('#desc');
+    const infoNode = document.querySelector('#info');
+
+    address.innerText = `${place.city} ${place.street} ${place.building}`;
+    time.innerText = info.time;
+    dangers.innerText = info.dangers;
+    victims.innerText = info.victims;
+    desc.innerText = info.desc;
+    infoNode.innerText = info.info;
+});

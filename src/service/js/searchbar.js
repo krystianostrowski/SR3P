@@ -15,16 +15,16 @@ const PerformArrayOfStrings = citiesArray => {
     return array;
 };
 
-const PerformArrayOfreportsStrings = reportsArray => {
-    const array = [];
+// const PerformArrayOfreportsStrings = reportsArray => {
+//     const array = [];
 
-    for(report of reportsArray)
-    {
-        array.push(`${report.street} ${report.building}, ${report.city}`);
-    }
+//     for(report of reportsArray)
+//     {
+//         array.push(`${report.street} ${report.building}, ${report.city}`);
+//     }
 
-    return array;
-};
+//     return array;
+// };
 
 /**
  * 
@@ -105,8 +105,5 @@ module.exports = {
     },
     AddLocationToList: (locationsList, string) => {
         AddLocationToList(locationsList, string);
-    },
-    PerformArrayOfreportsStrings: reportsArray => {
-        return PerformArrayOfreportsStrings(reportsArray);
     }
 };

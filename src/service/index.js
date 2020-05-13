@@ -126,8 +126,11 @@ const CreateWindow = () => {
     //#endregion
 
     window.webContents.on('dom-ready', () => {
-        GetDataFromAPI('getReports')
-        .then(data => window.webContents.send('got-reports', data));
+        GetDataFromAPI('getCities')
+        .then(data => {
+            //console.log(data);
+            window.webContents.send('got-places', data);
+        });
     });
 
     if(!bDev)
@@ -246,7 +249,7 @@ ipcMain.on('service-reached-destination', (event, arg) => {
 
     //TODO: Update status and send info to dispatcher
     //api.UpdateStatus(arg.id);
-    arg.services.fireFighters.state = "na miejscu";
+    //arg.services.fireFighters.state = "na miejscu";
 
     //dispatcherWindow.webContents.send('send-report-data', arg);
 

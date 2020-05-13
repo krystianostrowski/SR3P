@@ -59,28 +59,22 @@ const RenderInfo = report => {
     }*/
 }
 
-const RenderBuildingInfo = (adress, data) => {
-    const buildingData = data.data;
+const RenderBuildingInfo = data => {
+    data = data.data;
+    console.log(data);
+    const age = document.querySelector('#age');
+    const basement = document.querySelector("#basement");
+    const heating = document.querySelector('#heating');
+    const residents = document.querySelector("#residents");
+    const gate = document.querySelector('#gates');
+    const material = document.querySelector('#material');
 
-    const div = document.querySelector('.top-content');
-
-    if(div == null)
-        return;
-
-    let adressContainer = div.querySelector('.hies');
-    adressContainer = adressContainer.querySelector('#building-address');
-    const ul = div.querySelector('ul');
-    const spans = ul.querySelectorAll('.building-info');
-
-    adressContainer.innerText = adress;
-    
-    let index = 0;
-
-    for(data in buildingData)
-    {
-        spans[index].innerText = ` ${buildingData[data]}`;
-        index++;
-    }
+    age.innerText = data.age;
+    basement.innerHTML = data.basement;
+    heating.innerHTML = data.heating;
+    residents.innerHTML = data.residents;
+    gate.innerHTML = data.gate;
+    material.innerHTML = data.material;
 };
 
 module.exports = {
