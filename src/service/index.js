@@ -1,15 +1,16 @@
 const { app, BrowserWindow, globalShortcut, ipcMain, autoUpdater } = require('electron');
 const { DebugLog, LogTypes } = require('./js/debug');
-const { IP, Port, UpdateServer } = require('./config.json');
+const { IP, Port, UpdateServer, ID } = require('./config.json');
 const fetch = require('node-fetch');
 const io = require('socket.io-client');
 const path = require('path');
-const { ClientRequest } = require('http');
 
 let window;
 let bIsConnectedToServer;
 let bCanConnectToAPI;
 let bCanReceiveReport = true;
+
+let reportID;
 
 const bDev = true;
 
@@ -157,6 +158,8 @@ socket.on('connect', () => {
     DebugLog(`Connected to communication server: http://${IP}:${Port}`);
     DebugLog(`Client id: ${socket.id}`);
 
+    socket.emit('register-client', ID);
+
     bIsConnectedToServer = true;
 });
 
@@ -209,6 +212,7 @@ ipcMain.on('search-report-service', (event, arg) => {
         }
     });*/
     GetDataFromAPI(`getReportsArray/${arg}`).then(reports => {
+        console.log(reports);
         if(!reports.length)
         {
             DebugLog('Report not found', LogTypes.ERROR);
@@ -235,30 +239,38 @@ socket.on('request-sending-report', () => {
 });
 
 socket.on('sending-report', data => {
-    window.loadFile('./html/service__map.html');
+    GetDataFromAPI(`getReportByID/${data}`).then(report => {
+        window.loadFile('./html/service__map.html');
 
-    window.webContents.on('dom-ready', () => {
-        window.webContents.send('sending-data', data);
+        window.webContents.on('dom-ready', () => {
+            window.webContents.send('sending-data', report);
+            reportID = data;
+        });
     });
 });
 
 //TODO: confirmation of arrival
 
-ipcMain.on('service-reached-destination', (event, arg) => {
-    window.loadFile('./html/service__info.html');
+ipcMain.on('service-reached-destination', () => {
 
-    //TODO: Update status and send info to dispatcher
-    //api.UpdateStatus(arg.id);
-    //arg.services.fireFighters.state = "na miejscu";
+    socket.emit('update-service-status', { reportID: reportID, serviceID: ID, status: "na miejscu" });
 
-    //dispatcherWindow.webContents.send('send-report-data', arg);
+    GetDataFromAPI(`getReportByID/${reportID}`).then(report => {
+        const data = report.data;
+        const address = `${data.city}, ${data.street} ${data.building}`;
 
-    window.webContents.on('dom-ready', () => {
-        window.webContents.send('receive-report', arg)
+        GetDataFromAPI(`getBuildingInfo/${address}`).then(building => {
+            window.loadFile('./html/service__info.html');
+
+            window.webContents.on('dom-ready', () => {
+                window.webContents.send('render-report', { report: report, building: building });
+            });
+        });
     });
 }); 
 
 ipcMain.on('get-report-data', (event, arg) => {
+    reportID = arg;
     GetDataFromAPI(`getReportByID/${arg}`).then(data => {
         const buildingData = data.data;
         const address = `${buildingData.city}, ${buildingData.street} ${buildingData.building}`;
@@ -275,6 +287,7 @@ ipcMain.on('get-report-data', (event, arg) => {
 
 ipcMain.on('close-report', () => {
     //TODO: update report status
+    socket.emit('update-service-status', { reportID: reportID, serviceID: ID, status: "zakończono" });
     window.loadFile('./html/service.html');
 });
 

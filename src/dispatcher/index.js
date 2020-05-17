@@ -1,6 +1,6 @@
 const { app, BrowserWindow, globalShortcut, ipcMain, autoUpdater } = require('electron');
 const { DebugLog, LogTypes } = require('./js/debug');
-const { IP, Port, UpdateServer } = require('./config.json');
+const { IP, Port, UpdateServer, ID } = require('./config.json');
 const fetch = require('node-fetch');
 const io = require('socket.io-client');
 const path = require('path');
@@ -11,6 +11,8 @@ let window;
 let windowState;
 let bIsConnectedToServer;
 let bCanConnectToAPI;
+
+let reportID;
 
 const API = `http://${IP}:${Port}/api`;
 
@@ -170,6 +172,8 @@ socket.on('connect', () => {
     DebugLog(`Client id: ${socket.id}`);
 
     bIsConnectedToServer = true;
+
+    socket.emit('register-client', ID);
 });
 
 socket.on('disconnect', () => {
@@ -271,7 +275,7 @@ ipcMain.on('open-dispatcher-form', () => {
 });
 
 ipcMain.on('add-report-to-db', (event, arg) => {
-    socket.emit('add-report', arg);
+    socket.emit('add-report', { report: arg, ID: ID });
 });
 
 socket.on('added-report', report => {
@@ -293,6 +297,14 @@ socket.on('got-map-dir', data => {
     window.webContents.on('dom-ready', () => {
         window.webContents.send('send-report-data', { report: data.report, dir: data.dir});
     });
+});
+
+socket.on('update-info', () => {
+    if(windowState == Sate.INFO)
+    {
+        //TODO: Update displayed info;
+        //window.webContents.send('');
+    }
 });
 
 ipcMain.on('home-button-clicked', () => {

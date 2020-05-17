@@ -6,7 +6,7 @@ const finishButton = document.querySelector('#finish');
 if(confirmBtn != null)
 {
     confirmBtn.addEventListener('click', () => {
-        ipcRenderer.send('service-reached-destination', report);
+        ipcRenderer.send('service-reached-destination');
     });
 }
 

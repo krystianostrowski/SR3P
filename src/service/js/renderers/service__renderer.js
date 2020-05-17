@@ -91,12 +91,12 @@ let bCanReceiveReport = true;
 //     FillFormRandomLocations(numberOfReportsOnList, reportsStrings, reportsList);
 // });
 
-ipcRenderer.on('request-sending-report', (event, arg) => {
-    if(bCanReceiveReport)
-        ipcRenderer.send('request-accepted', arg);
-    else
-        ipcRenderer.send('request-rejected');     
-});
+// ipcRenderer.on('request-sending-report', (event, arg) => {
+//     if(bCanReceiveReport)
+//         ipcRenderer.send('request-accepted', arg);
+//     else
+//         ipcRenderer.send('request-rejected');     
+// });
 
 // ipcRenderer.on('render-report', (event, arg) => {
 //     RenderInfo(arg.report);
