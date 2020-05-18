@@ -22,7 +22,8 @@ ipcRenderer.on('sending-data', (event, arg) => {
     const report = arg;
     const place = report.data;
     const info = report.additionalInfo;
-    
+    const ID = report.num;
+    const reportID = document.querySelector('#report_id');
     const address = document.querySelector('#address');
     const time = document.querySelector('#time');
     const dangers = document.querySelector('#dangers');
@@ -30,6 +31,7 @@ ipcRenderer.on('sending-data', (event, arg) => {
     const desc = document.querySelector('#desc');
     const infoNode = document.querySelector('#info');
 
+    reportID.innerText = ID;
     address.innerText = `${place.city} ${place.street} ${place.building}`;
     time.innerText = info.time;
     dangers.innerText = info.dangers;

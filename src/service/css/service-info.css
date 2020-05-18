@@ -83,7 +83,7 @@ body{
     margin-top: 10%;
     display: flex;
     align-items: center;
-    cursor: wait;
+   z-index: 20;
 }
 .services-element img{
     width: 90%;
@@ -95,7 +95,7 @@ body{
     margin-left:-30vw;
     position: absolute;
     width:30%;
-    min-height: 40px;
+    min-height: 80px;
     height: auto;
     transform: scaleX(0);
     transition: .3s;
@@ -167,6 +167,7 @@ body{
     z-index: 10;
     left:0;
     top:-200%;
+    z-index: 10;
 }
 #emergency-exits{
     display:block;
@@ -176,6 +177,7 @@ body{
     z-index: 10;
     left:0;
     top:-300%;
+    z-index: 10;
 }
 #electricity-switch{
     display:block;
@@ -185,6 +187,7 @@ body{
     z-index: 10;
     left:0;
     top:-400%;
+    z-index: 10;
 }
 #gas-valve{
     display:block;
@@ -194,6 +197,7 @@ body{
     z-index: 10;
     left:0;
     top:-500%;
+    z-index: 10;
 }
 
 /*________SHOW MORE INFORMATIONS ABOUT THIS LOCATION__________*/

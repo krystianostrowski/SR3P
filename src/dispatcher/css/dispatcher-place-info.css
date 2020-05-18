@@ -176,6 +176,103 @@
     cursor: pointer;
     font-size: 150%;
     border: 5px solid var(--main);
+    transition: .4s;
+}
+.cesh button:hover{
+    color:white;
+}
+.active-notifications{
+    position: absolute;
+      height:auto;
+      width: 30%;
+      border: 2px solid #1ED760;;
+      margin-bottom: 2%;
+      min-height: 50px;
+      min-width: 382px;
+      max-height: 300px;
+      overflow: auto;
+      margin-top:15vh;
+      
+}
+.active-notifications--active
+{
+    display: block;
+}
+.active-notifications--inactive{
+    display: none;
+}
+.finished-notifications--active{
+    display: block;
+}
+.finished-notifications--inactive{
+    display: none;
+}
+.finished-notifications{
+    position: absolute;
+    width: 30%;
+    height: auto;
+    border: 2px solid #1ED760;
+    min-height: 50px;
+    max-height: 300px;
+    overflow: auto;
+    min-width: 382px;
+    margin-top:15vh;
+}
+
+table{
+    width: 100%;
+    height: auto;
+    border-spacing: 0;
+}
+tbody{
+    width: 100%;
+}
+tr{
+    width: 100%;
+    height: 50px;
+    padding:0;
+    margin:0;
+}
+
+td:first-child{
+    width:40%;
+    border-bottom:1px solid white;
+    border-right: 1px solid white;
+}
+td{
+    width:40%;
+    margin: 0;
+    border-bottom: 1px solid white;
+    border-right: 1px solid white;
+}
+td:last-child{
+    width: 20%;
+    border-right:none;
+}
+tr:last-child > td{
+  border-bottom:none;
+}
+.active-notifications button,
+.finished-notifications button{
+  outline: none;
+  background-color: transparent;
+  border: 1px solid white;
+  cursor:pointer;
+  color: white;
+  transition: 0.3s;
+}
+.active-notifications button:hover,
+.finished-notifications button:hover{
+  background-color: #1ED760;
+  color: black;
+  border: 1px solid #1ED760;
+}
+#close-table{
+    position: absolute;
+    top:0;
+    right: 0;
+    background-color: #1ED760;
+    border: none;
 }
 @media(max-width:1085px){
     .cash{

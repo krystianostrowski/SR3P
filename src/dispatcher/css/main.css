@@ -101,7 +101,7 @@ form{
     width: 100%;
     height: 100%;
 }
-.center input[type="search"]{
+.center input[type="text"]{
     width:100%;
     height: 100%;
     border:none;
@@ -112,10 +112,10 @@ form{
    
 }
 
-.center input[type=search]:focus{
+.center input[type=text]:focus{
     outline: none;
 }
-.center input[type=search]::placeholder{
+.center input[type=text]::placeholder{
     color:#C4C4C4;
 }
 .center img{

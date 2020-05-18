@@ -12,6 +12,15 @@
     border-right: 2px solid #1ED760;
     padding-top:40vh;
 }
+#info-header-title{
+    position:absolute;
+    width: 800px;
+    text-align: center;
+    margin: auto;
+    left:29vw;
+    top:4.5vh;
+
+}
 .home{
     margin-left:0.5%;
 }
