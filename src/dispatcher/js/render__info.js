@@ -74,8 +74,8 @@ const RenderBuildingInfo = (adress, data) => {
 
     let adressContainer = div.querySelector('.hies');
     adressContainer = adressContainer.querySelector('#building-address');
-    const ul = div.querySelector('ul');
-    const spans = ul.querySelectorAll('.building-info');
+    
+    const spans = div.querySelectorAll('.building-info');
 
     adressContainer.innerText = adress;
     
@@ -83,7 +83,7 @@ const RenderBuildingInfo = (adress, data) => {
 
     for(data in buildingData)
     {
-        spans[index].innerText = ` ${buildingData[data]}`;
+        spans[index].innerText = `${buildingData[data]}`;
         index++;
     }
 };

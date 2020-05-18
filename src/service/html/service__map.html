@@ -8,8 +8,9 @@
     <link rel="stylesheet" href="../css/service-map.css">
     <link rel="stylesheet" href="../resources/icons/css/fontawesome.css">
     <script defer src="../js/titlebar.js"></script>
-    <script defer src="../js/service__renderer.js"></script>
-    <script defer src="../js/map__window.js"></script>
+    <script defer src="../js/renderers/service__renderer.js"></script>
+    <script defer src="../js/renderers/map_window_renderer.js"></script>
+    <script defer src="../js/renderers/buttons__renderer.js"></script>
 </head>
 
 <body>
@@ -42,7 +43,7 @@
                     <table>
                         <tr class="small-tr">
                             <td style="width:25%;"><b>Miejsce:</b>&nbsp;</td>
-                            <td style="width:75%;"></td>
+                            <td style="width:75%;"><span id="address"></span></td>
                         </tr>
                     </table>
                 </div>
@@ -50,7 +51,7 @@
                     <table>
                         <tr class="small-tr" >
                             <td style="width: 70%;"><b>Godzina zgłoszenia:</b></td>
-                            <td style="width: 30%;"></td>
+                            <td style="width: 30%;"><span id="time"></span></td>
                         </tr>
                     </table>
                 </div>
@@ -60,7 +61,7 @@
                             <td class="other-td small-tr"><b>Dodatkowe zagrożenia:</b></td>
                         </tr>
                         <tr>
-                            <td class="other-td xd-td"></td>
+                            <td class="other-td xd-td"><span id="dangers"></span></td>
                         </tr>
                     </table>
                 </div>
@@ -70,7 +71,7 @@
                     <table>
                         <tr class="small-tr" >
                             <td style="width:80%;"><b>Orientacyjna liczba osób zagrożonych:</b></td>
-                            <td style="width:20%;"></td>
+                            <td style="width:20%;" id="victims"></td>
                         </tr>
                     </table>
                 </div>
@@ -80,17 +81,17 @@
                             <td class="other-td small-tr"><b>Opis zdarzenia:</b></td>
                         </tr>
                         <tr>
-                            <td class="other-td xd-td"></td>
+                            <td class="other-td xd-td" id="desc"></td>
                         </tr>
                     </table>
                 </div>
                 <div class="info-window">
                     <table>
                         <tr>
-                            <td class="other-td small-tr"><b>Dodatkowe informacje:</b></td>
+                            <td class="other-td small-tr" ><b>Dodatkowe informacje:</b></td>
                         </tr>
                         <tr>
-                            <td class="other-td xd-td"></td>
+                            <td class="other-td xd-td" id="info"></td>
                         </tr>
                     </table>
                 </div>

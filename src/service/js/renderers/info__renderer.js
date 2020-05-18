@@ -5,6 +5,17 @@ const buildWindow = document.querySelector(".build-info");
 const servicesParent = document.querySelector('.services');
 const serviceStatus = document.querySelectorAll(".service-info");
 
+const switchesPatent = document.querySelector('#switches__container');
+const overlays = document.querySelectorAll('.overlay--hidden');
+const overlaysObj = [];
+
+const PerformOverlaysObj = () => {
+    for(overlay of overlays)
+    {
+        overlaysObj.push({id: overlay.id, node: overlay});
+    }
+};
+
 buildSwitch.addEventListener('click',() => {
     infoWindow.classList.add("info--inactive");
     buildWindow.classList.add("build-info--active");
@@ -28,3 +39,34 @@ servicesParent.addEventListener('mouseout', event => {
         serviceStatus[id].classList.remove('service-info--active');
     }
 });
+
+ipcRenderer.on('render-report', (event, arg) => {
+    RenderInfo(arg.report);
+    RenderBuildingInfo(arg.building);
+    InsertImages(arg.building.data.mapDir);
+    PerformOverlaysObj();
+
+    if(!arg.report.isActive)
+        finishButton.classList.add('button--hidden');
+    else
+        finishButton.classList.remove('button--hidden');
+    //TODO: else check status
+});
+
+if(switchesPatent != null)
+{
+    switchesPatent.addEventListener('click', e => {
+        if(e.target.classList.contains('switches__checkbox'))
+        {
+            const checkbox = e.target;
+
+            for(ov of overlaysObj)
+            {
+                if(ov.id === checkbox.getAttribute('aria-controls'))
+                {
+                    ov.node.classList.toggle('overlay--hidden');
+                }
+            }
+        }
+    });
+}

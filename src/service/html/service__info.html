@@ -8,8 +8,9 @@
     <link rel="stylesheet" href="../css/service-info.css">
     <link rel="stylesheet" href="../resources/icons/css/fontawesome.css">
     <script defer src="../js/titlebar.js"></script>
-    <script defer src="../js/service__renderer.js"></script>
-    <script defer src="../js/info__switch__cards.js"></script>
+    <script defer src="../js/renderers/service__renderer.js"></script>
+    <script defer src="../js/renderers/info__renderer.js"></script>
+    <script defer src="../js/renderers/buttons__renderer.js"></script>
 </head>
 
 <body>
@@ -45,13 +46,13 @@
             
         </div>
         <div class="build-info">
-            <span class="info-text" style="font-size:130%">Rok budowy <span style="color:#1ED760">:&nbsp;</span><span id=""></span><br>
-            <span style="font-size:100%">Podpiwniczenie <span style="color:#1ED760">:&nbsp;</span><span id=""></span><br>
-            <span style="font-size:100%">Rodzaj ogrzewania <span style="color:#1ED760">:&nbsp;</span><span id=""></span><br>
-            <span style="font-size:100%">Liczba zameldowanych osób <span style="color:#1ED760">:&nbsp;</span><span id=""></span><br>
-            <span style="font-size:100%">Rozkład lokali i mieszkań <span style="color:#1ED760">:&nbsp;</span><span id=""></span><br>
-            <span style="font-size:100%">Wjazdy/wyjazdy<span style="color:#1ED760">:&nbsp;</span><span id=""></span><br>
-            <span style="font-size:100%">Materiał z jakiego budynek jest zbudowany <span style="color:#1ED760">:&nbsp;</span><span id=""></span>
+            <span class="info-text" style="font-size:130%">Rok budowy <span style="color:#1ED760">:&nbsp;</span><span id="age"></span><br>
+            <span style="font-size:100%">Podpiwniczenie<span style="color:#1ED760">:&nbsp;</span><span id="basement"></span><br>
+            <span style="font-size:100%">Rodzaj ogrzewania<span style="color:#1ED760">:&nbsp;</span><span id="heating"></span><br>
+            <span style="font-size:100%">Liczba zameldowanych osób<span style="color:#1ED760">:&nbsp;</span><span id="residents"></span><br>
+            <span style="font-size:100%">Rozkład lokali i mieszkań<span style="color:#1ED760">:&nbsp;</span><span id="schedule"></span><br>
+            <span style="font-size:100%">Wjazdy/wyjazdy<span style="color:#1ED760">:&nbsp;</span><span id="gates"></span><br>
+            <span style="font-size:100%">Materiał z jakiego budynek jest zbudowany<span style="color:#1ED760">:&nbsp;</span><span id="material"></span>
         </div>
         
         <div class="map">

@@ -10,6 +10,8 @@ const ClearTable = tableBody => {
 };
 
 const RenderTable = (array, tableBody) => {
+    ClearTable(tableBody);
+
     for(item of array)
     {
         const tr = document.createElement('tr');
@@ -21,7 +23,9 @@ const RenderTable = (array, tableBody) => {
         td1.innerText = item.additionalInfo.time;
         td2.innerText = item.num;
         button.innerText = 'Zobacz';
+        button.id = "table__button";
         button.setAttribute('report-id', item.id);
+        button.setAttribute('status', item.isActive);
 
         td3.appendChild(button);
 
@@ -44,12 +48,21 @@ const PerformArrays = reportsArray => {
 };
 
 ipcRenderer.on('render-reports-table', (event, arg) => {
-    console.log(arg);
     PerformArrays(arg);
 
-    ClearTable(activeTable);
+    //ClearTable(activeTable);
     RenderTable(activeArray, activeTable);
 
-    ClearTable(archiveTable);
+    //ClearTable(archiveTable);
     RenderTable(archiveArray, archiveTable);
+});
+
+document.addEventListener('click', e => {
+    console.log(e.target);
+    const node = e.target;
+    if(node.id == "table__button")
+    {
+        const reportId = node.getAttribute('report-id');
+        ipcRenderer.send('get-report-data', reportId);
+    }
 });

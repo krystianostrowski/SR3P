@@ -307,6 +307,10 @@ align-items: center;
     background-color: #1ED760;
     color:white;
 }
+
+.button--hidden {
+    display: none;
+}
 /*______________________________________________*/
 @media(max-width:1400px){
     .home{
