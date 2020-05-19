@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/service.css">
+    <link rel="stylesheet" href="../css/notification__list.css">
+    <link rel="stylesheet" href="../resources/icons/css/fontawesome.css">
+    <script defer src="../js/titlebar.js"></script>
+    <script defer src="../js/renderers/service__renderer.js"></script>
+    <script defer src="../js/renderers/table__renderer.js"></script>
+    <script defer src="../js/renderers/searchbar__renderer.js"></script>
+    <script defer src="../js/renderers/buttons__renderer.js"></script>
+</head>
+
+<body>
+    <div class="title-bar">
+        <div class="titlebar__title">
+            SR3P Service v1.1
+        </div>
+        <div class="controls-section">
+            <button id="min-btn"><i class="icon-window-minimize"></i></button>
+            <button id="max-btn"><i class="icon-check-empty"></i></button>
+            <button id="close-btn"><i class="icon-cancel"></i></button>
+        </div>
+    </div>
+        <div class="wrapper">
+            <div class="top">              
+                   <button id="service-search-button" class="search__button--inactive"><img src="../resources/img/lupa.png" alt=""></button>
+                    <input class="search__input" id="location" type="search" placeholder="Wyszukaj">
+                    <div id="adresses" class="adresses">
+
+
+
+                        <div class="out">
+        
+                        </div>
+                        <ul id="reports-list">
+                            <li class="location--visible">
+                                <div class="left-li"><img src="../resources/img/lokacja.png" alt=""></div>
+                                <div class="right-li locations__item">Wojska Polskiego, Słupsk</div>
+                            </li>
+        
+                            <li class="location--visible">
+                                <div class="left-li"><img src="../resources/img/lokacja.png" alt=""></div>
+                                <div class="right-li locations__item">Wojska Polskiego 02, Słupsk</div>
+                            </li>
+                            <li class="location--visible">
+                                <div class="left-li"><img src="../resources/img/lokacja.png" alt=""></div>
+                                <div class="right-li locations__item">Wojska Polskiego 03, Słupsk</div>
+                            </li>
+                            <li class="location--visible">
+                                <div class="left-li"><img src="../resources/img/lokacja.png" alt=""></div>
+                                <div class="right-li locations__item">Orange Słupsk Wojska Polskiego</div>
+                            </li>
+                            <li class="location--visible">
+                                <div class="left-li"><img src="../resources/img/lokacja.png" alt=""></div>
+                                <div class="right-li locations__item">Rzeszów</div>
+                            </li>
+                            <li class="location--visible">
+                                <div class="left-li"><img src="../resources/img/lokacja.png" alt=""></div>
+                                <div class="right-li locations__item">Niemcy</div>
+                            </li>
+                            <li class="location--visible">
+                                <div class="left-li"><img src="../resources/img/lokacja.png" alt=""></div>
+                                <div class="right-li locations__item">Francja</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            
+            <div class="centerl">
+                <span class="jarak">Słupsk, ul. Szymanowskiego 5</span><br>
+                <span class="jarak">Aktywne Zgłoszenia</span>
+                <div class="active-notifications">
+                    <table>
+                    <tr>
+                        <td><b>Data</b></td>
+                        <td><b>ID</b></td>
+                        <td></td>
+                    </tr>
+                    <tbody id="active__table">
+                        <tr>
+                            <td>02.04.2005</td>
+                            <td>20050402213739</td>
+                            <td><button>Zobacz</button></td>
+                        </tr>
+                        <tr>
+                            <td>02.05.2011</td>
+                            <td>20110502184556</td>
+                            <td><button>Zobacz</button></td>
+                        </tr>
+                        <tr>
+                            <td>07.10.1952</td>
+                            <td>19521007134623</td>
+                            <td><button>Zobacz</button></td>
+                        </tr>
+                    </tbody>
+                    </table>
+                </div>
+                <span class="jarak">Zamknięte zgłoszenia</span>
+                <div class="finished-notifications">
+                    <table>
+                        <tr>
+                            <td><b>Data</b></td>
+                            <td><b>ID</b></td>
+                            <td></td>
+                        </tr>
+                        <tbody id="archive__table">
+                            <tr>
+                                <td>20.08.2000</td>
+                                <td>20200505180623</td>
+                                <td><button>Zobacz</button></td>
+                            </tr>
+                            <tr>
+                                <td>20.08.2000</td>
+                                <td>20200505180623</td>
+                                <td><button>Zobacz</button></td>
+                            </tr>
+                            <tr>
+                                <td>20.08.2000</td>
+                                <td>20200505180623</td>
+                                <td><button>Zobacz</button></td>
+                            </tr>
+                            <tr>
+                                <td>20.08.2000</td>
+                                <td>20200505180623</td>
+                                <td><button>Zobacz</button></td>
+                            </tr>
+                            <tr>
+                                <td>20.08.2000</td>
+                                <td>Lays Fromage</td>
+                                <td><button>Zjedz</button></td>
+                            </tr>
+                            <tr>
+                                <td>20.08.2000</td>
+                                <td>20200505180623</td>
+                                <td><button>Zobacz</button></td>
+                            </tr>
+                            <tr>
+                                <td>20.08.2000</td>
+                                <td>20200505180623</td>
+                                <td><button>Zobacz</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

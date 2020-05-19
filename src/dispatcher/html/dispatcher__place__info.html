@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/dispatcher-place-info.css">
+    <link rel="stylesheet" href="../resources/icons/css/fontawesome.css">
+    <script defer src="../js/renderers/dispatcher__renderer.js"></script>
+    <script defer src="../js/renderers/searchbar__renderer.js"></script>
+    <script defer src="../js/renderers/buttons__renderer.js"></script>
+    <script defer src="../js/renderers/table__renderer.js"></script>
+    <script defer src="../js/titlebar.js"></script>
+</head>
+<body>
+    <div class="title-bar">
+        <div class="titlebar__title">
+            SR3P Dispatcher v1.1
+        </div>
+        <div class="controls-section">
+            <button id="min-btn"><i class="icon-window-minimize"></i></button>
+            <button id="max-btn"><i class="icon-check-empty"></i></button>
+            <button id="close-btn"><i class="icon-cancel"></i></button>
+        </div>
+    </div>
+    
+    <div class="wrapper">
+        <button id="open-location"><img src="../resources/img/lupa.png" alt=""></button>
+        <div class="location">
+            <button id="close-location">▲ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Zwiń&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ▲ </button>
+            <div class="case">
+                <div class="center">
+                    <form id="location-form">
+                        <img src="../resources/img/lupa.png" alt="">
+                        <input type="text" id="location" placeholder="Wyszukaj lokalizację">
+                    </form>
+                </div>
+            </div>
+            
+            <div id="adresses" class="adresses">
+
+
+
+                <div class="out">
+
+                </div>
+                <ul>
+                    <li class="location--visible">
+                        <div class="left-li"><img src="../resources/img/lokacja.png" alt=""></div>
+                        <div class="right-li locations__item">Wojska Polskiego, Słupsk</div>
+                    </li>
+
+                    <li class="location--visible">
+                        <div class="left-li"><img src="../resources/img/lokacja.png" alt=""></div>
+                        <div class="right-li locations__item">Wojska Polskiego 02, Słupsk</div>
+                    </li>
+                    <li class="location--visible">
+                        <div class="left-li"><img src="../resources/img/lokacja.png" alt=""></div>
+                        <div class="right-li locations__item">Wojska Polskiego 03, Słupsk</div>
+                    </li>
+                    <li class="location--visible">
+                        <div class="left-li"><img src="../resources/img/lokacja.png" alt=""></div>
+                        <div class="right-li locations__item">Orange Słupsk Wojska Polskiego</div>
+                    </li>
+                    <li class="location--visible">
+                        <div class="left-li"><img src="../resources/img/lokacja.png" alt=""></div>
+                        <div class="right-li locations__item">Rzeszów</div>
+                    </li>
+                    <li class="location--visible">
+                        <div class="left-li"><img src="../resources/img/lokacja.png" alt=""></div>
+                        <div class="right-li locations__item">Niemcy</div>
+                    </li>
+                    <li class="location--visible">
+                        <div class="left-li"><img src="../resources/img/lokacja.png" alt=""></div>
+                        <div class="right-li locations__item">Francja</div>
+                    </li>
+                </ul>
+            </div>
+            
+            <button class="plus">
+                <img src="../resources/img/plus.png" alt="">
+            </button>
+
+            <button class="home">
+                <img src="../resources/img/home.png" alt="">
+            </button>
+            
+        </div>
+        <div class="main">
+            <div class="top">
+                <div class="top-content">
+                    <div class="hies"><span style="font-size:130%;margin: auto;">Informacje o budynku: &nbsp; <span id="building-address"></span></div>
+                    <div class="build-info-table">
+                        <div class="build-info-element">
+                            <span style="margin: auto;font-size:110%;">Rok budowy: &nbsp; <span class="building-info"></span> </span>
+                        </div>
+                        <div class="build-info-element">
+                            <span style="margin: auto;font-size:110%;">Podpiwniczenie (tak lub nie): &nbsp; <span class="building-info"></span></span>
+                        </div>
+                        <div class="build-info-element">
+                            <span style="margin: auto;font-size:110%;">Rodzaj ogrzewania: &nbsp; <span class="building-info"></span></span>
+                        </div>
+                        <div class="build-info-element-l">
+                            <span style="margin: auto;font-size:110%;">Liczba zameldowanych osób:&nbsp; <span class="building-info"></span></span>
+                        </div>
+                    </div>
+                    <div class="build-info-table-b">
+                        <div class="build-info-element-b"><span style="margin: auto;font-size:110%;">Rokzład lokali i mieszkań: <br> <span style="font-size:120%;" class="building-info"></span></span></div>
+                        <div class="build-info-element-b"><span style="margin: auto;font-size:110%;">Wjazd/wjazdy: <br><span style="font-size:120%;" class="building-info"></span></span></div>
+                        <div class="build-info-element-b-l"><span style="margin: auto;font-size:110%;">Materiał z jakiego budynek jest zbudowany: <br><span style="font-size:120%;" class="building-info"></span></span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom">
+                <div class="bottom-content" id="see-report">
+                    <div class="cash"><span style="margin: auto;font-size:130%">Aktywne zgłoszenia: <span id="active-reports-num"></span></span></div>
+                    <div class="cesh">
+                        <button id="see-active-reports">Zobacz</button>
+                    </div>
+                    <div class="active-notifications active-notifications--inactive">
+                        <button id="close-active-table"><i class="icon-cancel"></i></button>
+                        <table>
+                        <tr>
+                            <td><b>Data</b></td>
+                            <td><b>ID</b></td>
+                            <td></td>
+                        </tr>
+                        <tbody id="active__table">
+                            <tr>
+                                <td>02.04.2005</td>
+                                <td>20050402213739</td>
+                                <td><button>Zobacz</button></td>
+                            </tr>
+                            <tr>
+                                <td>02.05.2011</td>
+                                <td>20110502184556</td>
+                                <td><button>Zobacz</button></td>
+                            </tr>
+                            <tr>
+                                <td>07.10.1952</td>
+                                <td>19521007134623</td>
+                                <td><button>Zobacz</button></td>
+                            </tr>
+                        </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="bottom-content" id="see-report">
+                    <div class="cash"><span style="margin: auto;font-size:130%">Zamknięte zgłoszenia: <span id="closed-reports-num"></span></span></div>
+                    <div class="cesh">
+                        <button id="see-finished-reports">Zobacz</button>
+                    </div>
+                    <div class="finished-notifications finished-notifications--inactive">
+                        <button id="close-table"><i class="icon-cancel"></i></button>
+                        <table>
+                            <tr>
+                                <td><b>Data</b></td>
+                                <td><b>ID</b></td>
+                                <td></td>
+                            </tr>
+                            <tbody id="archive__table">
+                                <tr>
+                                    <td>20.08.2000</td>
+                                    <td>20200505180623</td>
+                                    <td><button>Zobacz</button></td>
+                                </tr>
+                                <tr>
+                                    <td>20.08.2000</td>
+                                    <td>20200505180623</td>
+                                    <td><button>Zobacz</button></td>
+                                </tr>
+                                <tr>
+                                    <td>20.08.2000</td>
+                                    <td>20200505180623</td>
+                                    <td><button>Zobacz</button></td>
+                                </tr>
+                                <tr>
+                                    <td>20.08.2000</td>
+                                    <td>20200505180623</td>
+                                    <td><button>Zobacz</button></td>
+                                </tr>
+                                <tr>
+                                    <td>20.08.2000</td>
+                                    <td>Lays Fromage</td>
+                                    <td><button>Zjedz</button></td>
+                                </tr>
+                                <tr>
+                                    <td>20.08.2000</td>
+                                    <td>20200505180623</td>
+                                    <td><button>Zobacz</button></td>
+                                </tr>
+                                <tr>
+                                    <td>20.08.2000</td>
+                                    <td>20200505180623</td>
+                                    <td><button >Zobacz</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

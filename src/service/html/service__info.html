@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/service-info.css">
+    <link rel="stylesheet" href="../resources/icons/css/fontawesome.css">
+    <script defer src="../js/titlebar.js"></script>
+    <script defer src="../js/renderers/service__renderer.js"></script>
+    <script defer src="../js/renderers/info__renderer.js"></script>
+    <script defer src="../js/renderers/buttons__renderer.js"></script>
+</head>
+
+<body>
+    <div class="title-bar">
+        <div class="titlebar__title">
+            SR3P Service v1.1
+        </div>
+        <div class="controls-section">
+            <button id="min-btn"><i class="icon-window-minimize"></i></button>
+            <button id="max-btn"><i class="icon-check-empty"></i></button>
+            <button id="close-btn"><i class="icon-cancel"></i></button>
+        </div>
+    </div>
+    <button class="home">
+        <img src="../resources/img/home.png" alt="">
+    </button>
+    <div class="wrapper">
+        <div class="main">
+        <div class="left-side">
+            <div class="info-info">
+            <img id="info__info" src="../resources/img/info.png" alt="">
+            </div>
+            <div class="build-info-info">
+            <img id="build__info" src="../resources/img/build.png" alt="">
+            </div>
+        </div>
+        <div class="info ">
+            <span class="info-text" style="font-size:130%">Opis Zdarzenia <span style="color:#1ED760">:</span><span id="description"></span><br>
+            <span style="font-size:100%">Godzina zgłoszenia <span style="color:#1ED760">:</span><span id="time"></span><br>
+            <span style="font-size:100%">Orientacyjna liczba osób zagrożonych <span style="color:#1ED760">:</span><span id="victims"></span><br>
+            <span style="font-size:100%">Dodatkowe zagrożenia <span style="color:#1ED760">:</span><span id="additional-dangers"></span><br>
+            <span style="font-size:100%">Dodatkowe informacje <span style="color:#1ED760">:</span><span id="additional-informations"></span><br>
+            
+        </div>
+        <div class="build-info">
+            <span class="info-text" style="font-size:130%">Rok budowy <span style="color:#1ED760">:&nbsp;</span><span id="age"></span><br>
+            <span style="font-size:100%">Podpiwniczenie<span style="color:#1ED760">:&nbsp;</span><span id="basement"></span><br>
+            <span style="font-size:100%">Rodzaj ogrzewania<span style="color:#1ED760">:&nbsp;</span><span id="heating"></span><br>
+            <span style="font-size:100%">Liczba zameldowanych osób<span style="color:#1ED760">:&nbsp;</span><span id="residents"></span><br>
+            <span style="font-size:100%">Rozkład lokali i mieszkań<span style="color:#1ED760">:&nbsp;</span><span id="schedule"></span><br>
+            <span style="font-size:100%">Wjazdy/wyjazdy<span style="color:#1ED760">:&nbsp;</span><span id="gates"></span><br>
+            <span style="font-size:100%">Materiał z jakiego budynek jest zbudowany<span style="color:#1ED760">:&nbsp;</span><span id="material"></span>
+        </div>
+        
+        <div class="map">
+            <img id="map" src="" alt="">
+            <img id="gate" class="overlay--hidden" src="../resources/img/maps/1/gate.png" alt="">
+            <img id="water" class="overlay--hidden" src="../resources/img/maps/1/water.png" alt="">
+            <img id="emergency-exits" class="overlay--hidden" src="../resources/img/maps/1/emeregency-exit.png" alt="">
+            <img id="electricity-switch" class="overlay--hidden" src="../resources/img/maps/1/electricity-switch.png" alt="">
+            <img id="gas-valve" class="overlay--hidden" src="../resources/img/maps/1/gas-valve.png" alt="">
+        </div>
+        <div class="services">
+            <div id="0" class="services-element" style="background-color:rgb(252, 191, 61);">
+                <img class="services__elemnet__img" src="../resources/img/pogotowie.png" alt="">
+                <div class="service-info" style="background-color:rgb(252, 191, 61);">
+                    <!--This is the div you have to add-->
+                    <div class="status">
+                        <div class="service-id"><span>ID:&nbsp; <span> 1231312313212</span></span></div>
+                        <div class="service-status"><span>Status:&nbsp;<span> XDDD</span></span></div>
+                    </div>
+                    <!---->
+                    <div class="status"> 
+                        <div class="service-id"><span>ID:&nbsp; <span> 1231312313212</span></span></div>
+                        <div class="service-status"><span>Status:&nbsp;<span> XDDD</span></span></div>
+                    </div>
+                </div>
+            </div>
+            <div id="1" class="services-element" style="background-color: rgb(255, 74, 92);">
+                <img class="services__elemnet__img" src="../resources/img/strazak.png" alt="">
+                <div class="service-info" style="background-color: rgb(255, 74, 92);">
+                    
+                </div>
+            </div>
+            <div id="2" class="services-element" style="background-color:rgb(37, 113, 228) ;">
+                <img class="services__elemnet__img" src="../resources/img/policjant.png" alt="">
+                <div class="service-info" style="background-color:rgb(37, 113, 228) ;">
+                    
+                </div>
+            </div>
+        </div>
+        <div class="show" id="switches__container">
+            <div class="element">
+                <div class="element-left">
+                    <label  class="switch">
+                        <input type="checkbox" class="switches__checkbox" aria-controls="gate">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="element-right">
+                    <span class="show-text" style="font-size:160%;padding-left:1vw;">Pokaż bramy wjazdowe</span>
+                 </div>
+            </div>
+
+            <div class="element">
+                <div class="element-left">
+                    <label  class="switch">
+                        <input type="checkbox" class="switches__checkbox" aria-controls="water">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="element-right">
+                    <span class="show-text" style="font-size:160%;padding-left:1vw;">Pokaż dojścia wody</span>
+                 </div>
+            </div>
+
+            <div class="element">
+                <div class="element-left">
+                    <label  class="switch">
+                        <input type="checkbox" class="switches__checkbox" aria-controls="emergency-exits">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="element-right">
+                    <span class="show-text" style="font-size:160%;padding-left:1vw;">Pokaż wyjścia ewakuacyjne</span>
+                 </div>
+            </div>
+
+            <div class="element">
+                <div class="element-left">
+                    <label  class="switch">
+                        <input type="checkbox" class="switches__checkbox" aria-controls="electricity-switch">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="element-right">
+                    <span class="show-text" style="font-size:160%;padding-left:1vw;">Wyłącznik prądu</span>
+                 </div>
+            </div>
+
+            <div class="element">
+                <div class="element-left">
+                    <label  class="switch">
+                        <input type="checkbox" class="switches__checkbox" aria-controls="gas-valve">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="element-right">
+                    <span class="show-text" style="font-size:160%;padding-left:1vw;">Główny zawór gazu</span>
+                 </div>
+            </div>
+        </div>
+        <button id="finish">Zakończ</button>
+    </div>
+    </body>
+</html>

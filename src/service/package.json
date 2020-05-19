@@ -1,0 +1,39 @@
+{
+  "name": "sr3pservice",
+  "version": "1.1.0",
+  "description": "SR3P",
+  "main": "./index.js",
+  "dependencies": {
+    "electron": "^8.0.0"
+  },
+  "devDependencies": {
+    "electron-packager": "^14.2.1",
+    "electron-winstaller": "^4.0.0"
+  },
+  "scripts": {
+    "start": "electron ./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krystianostrowski/SR3P.git"
+  },
+  "contributors": [
+    {
+      "name": "Krystian Ostrowski"
+    },
+    {
+      "name": "Damian Radko"
+    },
+    {
+      "name": "Mateusz Galazka"
+    },
+    {
+      "name": "Norbert Jungto"
+    }
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/krystianostrowski/SR3P/issues"
+  },
+  "homepage": "https://github.com/krystianostrowski/SR3P#readme"
+}

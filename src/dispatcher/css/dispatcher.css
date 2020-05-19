@@ -1,0 +1,11 @@
+.main{
+    display: flex;
+    align-items: center;
+    width:100%;
+    min-height:85.9vh;
+    max-height: inherit;
+    background-color:var(--main) ;
+}
+.main img{
+    margin: auto;
+}

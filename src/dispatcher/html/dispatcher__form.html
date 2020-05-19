@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/dispatcher-form.css">
+    <link rel="stylesheet" href="../resources/icons/css/fontawesome.css">
+    <script defer src="../js/renderers/dispatcher__renderer.js"></script>
+    <script defer src="../js/renderers/searchbar__renderer.js"></script>
+    <script defer src="../js/renderers/form__renderer.js"></script>
+    <script defer src="../js/renderers/buttons__renderer.js"></script>
+    <script defer src="../js/titlebar.js"></script>
+</head>
+<body>
+    <div class="title-bar">
+        <div class="titlebar__title">
+            SR3P Dispatcher v1.1
+        </div>
+        <div class="controls-section">
+            <button id="min-btn"><i class="icon-window-minimize"></i></button>
+            <button id="max-btn"><i class="icon-check-empty"></i></button>
+            <button id="close-btn"><i class="icon-cancel"></i></button>
+        </div>
+    </div>
+    <div class="wrapper">
+        <button id="open-location"><img src="../resources/img/lupa.png" alt=""></button>
+        <div class="location">
+            <button id="close-location"><span style="float:left;" class="arrow-top">▲ </span>Zwiń <span style="float: right;" class="arrow-top">▲</span> </button>
+            <div class="case" id="case">
+                <div class="center">
+                    <form id="location-form">
+                        <img src="../resources/img/lupa.png" alt="">
+                        <input type="text" id="location" placeholder="Wyszukaj lokalizację">
+                    </form>
+                </div>
+                
+            </div>
+            
+            <div id="adresses" class="adresses">
+
+
+
+                <div class="out">
+
+                </div>
+                <ul>
+                    <li class="location--visible">
+                        <div class="left-li"><img src="../resources/img/lokacja.png" alt=""></div>
+                        <div class="right-li locations__item">Wojska Polskiego, Słupsk</div>
+                    </li>
+
+                    <li class="location--visible">
+                        <div class="left-li"><img src="../resources/img/lokacja.png" alt=""></div>
+                        <div class="right-li locations__item">Wojska Polskiego 02, Słupsk</div>
+                    </li>
+                    <li class="location--visible">
+                        <div class="left-li"><img src="../resources/img/lokacja.png" alt=""></div>
+                        <div class="right-li locations__item">Wojska Polskiego 03, Słupsk</div>
+                    </li>
+                    <li class="location--visible">
+                        <div class="left-li"><img src="../resources/img/lokacja.png" alt=""></div>
+                        <div class="right-li locations__item">Orange Słupsk Wojska Polskiego</div>
+                    </li>
+                    <li class="location--visible">
+                        <div class="left-li"><img src="../resources/img/lokacja.png" alt=""></div>
+                        <div class="right-li locations__item">Rzeszów</div>
+                    </li>
+                    <li class="location--visible">
+                        <div class="left-li"><img src="../resources/img/lokacja.png" alt=""></div>
+                        <div class="right-li locations__item">Niemcy</div>
+                    </li>
+                    <li class="location--visible">
+                        <div class="left-li"><img src="../resources/img/lokacja.png" alt=""></div>
+                        <div class="right-li locations__item">Francja</div>
+                    </li>
+                </ul>
+            </div>
+
+            
+            <button class="home">
+                <img src="../resources/img/home.png" alt="">
+            </button>
+        </div>
+        <div class="main">
+            <h1 style="margin-top:0;margin-bottom:4vh!important;">Wyślij zgłoszenie</h1>
+               
+            <form>
+            <div class="services">
+
+                <div style=" background-color:rgb(37, 113, 228) ;" class="service-body">
+                    <div style="background-color:rgb(15, 90, 201) ;" class="service-header">
+                       <span style="margin: auto;"> Policja</span>
+                    </div>
+                    <div class="service-top-left">
+                        <img src="../resources/img/policjant.png" alt="">
+                    </div>
+                    <div class="service-top-right">
+                        <input type="checkbox" id="police__checkbox">
+                    </div>
+                    <div style="background-color:rgb(15, 90, 201);" class="service-bottom">
+                      <span style="margin: auto;">  Ilość jednostek:&nbsp; <input type="text" disabled id="police-quantity"></span>
+                    </div>
+                </div>
+
+                <div style="margin-bottom:5%;margin-top:5%;background-color: rgb(252, 191, 61);" class="service-body">
+                    <div style="background-color:rgb(235, 165, 15)" class="service-header">
+                        <span style="margin: auto;"> Pogotowie</span>
+                    </div>
+                    <div class="service-top-left">
+                        <img src="../resources/img/pogotowie.png" alt="">
+                    </div>
+                    <div class="service-top-right">
+                        <input type="checkbox" id="ambulance__checkbox">
+                    </div>
+                    <div style="background-color:rgb(235, 165, 15)" class="service-bottom">
+                      <span style="margin: auto;">  Ilość jednostek:&nbsp; <input type="text" disabled id="ambulance-quantity"></span>
+                    </div>
+                </div>
+
+                <div style="background-color: rgb(255, 74, 92);" class="service-body">
+                    <div style="background-color:rgb(194, 62, 75)" class="service-header">
+                        <span style="margin: auto;"> Straż Pożarna</span>
+                    </div>
+                    <div class="service-top-left">
+                        <img src="../resources/img/strazak.png" alt="">
+                    </div>
+                    <div class="service-top-right">
+                        <input type="checkbox" id="fire-fighters__checkbox">
+                    </div>
+                    <div style="background-color:rgb(194, 62, 75)" class="service-bottom">
+                      <span style="margin: auto;">  Ilość jednostek:&nbsp; <input type="text" disabled id="ff-quantity"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div class="first-row-element">
+                        <div class="top">
+                            <span style="margin:auto">Miejscowość: </span>
+                        </div>
+                        <div class="bottom" id="city">
+                            <input type="text" id="city__input" class="form__input input--border">
+                            <div class="places__list list--hidden">
+                                <ul input="city">
+                                    <li><span style="margin: auto;"> Słupsk</span></li>
+                                    <li><span style="margin: auto;"> Słupsk</span></li>
+                                    <li><span style="margin: auto;"> Słupsk</span></li>
+                                    <li><span style="margin: auto;"> Słupsk</span></li>
+                                    
+                                </ul>
+                            </div>
+                            
+                        </div>
+                       
+                    </div>
+                    <div style="margin-left:5%;margin-right:5%" class="first-row-element">
+                        <div class="top">
+                            <span style="margin:auto">Ulica: </span>
+                        </div>
+                        <div class="bottom" id="street">
+                            <input type="text" id="street__input" class="input--border">
+                            <div class="places__list list--hidden">
+                                <ul input="street">
+                                    <li><span style="margin: auto;"> Słupsk</span></li>  
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="first-row-element">
+                        <div class="top">
+                            <span style="margin:auto">Numer Budynku: </span>
+                        </div>
+                        <div class="bottom" id="building">
+                            <input type="text" id="building__input" class="input--border">
+                            <div class="places__list list--hidden">
+                                <ul input="building">
+                                    <li><span style="margin: auto;"> Słupsk</span></li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="description">
+                        <div class="top">
+                            <span style="margin:auto">Opis zgłoszenia: </span>
+                        </div>
+                        <div class="bottom">
+                            <input style="padding-left:2%;" type="text" id="desc" class="input--border">
+                        </div>
+                    </div>
+                    <div class="number-of-people">
+                        <div class="top">
+                            <span id="hi" style="margin:auto">Orientacyjna liczba osób poszkodowanych: </span>
+                        </div>
+                        <div class="bottom">
+                            <input type="text" id="victims" class="input--border">
+                        </div>
+                    </div>
+                </div>
+                <div class="additional-threats">
+                    <div class="top">
+                        <span style="margin:auto">Dodatkowe zagrożenia: </span>
+                    </div>
+                    <div class="bottom">
+                        <input style="padding-left:2%" type="text" id="dangers" class="input--border">
+                    </div>
+                </div>
+                <div class="additional-info">
+                    <div class="top">
+                        <span style="margin:auto">Dodatkowe informacje: </span>
+                    </div>
+                    <div class="bottom">
+                        <input style="padding-left:2%" type="text" id="additional-info" class="input--border">
+                    </div>
+                </div>
+               
+                <button class="send" type="button">Wyślij</button>
+                
+
+                
+            </div>
+            </form>
+           
+        </div>
+</body>
+</html>

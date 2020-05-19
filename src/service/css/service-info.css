@@ -1,0 +1,429 @@
+body{
+    background-color:  #121212;
+}
+.main{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.wrapper{
+    padding-top:5%;
+}
+.left-side{
+    width: 5%;
+    height:25vh;
+}
+#build__info{
+    width: 80%;
+    height: 60%;
+    margin: auto;
+}
+.home{
+    margin-top:1vh!important;
+    margin-left:0.5%!important;
+}
+.info-info{
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.build-info-info{
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    border: 5px solid  #1ED760;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-left:5%;
+}
+/*__________________INFORMATIONS ABOUT CALL___________ */
+.info{
+    font-size:105%;
+    width:35%;
+    height: 25vh;
+    border-left:5px solid #1ED760;
+    border-radius: 5px;
+    float:left;
+    text-align: left;
+    padding-left:0.7vw;
+}
+.info--inactive{
+    display: none;
+}
+.build-info{
+    font-size:105%;
+    width:35%;
+    height: 25vh;
+    border-left:5px solid #1ED760;
+    border-radius: 5px;
+    float:left;
+    text-align: left;
+    padding-left:0.7vw;
+    display: none;
+    overflow: auto;
+}
+.build-info--active{
+    display: block;
+}
+/*____________SERVICES STATUS____________________*/
+.services{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 10%;
+    height: 60vh;
+}
+.services-element{
+    width: 80px;
+    height: 80px;
+    margin-top: 10%;
+    display: flex;
+    align-items: center;
+   z-index: 20;
+}
+.services-element img{
+    width: 90%;
+    height: 90%;
+    margin: auto;
+}
+.service-info{
+    
+    margin-left:-30vw;
+    position: absolute;
+    width:30%;
+    min-height: 80px;
+    height: auto;
+    transform: scaleX(0);
+    transition: .3s;
+    transform-origin: 30vw;
+    display: flex;
+    flex-direction: column;
+}
+.service-info--active{
+    transform: scaleX(1);
+}
+.status{
+    width: 100%;
+    height: 40px;
+    border-bottom: 2px solid white;
+    display: flex;
+}
+.status:last-child{
+    border-bottom: none;
+}
+.service-id{
+    height: 100%;
+    width: 60%;
+    display: flex;
+    align-items: center;
+    border-right:2px solid #fff;
+}
+.service-status{
+    width: 40%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.service-id span,
+.service-status span{
+    margin: auto;
+    text-align:center;
+}
+
+.service--hidden {
+    display: none;
+}
+/*_______________________________________*/
+/*__________MAP WITH LOCATION___________*/
+.map{
+    width: 50%;
+    height: 60vh;
+    margin-top:3vh;
+    border:2px solid #1ED760;
+}
+.map img{
+    width: 100%;
+    height: 100%;
+}
+#map{
+    display:block;
+    z-index: 9;
+}
+#gate{
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    left:0;
+    top:-100%;
+    
+}
+#water{
+    display:block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    left:0;
+    top:-200%;
+    z-index: 10;
+}
+#emergency-exits{
+    display:block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    left:0;
+    top:-300%;
+    z-index: 10;
+}
+#electricity-switch{
+    display:block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    left:0;
+    top:-400%;
+    z-index: 10;
+}
+#gas-valve{
+    display:block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    left:0;
+    top:-500%;
+    z-index: 10;
+}
+
+/*________SHOW MORE INFORMATIONS ABOUT THIS LOCATION__________*/
+.show{
+    position: absolute;
+    width:30%;
+    height: 53vh;
+    top:40%;
+    padding-left:1vw;
+    padding-top:2vh;
+    padding-bottom:2vh;
+}
+p{
+    padding:0;
+    margin:0;
+}
+.element{
+    height: 20%;
+    width: 100%;
+    text-align: left;
+    display: flex;
+    align-items: center;
+}
+.element-left{
+width: 20%;
+height: 100%;
+display: flex;
+align-items: center;
+}
+.element-right{
+    width: 80%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    
+    
+}
+/*---------SWITCH-------*/
+.switch{
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    margin: auto;
+    
+}
+.slider{
+    cursor: pointer;
+    background-color: black;
+    transition: .7s;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    box-shadow:0px 0px 3px 3px gray;
+}
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: rgb(160, 159, 159);
+    -webkit-transition: .2s;
+    transition: .2s;
+    border: 1px solid  rgb(83, 82, 82);
+   
+  }
+  input:checked + .slider {
+    background-color: rgb(30, 216, 95,0.7);
+  }
+  input:focus + .slider {
+    box-shadow: 0 0 1px #1ED760;
+    box-shadow:0px 0px 3px 3px gray;
+  }
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+    
+  }
+  .slider.round {
+
+    border-radius: 34px;
+  }
+  .slider.round:before {
+    border-radius: 50%;
+  }
+.switch input{
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+#finish{
+    position: absolute;
+    width: 15%;
+    height: 50px;
+    margin-left:58%;
+    margin-top:70vh;
+    min-width: 300px;
+    border-radius: 20px;
+    outline:none;
+    border: 3px solid #1ED760;
+    font-size:130%;
+    transition: .3s;
+    cursor: pointer;
+}
+#finish:hover{
+    background-color: #1ED760;
+    color:white;
+}
+
+.button--hidden {
+    display: none;
+}
+/*______________________________________________*/
+@media(max-width:1400px){
+    .home{
+    height:50px;
+    width:65px;
+    }
+}
+@media(max-width:1177px){
+    .home{
+    height:40px;
+    width:55px;
+    }
+}
+@media(max-width:967px){
+    .home{
+    height:30px;
+    width:40px;
+    }
+}
+@media(max-width:1155px){
+        .left-side img{
+            width:90%
+        }
+        .info-text{
+            font-size:110%!important;
+        }
+        .element{
+            width:100%;
+            height: 10vh;
+            display:block;
+            text-align: center!important;
+        }
+        .element-left{
+            width: 100%;
+            height: 40%;
+            float: left;
+        }
+        .element-right{
+            width:100%;
+            height: 60%;
+            float: left;
+            display: block;
+            margin-top:1vh;
+           
+        }
+    }
+@media(max-height:668px){
+    .element-right{
+        margin-top:3vh;
+
+    }
+    .service-top img{
+        width:80%;
+    }
+    .main{
+        height: 99vh;
+    }
+}
+@media(max-height:780px){
+    .service-top img{
+        width:45%;
+    }
+    .element{
+        font-size:90%;
+    }
+}
+@media(max-width:1340px){
+        .element span{
+            font-size:140%!important;
+        }
+    }
+@media(max-width:1196px){
+        .element span{
+            font-size:120%!important;
+        }
+    }
+@media(max-width:1064px){
+        .element span{
+            font-size:100%!important;
+        }
+    }
+@media(max-width:916px){
+        .element span{
+            font-size:80%!important;
+        }
+        .service-top img{
+            width:80%;
+        }
+    }
+@media(max-width:776px){
+        .element span{
+            font-size:60%!important;
+        }
+    }
+@media(max-width:946px){
+    .straz-body,
+    .policja-body,
+    .pogotowie-body{
+        font-size:80%;
+    }
+}
+@media(max-width:946px){
+    .straz-body,
+    .policja-body,
+    .pogotowie-body{
+        font-size:70%;
+    }
+}
