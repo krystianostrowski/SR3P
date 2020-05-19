@@ -218,6 +218,10 @@ ipcMain.on('search-report', (event, arg) => {
                 const dir = response.data.mapDir;
                 
                 window.webContents.send('found-report', {report, dir});
+
+                GetDataFromAPI(`getReportsArray/${arg}`).then(reports => {
+                    window.webContents.send('render-reports-table', reports);
+                });
             });
         }
     });
@@ -261,9 +265,14 @@ ipcMain.on('display-dispatcher-info', (event, arg) => {
         window.loadFile('./html/dispatcher__info.html');
     }
 
-    window.webContents.on('dom-ready', () => {
-        window.webContents.send('send-report-data', {report: arg.report, dir: arg.dir});
+    GetDataFromAPI(`getReportByID/${arg}`).then(report => {
+        //window.webContents.send('send-report-data', {report: report, dir: arg. })
+        socket.emit('getMapDir', report);
     });
+
+    /*window.webContents.on('dom-ready', () => {
+        window.webContents.send('send-report-data', {report: arg.report, dir: arg.dir});
+    });*/
 });
 
 ipcMain.on('open-dispatcher-form', () => {

@@ -69,7 +69,10 @@ const RenderBuildingInfo = (adress, data) => {
     let index = 0;
 
     for(data in buildingData)
-    {
+    {   
+        if(spans[index] == undefined)
+            continue;
+
         spans[index].innerText = `${buildingData[data]}`;
         index++;
     }

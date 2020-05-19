@@ -4,6 +4,9 @@ const archiveTable = document.querySelector('#archive__table');
 const activeArray = [];
 const archiveArray = [];
 
+const activeNum = document.querySelector('#active-reports-num');
+const closedNum = document.querySelector('#closed-reports-num');
+
 const ClearTable = tableBody => {
     while(tableBody.firstChild)
         tableBody.removeChild(tableBody.firstChild);
@@ -48,6 +51,9 @@ const PerformArrays = reportsArray => {
 };
 
 ipcRenderer.on('render-reports-table', (event, arg) => {
+    activeArray.splice(0, activeArray.length);
+    archiveArray.splice(0, archiveArray.length);
+    
     PerformArrays(arg);
 
     //ClearTable(activeTable);
@@ -55,6 +61,9 @@ ipcRenderer.on('render-reports-table', (event, arg) => {
 
     //ClearTable(archiveTable);
     RenderTable(archiveArray, archiveTable);
+
+    activeNum.innerText = activeArray.length;
+    closedNum.innerText = archiveArray.length;
 });
 
 document.addEventListener('click', e => {
@@ -63,7 +72,7 @@ document.addEventListener('click', e => {
     if(node.id == "table__button")
     {
         const reportId = node.getAttribute('report-id');
-        ipcRenderer.send('get-report-data', reportId);
+        ipcRenderer.send('display-dispatcher-info', reportId);
     }
 });
 

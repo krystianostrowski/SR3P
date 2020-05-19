@@ -48,6 +48,9 @@ const PerformArrays = reportsArray => {
 };
 
 ipcRenderer.on('render-reports-table', (event, arg) => {
+    activeArray.splice(0, activeArray.length);
+    archiveArray.splice(0, archiveArray.length);
+    
     PerformArrays(arg);
 
     //ClearTable(activeTable);

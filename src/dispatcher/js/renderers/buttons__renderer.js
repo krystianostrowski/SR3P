@@ -16,12 +16,12 @@ if(homeBtn != null)
     });
 }
 
-if(seeReportBtn != null)
+/*if(seeReportBtn != null)
 {
     seeReportBtn.addEventListener('click', () => {
         ipcRenderer.send('display-dispatcher-info', {report, dir});
     });
-}
+}*/
 
 
  ////------------------------------------------------------------
