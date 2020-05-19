@@ -133,6 +133,10 @@ body{
     margin: auto;
     text-align:center;
 }
+
+.service--hidden {
+    display: none;
+}
 /*_______________________________________*/
 /*__________MAP WITH LOCATION___________*/
 .map{

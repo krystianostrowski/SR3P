@@ -214,7 +214,6 @@ ipcMain.on('search-report-service', (event, arg) => {
         }
     });*/
     GetDataFromAPI(`getReportsArray/${arg}`).then(reports => {
-        console.log(reports);
         if(!reports.length)
         {
             DebugLog('Report not found', LogTypes.ERROR);
@@ -232,13 +231,13 @@ ipcMain.on('search-report-service', (event, arg) => {
     }); 
 });
 
-socket.on('request-sending-report', () => {
-    if(bCanReceiveReport && bIsConnectedToServer)
-    {
-        bCanReceiveReport = false;
-        socket.emit('can-receive-report');
-    }
-});
+// socket.on('request-sending-report', () => {
+//     if(bCanReceiveReport && bIsConnectedToServer)
+//     {
+//         bCanReceiveReport = false;
+//         socket.emit('can-receive-report');
+//     }
+// });
 
 socket.on('sending-report', data => {
     GetDataFromAPI(`getReportByID/${data}`).then(report => {

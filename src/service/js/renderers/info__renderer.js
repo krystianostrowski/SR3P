@@ -45,6 +45,7 @@ ipcRenderer.on('render-report', (event, arg) => {
     RenderBuildingInfo(arg.building);
     InsertImages(arg.building.data.mapDir);
     PerformOverlaysObj();
+    UpdateStatuses(arg.report);
 
     if(!arg.report.isActive)
         finishButton.classList.add('button--hidden');
@@ -54,6 +55,7 @@ ipcRenderer.on('render-report', (event, arg) => {
 });
 
 ipcRenderer.on('update-info', (event, arg) => {
+    console.log("UPdate");
     UpdateStatuses(arg);
 });
 

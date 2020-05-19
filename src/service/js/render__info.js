@@ -2,7 +2,7 @@ const { IP, Port } = require('../config.json');
 const ImgPath = `http://${IP}:${Port}`;
 
 const sInfo = document.querySelectorAll('.service-info');
-const sElement = document.querySelectorAll('.service-element');
+const sElement = document.querySelectorAll('.services-element');
 const ffStatus = sInfo[1];
 const policeStatus = sInfo[2];
 const ambulanceStatus = sInfo[0];
@@ -54,7 +54,6 @@ const RenderInfo = report => {
 
 const RenderBuildingInfo = data => {
     data = data.data;
-    console.log(data);
     const age = document.querySelector('#age');
     const basement = document.querySelector("#basement");
     const heating = document.querySelector('#heating');
