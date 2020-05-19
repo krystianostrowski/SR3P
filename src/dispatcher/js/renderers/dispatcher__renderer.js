@@ -1,5 +1,5 @@
 const { ipcRenderer } = require('electron');
-const { RenderInfo, RenderBuildingInfo, InsertImages } = require('../js/render__info');
+const { RenderInfo, RenderBuildingInfo, InsertImages, UpdateStatuses } = require('../js/render__info');
 const { ClearList, PerformArrayOfStrings, FillFormRandomLocations, AddLocationToList } = require('../js/searchbar');
 
 // const searchBar = document.querySelector('#location');
@@ -211,6 +211,10 @@ ipcRenderer.on('report-not-found', () => {
         if(!seeReportBtn.classList.contains('see-report__button--hidden'))
             seeReportBtn.classList.add('see-report__button--hidden');
     }
+});
+
+ipcRenderer.on('update-info', (event, arg) => {
+    UpdateStatuses(arg);
 });
 
 // searchBar.addEventListener('click', ActivateSearchBar);

@@ -53,6 +53,10 @@ ipcRenderer.on('render-report', (event, arg) => {
     //TODO: else check status
 });
 
+ipcRenderer.on('update-info', (event, arg) => {
+    UpdateStatuses(arg);
+});
+
 if(switchesPatent != null)
 {
     switchesPatent.addEventListener('click', e => {

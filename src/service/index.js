@@ -169,6 +169,8 @@ socket.on('disconnect', () => {
 
     bIsConnectedToServer = false;
     bCanConnectToAPI = false;
+
+    app.quit();
 });
 
 GetDataFromAPI('connection').then(response => {
@@ -240,16 +242,25 @@ socket.on('request-sending-report', () => {
 
 socket.on('sending-report', data => {
     GetDataFromAPI(`getReportByID/${data}`).then(report => {
-        window.loadFile('./html/service__map.html');
 
-        window.webContents.on('dom-ready', () => {
-            window.webContents.send('sending-data', report);
-            reportID = data;
-        });
+        socket.emit('get-route', report);
     });
 });
 
-//TODO: confirmation of arrival
+socket.on('got-route', data => {
+    window.loadFile('./html/service__map.html');
+
+    window.webContents.on('dom-ready', () => {
+        window.webContents.send('sending-data', { report: data.report, dir: data.dir });
+        reportID = data.report.id;
+    });
+});
+
+socket.on('update-info', id => {
+    GetDataFromAPI(`getReportByID/${id}`).then(report =>{
+        window.webContents.send('update-info', report);
+    });
+});
 
 ipcMain.on('service-reached-destination', () => {
 

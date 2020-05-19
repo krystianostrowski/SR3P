@@ -2,6 +2,9 @@ const mapSwitch = document.querySelector(".map");
 const infoSwitch = document.querySelector(".notificaton-info");
 const infoWindow = document.querySelector(".notificaton-info-window");
 const mapWindow = document.querySelector(".map-window");
+const map = mapWindow.querySelector('.map-view');
+
+const { IP, Port } = require('../config.json');
 
 mapSwitch.addEventListener('click', () =>{
     mapSwitch.classList.add("map--active");
@@ -19,7 +22,7 @@ infoSwitch.addEventListener('click',() =>{
 });
 
 ipcRenderer.on('sending-data', (event, arg) => {
-    const report = arg;
+    const report = arg.report;
     const place = report.data;
     const info = report.additionalInfo;
     
@@ -36,4 +39,10 @@ ipcRenderer.on('sending-data', (event, arg) => {
     victims.innerText = info.victims;
     desc.innerText = info.desc;
     infoNode.innerText = info.info;
+
+    const img = document.createElement('img');
+
+    img.src = `http://${IP}:${Port}/${arg.dir}/route.png`;
+
+    map.appendChild(img);
 });

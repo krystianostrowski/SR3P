@@ -12,7 +12,7 @@ let windowState;
 let bIsConnectedToServer;
 let bCanConnectToAPI;
 
-let reportID;
+//let reportID = null;
 
 const API = `http://${IP}:${Port}/api`;
 
@@ -182,6 +182,8 @@ socket.on('disconnect', () => {
 
     bIsConnectedToServer = false;
     bCanConnectToAPI = false;
+
+    app.quit();
 });
 
 GetDataFromAPI('connection').then(response => {
@@ -286,6 +288,7 @@ socket.on('added-report', report => {
     }
     else
     {
+        //reportID = report.id;
         socket.emit('getMapDir', report);
     }
 });
@@ -296,14 +299,16 @@ socket.on('got-map-dir', data => {
 
     window.webContents.on('dom-ready', () => {
         window.webContents.send('send-report-data', { report: data.report, dir: data.dir});
+        socket.emit('can-be-updated', data.report.id);
     });
 });
 
-socket.on('update-info', () => {
+socket.on('update-info', id => {
     if(windowState == Sate.INFO)
     {
-        //TODO: Update displayed info;
-        //window.webContents.send('');
+        GetDataFromAPI(`getReportByID/${id}`).then(report =>{
+            window.webContents.send('update-info', report);
+        });
     }
 });
 

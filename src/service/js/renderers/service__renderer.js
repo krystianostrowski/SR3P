@@ -1,5 +1,5 @@
 const { ipcRenderer } = require('electron');
-const { RenderInfo, RenderBuildingInfo, InsertImages } = require('../js/render__info');
+const { RenderInfo, RenderBuildingInfo, InsertImages, UpdateStatuses } = require('../js/render__info');
 const { FillFormRandomLocations, ClearList, AddLocationToList, PerformArrayOfStrings } = require('../js/searchbar');
 
 // const confirmBtn = document.querySelector('#arrival-confirmation');
