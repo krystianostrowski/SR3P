@@ -213,8 +213,21 @@ const GetDataFromForm = () => {
             building: parseInt(buildingInput.value)
     }
 
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+    let hour = date.getHours();
+    let min = date.getMinutes();
+    let sec = date.getSeconds();
+
+    day = (day < 10) ? `0${day}` : day;
+    month = (month < 10) ? `0${month}` : month;
+    hour = (hour < 10) ? `0${hour}` : hour;
+    min = (min < 10) ? `0${min}` : min;
+    sec = (sec < 10) ? `0${sec}` : sec;
+
     const additionalInfo = {
-        time: `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`,
+        time: `${day}.${month}.${year} ${hour}:${min}:${sec}`,
         desc: desc.value,
         victims: (victims == '' || victims == null) ? null : parseInt(victims.value),
         dangers: dangers.value,
