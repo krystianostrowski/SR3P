@@ -3,6 +3,7 @@ const overlays = document.querySelectorAll('.overlay--hidden');
 const overlaysObj = [];
 
 const PerformOverlaysObj = () => {
+    overlaysObj.splice(0, overlaysObj.length);
     for(overlay of overlays)
     {
         overlaysObj.push({id: overlay.id, node: overlay});

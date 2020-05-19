@@ -15,7 +15,7 @@ const { FillFormRandomLocations, ClearList, AddLocationToList, PerformArrayOfStr
 // let reportsStrings = [];
 
 // let bIsSearchbarActive = false;
-let bCanReceiveReport = true;
+//let bCanReceiveReport = true;
 
 // const switchesPatent = document.querySelector('#switches__container');
 // const overlays = document.querySelectorAll('.overlay--hidden');
