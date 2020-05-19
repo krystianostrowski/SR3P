@@ -83,7 +83,7 @@ body{
     margin-top: 10%;
     display: flex;
     align-items: center;
-    cursor: wait;
+   z-index: 20;
 }
 .services-element img{
     width: 90%;
@@ -95,8 +95,8 @@ body{
     margin-left:-30vw;
     position: absolute;
     width:30%;
-    height: auto;
     min-height: 80px;
+    height: auto;
     transform: scaleX(0);
     transition: .3s;
     transform-origin: 30vw;
@@ -110,9 +110,28 @@ body{
     width: 100%;
     height: 40px;
     border-bottom: 2px solid white;
+    display: flex;
 }
 .status:last-child{
     border-bottom: none;
+}
+.service-id{
+    height: 100%;
+    width: 60%;
+    display: flex;
+    align-items: center;
+    border-right:2px solid #fff;
+}
+.service-status{
+    width: 40%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.service-id span,
+.service-status span{
+    margin: auto;
+    text-align:center;
 }
 /*_______________________________________*/
 /*__________MAP WITH LOCATION___________*/
@@ -148,6 +167,7 @@ body{
     z-index: 10;
     left:0;
     top:-200%;
+    z-index: 10;
 }
 #emergency-exits{
     display:block;
@@ -157,6 +177,7 @@ body{
     z-index: 10;
     left:0;
     top:-300%;
+    z-index: 10;
 }
 #electricity-switch{
     display:block;
@@ -166,6 +187,7 @@ body{
     z-index: 10;
     left:0;
     top:-400%;
+    z-index: 10;
 }
 #gas-valve{
     display:block;
@@ -175,6 +197,7 @@ body{
     z-index: 10;
     left:0;
     top:-500%;
+    z-index: 10;
 }
 
 /*________SHOW MORE INFORMATIONS ABOUT THIS LOCATION__________*/

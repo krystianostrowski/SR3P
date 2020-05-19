@@ -9,6 +9,7 @@
     <script defer src="../js/renderers/dispatcher__renderer.js"></script>
     <script defer src="../js/renderers/searchbar__renderer.js"></script>
     <script defer src="../js/renderers/buttons__renderer.js"></script>
+    <script defer src="../js/renderers/table__renderer.js"></script>
     <script defer src="../js/titlebar.js"></script>
 </head>
 <body>
@@ -31,7 +32,7 @@
                 <div class="center">
                     <form id="location-form">
                         <img src="../resources/img/lupa.png" alt="">
-                        <input type="search" id="location" placeholder="Wyszukaj lokalizację">
+                        <input type="text" id="location" placeholder="Wyszukaj lokalizację">
                     </form>
                 </div>
             </div>
@@ -115,6 +116,86 @@
                     <div class="cash"><span style="margin: auto;font-size:130%">Aktywne zgłoszenia: 1</span></div>
                     <div class="cesh">
                         <button>Zobacz</button>
+                    </div>
+                    <div class="active-notifications active-notifications--inactive">
+                        <button id="close-active-table"><i class="icon-cancel"></i></button>
+                        <table>
+                        <tr>
+                            <td><b>Data</b></td>
+                            <td><b>ID</b></td>
+                            <td></td>
+                        </tr>
+                        <tbody id="active__table">
+                            <tr>
+                                <td>02.04.2005</td>
+                                <td>20050402213739</td>
+                                <td><button>Zobacz</button></td>
+                            </tr>
+                            <tr>
+                                <td>02.05.2011</td>
+                                <td>20110502184556</td>
+                                <td><button>Zobacz</button></td>
+                            </tr>
+                            <tr>
+                                <td>07.10.1952</td>
+                                <td>19521007134623</td>
+                                <td><button id="see-active-reports">Zobacz</button></td>
+                            </tr>
+                        </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="bottom-content" id="see-report">
+                    <div class="cash"><span style="margin: auto;font-size:130%">Zamknięte zgłoszenia: 1</span></div>
+                    <div class="cesh">
+                        <button id="see-finished-reports">Zobacz</button>
+                    </div>
+                    <div class="finished-notifications finished-notifications--inactive">
+                        <button id="close-table"><i class="icon-cancel"></i></button>
+                        <table>
+                            <tr>
+                                <td><b>Data</b></td>
+                                <td><b>ID</b></td>
+                                <td></td>
+                            </tr>
+                            <tbody id="archive__table">
+                                <tr>
+                                    <td>20.08.2000</td>
+                                    <td>20200505180623</td>
+                                    <td><button>Zobacz</button></td>
+                                </tr>
+                                <tr>
+                                    <td>20.08.2000</td>
+                                    <td>20200505180623</td>
+                                    <td><button>Zobacz</button></td>
+                                </tr>
+                                <tr>
+                                    <td>20.08.2000</td>
+                                    <td>20200505180623</td>
+                                    <td><button>Zobacz</button></td>
+                                </tr>
+                                <tr>
+                                    <td>20.08.2000</td>
+                                    <td>20200505180623</td>
+                                    <td><button>Zobacz</button></td>
+                                </tr>
+                                <tr>
+                                    <td>20.08.2000</td>
+                                    <td>Lays Fromage</td>
+                                    <td><button>Zjedz</button></td>
+                                </tr>
+                                <tr>
+                                    <td>20.08.2000</td>
+                                    <td>20200505180623</td>
+                                    <td><button>Zobacz</button></td>
+                                </tr>
+                                <tr>
+                                    <td>20.08.2000</td>
+                                    <td>20200505180623</td>
+                                    <td><button >Zobacz</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
