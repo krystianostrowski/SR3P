@@ -283,7 +283,7 @@ margin: auto;
 }
 @media(max-width:1000px){
     
-    .center input[type=search]{
+    .center input[type=text]{
         padding-left:13%;
         font-size:120%;
     }
@@ -299,7 +299,7 @@ margin: auto;
     }
   }
   @media(max-width:1200px){
-    .center input[type=search]{
+    .center input[type=text]{
         padding-left:12%;
     }
     .center img{
@@ -316,7 +316,7 @@ margin: auto;
 
 }
 @media(max-width:870px){
-    .center input[type=search]{
+    .center input[type=text]{
         padding-left:14%;
     }
     .center img{
@@ -336,7 +336,7 @@ margin: auto;
         width:15%;
         padding:13px 15px 13px 15px;
     }
-    .center input[type=search]{
+    .center input[type=text]{
         padding-left:16%;
     }
 }
@@ -345,7 +345,7 @@ margin: auto;
         width:17%;
         padding:13px 15px 13px 15px;
     }
-    .center input[type=search]{
+    .center input[type=text]{
         padding-left:19%;
     }
 }

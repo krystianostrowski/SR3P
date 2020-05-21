@@ -274,6 +274,13 @@ tr:last-child > td{
     background-color: #1ED760;
     border: none;
 }
+#close-active-table{
+    position: absolute;
+    top:0;
+    right: 0;
+    background-color: #1ED760;
+    border: none;
+}
 @media(max-width:1085px){
     .cash{
         font-size:90%;

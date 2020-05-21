@@ -82,7 +82,7 @@ button:focus input {
 }
 .adresses{
   width: 56%!important;
- margin-top: -0.5%;
+ margin-top: -0.3%;
  z-index:49!important;
 }
 @media(max-width:1000px){
