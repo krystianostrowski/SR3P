@@ -18,7 +18,7 @@ const InsertImages = imgDir => {
     for(img of imgs)
     {
         const id = img.id;
-        const path = `${ImgPath}/${imgDir}/${id}.png`; 
+        const path = `${ImgPath}/${imgDir}/service/${id}.png`; 
         img.src = path; 
     }
 };
