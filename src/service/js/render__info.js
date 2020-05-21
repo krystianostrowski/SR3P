@@ -30,15 +30,9 @@ const RenderInfo = report => {
     const addInf = document.querySelector('#additional-informations');
 
     let info;
-    let services;
 
     if(report != null)
         info = report.additionalInfo;
-
-    if(report != null)
-        services = report.services;
-    else
-        services = null;
 
     desc.innerText = (report == null) ? "" : info.desc;
     time.innerText = (report == null) ? "" : info.time;
@@ -65,12 +59,18 @@ const RenderBuildingInfo = data => {
     basement.innerHTML = data.basement;
     heating.innerHTML = data.heating;
     residents.innerHTML = data.residents;
-    gate.innerHTML = data.gate;
+    gate.innerHTML = data.wjazd;
     material.innerHTML = data.material;
 };
 
 const UpdateStatuses = report => {
-    const services = report.services;
+    let services;
+
+    if(report != null)
+        services = report.services;
+    else
+        services = null;
+
 
     if(services != null)
     {

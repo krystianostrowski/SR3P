@@ -206,11 +206,14 @@ ipcRenderer.on('found-report', (event, arg) => {
 ipcRenderer.on('report-not-found', () => {
     report = null;
     
-    if(seeReportBtn != null)
+    /*if(seeReportBtn != null)
     {
         if(!seeReportBtn.classList.contains('see-report__button--hidden'))
             seeReportBtn.classList.add('see-report__button--hidden');
-    }
+    }*/
+
+    activeNum.innerText = 0;
+    closedNum.innerText = 0;
 });
 
 ipcRenderer.on('update-info', (event, arg) => {

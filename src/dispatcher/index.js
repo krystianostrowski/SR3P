@@ -5,7 +5,7 @@ const fetch = require('node-fetch');
 const io = require('socket.io-client');
 const path = require('path');
 
-const devBuild = true;
+const devBuild = false;
 
 let window; 
 let windowState;

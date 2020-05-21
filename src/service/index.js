@@ -12,7 +12,7 @@ let bCanReceiveReport = true;
 
 let reportID;
 
-const bDev = true;
+const bDev = false;
 
 const API = `http://${IP}:${Port}/api`;
 
@@ -217,7 +217,12 @@ ipcMain.on('search-report-service', (event, arg) => {
         if(!reports.length)
         {
             DebugLog('Report not found', LogTypes.ERROR);
-            window.webContents.send('report-not-found');
+            //window.webContents.send('report-not-found');
+            window.loadFile('./html/notification__list.html');
+
+            window.webContents.on('dom-ready', () => {
+                window.webContents.send('render-reports-table', { reports: [], address: arg });
+            });
         }
         else
         {
@@ -225,7 +230,7 @@ ipcMain.on('search-report-service', (event, arg) => {
             window.loadFile('./html/notification__list.html');
 
             window.webContents.on('dom-ready', () => {
-                window.webContents.send('render-reports-table', reports);
+                window.webContents.send('render-reports-table', { reports: reports, address: arg });
             });
         }
     }); 

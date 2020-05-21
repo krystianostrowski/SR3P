@@ -4,6 +4,19 @@ const archiveTable = document.querySelector('#archive__table');
 const activeArray = [];
 const archiveArray = [];
 
+const RenderAddress = address => {
+    const span = document.querySelector('#address');
+
+    let splitedAddress = address.split(' ');
+    
+    for(let i = 0; i < splitedAddress.length; i++)
+    {
+        splitedAddress[i] = splitedAddress[i].charAt(0).toUpperCase() + splitedAddress[i].substring(1);
+    }
+
+    span.innerText = splitedAddress.join(' ');
+};
+
 const ClearTable = tableBody => {
     while(tableBody.firstChild)
         tableBody.removeChild(tableBody.firstChild);
@@ -51,13 +64,15 @@ ipcRenderer.on('render-reports-table', (event, arg) => {
     activeArray.splice(0, activeArray.length);
     archiveArray.splice(0, archiveArray.length);
     
-    PerformArrays(arg);
+    PerformArrays(arg.reports);
 
     //ClearTable(activeTable);
     RenderTable(activeArray, activeTable);
 
     //ClearTable(archiveTable);
     RenderTable(archiveArray, archiveTable);
+
+    RenderAddress(arg.address);
 });
 
 document.addEventListener('click', e => {
